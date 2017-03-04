@@ -1,0 +1,18 @@
+from pymongo import MongoClient
+import os, sys
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)),os.path.pardir)
+from Utils import ProtocolItem
+
+mongo_uri = 'mongodb://localhost:27017/'
+
+
+def UpsertGateway(gateway):
+    client = MongoClient(mongo_uri)
+    if gateway.has_key(ProtocolItem.ID):
+        client.gateway.replace_one({ProtocolItem.ID:gateway[ProtocolItem.ID]},gateway,upsert=True)
+    else:
+        return None
+
+
+def DeleteGateway(gateway):
+    

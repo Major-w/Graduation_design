@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<form action="" method="post" name="view_account" enctype="multipart/form-data">
+    {{form.hidden_tag()}}
+
+<div class="row">
+<div class="col-lg-10 col-xs-10">
+{{ render_field(form.telephone, size=50)}}
+</div>
+
+
+<div class="col-lg-10 col-xs-10">
+{{ render_field(form.flag_telephone)}}
+</div>
+<div class="col-lg-10 col-xs-10">
+{{ render_field(form.source, size=50)}}
+</div>
+
+
+</div>
+
+
+{{form.message}}
+   
+<p/>
+
+    <p><input type="submit" value="确定" name="confirm"></p>
+</form>
+{% endblock %}

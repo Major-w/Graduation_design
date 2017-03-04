@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row" style="overflow:hidden; text-overflow:ellipsis;">
+  <div class="col-md-10">
+    <div class="box">
+      <div class="box-header with-border">
+         <h3 class="box-title">--</h3>
+      </div><!-- /.box-header -->
+      <div class="box-body">
+        <table class="table table-bordered">
+          <tr>
+	    <th style="width: 10px">#</th>
+	    <th>注册电话</th>
+	    <th>是否已认证</th>
+	    <th>来源</th>
+	    <th></th>
+	    <th style="width: 40px"></th>
+	  </tr>
+ {% if forms %}
+   {% for f in forms %}
+	  <tr>
+	    <td>
+	      {{f.id.data}}
+	    </td>
+	    <td>
+<a href="/bd/view_account?id={{f.id.data}}">
+	      {{f.telephone.data}}
+</a>
+	    </td>
+	    <td>
+	      {{f.flag_telephone.data}}
+	    </td>
+	    <td>
+	      {{f.source.data}}
+	    </td>
+	    <td>
+
+	    </td>
+	    <td>
+	      <form action="" method="post" name="edit_account" onsubmit="return confirm('确认要提交吗?');">
+		{{f.hidden_tag()}}
+		<input type="submit" value="删除" name="delete">		    
+	      </form>
+	    </td>
+	  </tr>
+    {% endfor %}
+  {% endif %}
+
+    </table>
+
+  </div><!-- /.box-body -->
+  <div class="box-footer clearfix">
+    <ul class="pagination pagination-sm no-margin pull-right">
+ {% if paging %}
+      <li><a href="/bd/view_accounts?page=1">&laquo;</a></li>
+   {% for i in range(paging.page_from,paging.page_to+1) %}
+
+      <li><a href="/bd/view_accounts?page={{i}}">{{i}}</a></li>
+
+    {% endfor %}
+      <li><a href="/bd/view_accounts?page={{paging.total_pages}}">&raquo;</a></li>
+  {% endif %}
+
+    </ul>
+  </div>
+</div><!-- /.box -->
+</div>
+</div>
+
+
+
+
+
+
+{% endblock %}

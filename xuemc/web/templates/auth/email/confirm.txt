@@ -1,0 +1,11 @@
+Dear {{ user.username }},
+
+欢迎来到爱租房！
+
+为激活您的账户，请点击以下链接:
+
+{{ url_for('confirm', token=token, _external=True) }}
+
+谢谢,
+
+嵌入式132班--季凯

@@ -1,0 +1,8 @@
+<p>Dear {{ user.username }},</p>
+<p>欢迎来到<b>爱租房</b>!</p>
+<p>为激活您的账户 <a href="{{ url_for('confirm', token=token, _external=True) }}"> 点击这里</a>.</p>
+<p>或者复制链接到浏览器中访问:</p>
+<p>{{ url_for('confirm', token=token, _external=True) }}</p>
+<p>谢谢,</p>
+<p>嵌入式132班--季凯</p>
+<p><small>Note: replies to this email address are not monitored.</small></p>

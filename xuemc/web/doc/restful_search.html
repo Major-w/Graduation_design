@@ -1,0 +1,140 @@
+
+<p>
+<h1>图片文件存放路径：</h1>
+/bd/web/files/...........
+</p>
+<br/>
+<p>
+<h1>Restful Api搜索方法：</h1>
+</p>
+
+<b>搜索所有schooltype是初中的学校：</b>
+<p>
+因为初中schooltype的id是3，所以用如下语句搜索：<br>
+http://121.43.104.77/bd/api/v1.0/school?q={"filters":[{"name":<b style="color:red">"schooltype_id"</b>,"op":"eq","val":<b style="color:red">3</b>}]}
+</p>
+<br>
+
+
+<b>搜索所有卢湾区的学校：</b>
+<p>
+因为卢湾区的\area的id是4，所以用如下语句搜索：<br>
+http://121.43.104.77/bd/api/v1.0/school?q={"filters":[{"name":<b style="color:red">"area_id"</b>,"op":"eq","val":<b style="color:red">4</b>}]}
+</p>
+<br>
+
+
+<b>搜索所有具有“体育”特色的学校：</b>
+<p>
+每个学校可以有多个特色，所以数据结构与地区等单选属性不太一样,导致查询接口稍微复杂。<br>
+因为体育feature的id是12，所以用如下语句搜索：<br>
+http://121.43.104.77/bd/api/v1.0/school?q={"filters":[{"name":<b style="color:red">"schoolfeatures"</b>,"op":"any","val":{"name":<b style="color:red">"feature_id"</b>,"op":"eq","val":<b style="color:red">12</b>}}]}
+</p>
+<br>
+
+
+<b>组合查询：搜索所有 在卢湾区，并且具有“体育”特色的， 并且是初中类型的  学校：</b>
+<p>
+在filters中放置多个条件即可<br>
+http://121.43.104.77/bd/api/v1.0/school?q={"filters":[{"name":<b style="color:red">"schoolfeatures"</b>,"op":"any","val":{"name":"feature_id","op":"eq","val":12}},  {"name":<b style="color:red">"schoolfeatures"</b>,"op":"any","val":{"name":<b style="color:red">"feature_id"</b>,"op":"eq","val":<b style="color:red">12</b>}}, {"name":<b style="color:red">"schooltype_id"</b>,"op":"eq","val":<b style="color:red">3</b>}]}
+</p>
+<br>
+
+
+
+
+<br/>
+<p>
+<h1>注册用户及验证手机方法：</h1>
+</p>
+
+<b>新用户注册并发送验证短信</b>
+<p>
+向account对象发送POST请求，其消息体中用json格式提交,username, name, 和telephone属性。比如提交：
+<P style="BACKGROUND-COLOR: grey">
+POST /bd/api/v1.0/account HTTP/1.1<br/>
+Host: 121.43.104.77<br/>
+Content-type: application/json<br/>
+<br/>
+{"name": "david", "telephone": "13912345678"}<br/>
+</p>
+
+服务器返回如下：
+<P style="BACKGROUND-COLOR: grey">
+HTTP/1.1 201 Created<br/>
+<br/>
+{<br/>
+  "flag_telephone": 0,     //表示手机未验证成功状态<br/>
+<b style="color:red">  "id": 7</b>,                 <b>//客户端需记录此id, 以后提交短信验证码时需要用到。或者修改用户信息也会用到.</b><br/>
+  "name": "david",         //昵称<br/>
+  "password": null,<br/>
+  "role": null,<br/>
+  "telephone": "13912345678",<br/>
+  "terminals": [],<br/>
+  "username": null        //登录名，注册时未提交则为null<br/>
+}<br/>
+
+</p>
+<br/><br/>
+
+
+<b>修改注册信息</b>
+<p>
+向account对象(url中需要有注册时从服务器获得的id)发送PATCH请求，其消息体中用json格式提交,username, name, 和telephone属性。比如提交：
+<P style="BACKGROUND-COLOR: grey">
+PATCH /bd/api/v1.0/account/7 HTTP/1.1<br/>
+Host: 121.43.104.77<br/>
+Content-type: application/json<br/>
+<br/>
+{"name": "david222"}<br/>
+</p>
+
+服务器返回如下：
+<P style="BACKGROUND-COLOR: grey">
+HTTP/1.1 200 OK<br/>
+<br/>
+{<br/>
+  "flag_telephone": 0,     <br/>
+  "id": 7,                 <br/>
+<b>  "name": "david222",      </b><br/>
+  "password": null,<br/>
+  "role": null,<br/>
+  "telephone": "13912345678",<br/>
+  "terminals": [],<br/>
+  "username": null        <br/>
+}<br/>
+
+</p>
+<br/><br/>
+
+
+
+
+<b>获取验证结果</b>
+<p>
+向account对象(url中需要有注册时从服务器获得的id)发送PATCH请求，其消息体中用json格式提交checkcode属性。比如提交：
+<P style="BACKGROUND-COLOR: grey">
+PATCH /bd/api/v1.0/account/7 HTTP/1.1<br/>
+Host: 121.43.104.77<br/>
+Content-type: application/json<br/>
+<br/>
+{"checkcode": "13912345678"}<br/>
+</p>
+
+服务器返回如下：
+<P style="BACKGROUND-COLOR: grey">
+HTTP/1.1 200 OK<br/>
+<br/>
+{<br/>
+<b style="color:red">  "flag_telephone": 1</b>,     <b>状态变为1，表示验证通过，否则表示验证未通过</b><br/> 
+  "id": 7,                 <br/>
+<b>  "name": "david222",      </b><br/>
+  "password": null,<br/>
+  "role": null,<br/>
+  "telephone": "13912345678",<br/>
+  "terminals": [],<br/>
+  "username": null        <br/>
+}<br/>
+
+</p>
+<br/><br/>

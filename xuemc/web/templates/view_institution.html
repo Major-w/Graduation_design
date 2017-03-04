@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<form action="" method="post" name="view_institution" enctype="multipart/form-data">
+    {{form.hidden_tag()}}
+
+<div class="row">
+<div class="col-lg-5 col-xs-10">
+{{ render_field(form.name, size=50)}}
+</div>
+<div class="col-lg-5 col-xs-10">
+{{ render_field(form.address, size=50)}}
+</div>
+<div class="col-lg-5 col-xs-10">
+{{ render_field(form.agespan_id)}}
+</div>
+
+<div class="col-lg-5 col-xs-10">
+{{ render_field(form.area_id)}}
+</div>
+
+<div class="col-lg-5 col-xs-10">
+{{ render_field(form.longitude)}}
+</div>
+<div class="col-lg-5 col-xs-10">
+{{ render_field(form.latitude)}}
+</div>
+
+<div class="col-lg-5 col-xs-10">
+{{ render_field(form.location, size=50)}}
+</div>
+<div class="col-lg-5 col-xs-10">
+{{ render_field(form.telephone, size=50)}}
+</div>
+
+
+<div class="col-lg-5 col-xs-10">
+{{ render_field(form.feetype_id)}}
+</div>
+
+<div class="col-lg-5 col-xs-10">
+{{ render_field(form.feedesc, size= 50)}}
+</div>
+
+<div class="col-lg-5 col-xs-10">
+{{ render_field(form.timeopen, size=50)}}
+</div>
+
+<div class="col-lg-5 col-xs-10">
+{{ render_field(form.timeclose, size= 50)}}
+</div>
+
+
+<div class="col-lg-5 col-xs-10">
+{{ render_field(form.website, size=50)}}
+</div>
+
+<div class="col-lg-5 col-xs-10">
+{{ render_field(form.feature_ids, size = 10)}}
+</div>
+
+<div class="col-lg-5 col-xs-10">
+{{ render_field(form.image, accept="image/png, image/jpeg")}}
+  <p><input type="submit" value="上传" name="upload"> 注：接受jpg和png格式的图片，建议图片分辨率1000x800</p>
+</div>
+
+</div>
+
+
+{{form.message}}
+    
+
+
+<!-- images -->
+          <div class='box box-default'>
+            <div class='box-header with-border'>
+              <h3 class='box-title'><i class="fa fa-tag"></i> 已经上传的图片</h3>
+            </div>
+            <div class='box-body'>
+              <div class='row'>
+
+  {% if form.institutionimages %}
+    {% for image in form.institutionimages %}
+                <div class='col-sm-8 col-md-4'>
+                  <!-- <h4 class='text-center'>Primary</h4> -->
+		  <img src='{{"/bd/web/files/"+image.file}}' alt='{{image.file}}' height="200" width="200"/>
+		  <a href="javascript:genDeleteRef('{{image.file}}');">删除本图片</a>
+                </div><!-- /.col -->
+    {% endfor %}
+  {% endif %}
+
+
+               </div><!-- /.row -->
+            </div><!-- /.box-body -->
+          </div><!-- /.box -->
+
+    <p><input type="submit" value="确定" name="confirm"></p>
+</form>
+{% endblock %}
