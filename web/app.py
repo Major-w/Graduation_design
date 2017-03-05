@@ -31,7 +31,7 @@ app.debug = True
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+pg8000://postgres:123456@localhost/xuemc_bd'
 app.config['WTF_CSRF_ENABLED'] = True
-app.config['SECRET_KEY'] = 'you-will-never-..guess'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 'hard to guess string'
 app.config['FLASKY_ADMIN'] = os.environ.get('FLASKY_ADMIN')
 app.config['FLASKY_MAIL_SENDER'] = '471397033@qq.com'
 app.config['MAIL_SERVER'] = 'smtp.qq.com'
@@ -40,7 +40,8 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 app.config['FLASKY_MAIL_SUBJECT_PREFIX'] = '[Flasky]'
 app.config['MAIL_USERNAME'] = '471397033'
-app.config['MAIL_PASSWORD'] = 'ieghndbhcmjdcacb'
+app.config['MAIL_PASSWORD'] = 'kxqwntmvymrxbhac'
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
 
 

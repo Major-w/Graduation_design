@@ -1,20 +1,15 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block content %}
+{% block page_content %}
 
 <form action="" method="post" name="login" enctype="multipart/form-data">
     {{form.hidden_tag()}}
 
-<div class="page-header">
-    <h2>登录</h2>
-</div>
-
-
 <div class="col-md-4">
     {{ wtf.quick_form(form) }}
     <br>
-    <p>忘记密码? <a href="{{ url_for('register') }}">请点击这里</a>.</p>
+    <p>忘记密码? <a href="{{ url_for('password_reset_request') }}">请点击这里</a>.</p>
     <p>新用户? <a href="{{ url_for('register') }}">点击注册</a>.</p>
 </div>
 {% endblock %}

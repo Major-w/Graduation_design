@@ -127,9 +127,9 @@ def GetAccountFormById(account_id):
     return accountform
 
 
-def LoadBasePageInfo(pagename, pagetask, form):
+def LoadBasePageInfo(pagename, form):
     form.pagename = pagename;
-    form.pagetask = pagetask;
+    # form.pagetask = pagetask;
     form.school_count = orm.School.query.count()
     form.institution_count = orm.Institution.query.count()
     form.bulletin_count = orm.Bulletin.query.count()

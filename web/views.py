@@ -5,7 +5,8 @@ from flask import render_template, send_from_directory, session, redirect, url_f
 from flask_login import login_user, logout_user, current_user, login_required
 from flask import Markup, request
 from app import app, db
-from forms import SchoolForm, PageInfo, InstitutionForm, BulletinForm, AccountForm, LoginForm, RegistrationForm, PasswordResetRequestForm
+from forms import SchoolForm, PageInfo, InstitutionForm, BulletinForm, AccountForm, LoginForm, RegistrationForm,\
+    PasswordResetRequestForm, PasswordResetForm
 from DB import orm
 from Utils import Util
 from Logic import restful, logic
@@ -29,6 +30,23 @@ def rootDir():
     return redirect(url_for('login'))
 
 
+@app.route('/reset/<token>', methods=['GET', 'POST'])
+def password_reset(token):
+    if not current_user.is_anonymous:
+        return redirect(url_for('view_school'))
+    form = PasswordResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is None:
+            return redirect(url_for('view_school'))
+        if user.reset_password(token, form.password.data):
+            flash(u'您的密码已经更新.')
+            return redirect(url_for('login'))
+        else:
+            return redirect(url_for('index'))
+    return render_template('auth/reset_password.html', form=form)
+
+
 @app.route('/reset', methods=['GET', 'POST'])
 def password_reset_request():
     if not current_user.is_anonymous:
@@ -38,7 +56,7 @@ def password_reset_request():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
             token = user.generate_reset_token()
-            send_email(user.email, 'Reset Your Password',
+            send_email(user.email, u'重置密码',
                        'auth/email/reset_password',
                        user=user, token=token,
                        next=request.args.get('next'))
@@ -51,7 +69,7 @@ def password_reset_request():
 @login_required
 def confirm(token):
     if current_user.confirmed:
-        return redirect(url_for('view_schools'))
+        return redirect(url_for('view_school'))
     if current_user.confirm(token):
         flash(u'您已经激活了您的账户')
     else:
@@ -77,7 +95,9 @@ def login():
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
             return redirect(request.args.get('next') or url_for('main.index'))
-        flash('Invalid username or password.')
+        flash(u'用户名或密码错误')
+    elif request.method =='GET':
+        logic.LoadBasePageInfo('登录',form)
     return render_template('auth/login.html', form=form)
 
 
@@ -92,13 +112,16 @@ def register():
         db.session.commit()
         token = user.generate_confirmation_token()
         send_email(user.email, 'Confirm Your Account',
-                   'email/confirm', user=user, token=token)
+                   'auth/email/confirm', user=user, token=token)
+        print '发送邮件'
         flash('已经向您的邮箱那个发送了一份邮件.')
         return redirect(url_for('login'))
+    elif request.method == 'GET':
+        logic.LoadBasePageInfo('注册', form)
     return render_template('auth/register.html', form=form)
 
 
-@app.route('/bd/view_school' , methods=['GET', 'POST'])
+@app.route('/bd/view_school', methods=['GET', 'POST'])
 def view_school():
     school_id = request.args.get('id')
     q = request.args.get('q')
@@ -152,9 +175,9 @@ def view_school():
             return redirect(url_for('view_school'))
     elif request.method =='GET' and school_id:
         form = logic.GetSchoolFormById(school_id)
-        logic.LoadBasePageInfo('修改学校','输入并确定',form)
+        logic.LoadBasePageInfo('修改学校',form)
     else:
-        logic.LoadBasePageInfo('新建学校','输入并确定',form)
+        logic.LoadBasePageInfo('新建学校',form)
 
     if form.id.data:
         school = orm.School.query.get(int(form.id.data))
@@ -192,7 +215,7 @@ def view_schools():
             return redirect(url_for('view_schools', page=page, q=q))
 
     form = PageInfo()
-    logic.LoadBasePageInfo('所有学校','查看',form)
+    logic.LoadBasePageInfo('所有学校',form)
     
     return render_template('view_schools.html',forms = schoolforms,form = form, paging=restful.GetPagingFromResult(schools))
 
@@ -273,9 +296,9 @@ def view_institution():
             return redirect(url_for('view_institution'))
     elif request.method =='GET' and institution_id:
         form = logic.GetInstitutionFormById(institution_id)
-        logic.LoadBasePageInfo('修改培训机构','输入并确定',form)
+        logic.LoadBasePageInfo('修改培训机构',form)
     else:
-        logic.LoadBasePageInfo('新建培训机构','输入并确定',form)
+        logic.LoadBasePageInfo('新建培训机构',form)
 
     if form.id.data:
         institution = orm.Institution.query.get(int(form.id.data))
@@ -312,8 +335,8 @@ def view_institutions():
             orm.db.session.commit()
             return redirect(url_for('view_institutions', page=page, q=q))
 
-    form = PageInfo()        
-    logic.LoadBasePageInfo('所有培训机构','查看',form)
+    form = PageInfo()
+    logic.LoadBasePageInfo('所有培训机构',form)
     
     return render_template('view_institutions.html',forms = institutionforms,form = form, paging=restful.GetPagingFromResult(institutions))
 
@@ -362,10 +385,10 @@ def view_bulletin():
             return redirect(url_for('view_bulletin'))
     elif request.method =='GET' and bulletin_id:
         form = logic.GetBulletinFormById(bulletin_id)
-        logic.LoadBasePageInfo('修改公告','输入并确定',form)
+        logic.LoadBasePageInfo('修改公告',form)
     else:
         form.dt.data = datetime.datetime.now()
-        logic.LoadBasePageInfo('新建公告','输入并确定',form)
+        logic.LoadBasePageInfo('新建公告', form)
 
     if form.id.data:
         bulletin = orm.Bulletin.query.get(int(form.id.data))
@@ -401,7 +424,7 @@ def view_bulletins():
             return redirect(url_for('view_bulletins', page=page, q=q))
 
     form = PageInfo()        
-    logic.LoadBasePageInfo('所有公告','查看',form)
+    logic.LoadBasePageInfo('所有公告',form)
     
     return render_template('view_bulletins.html',forms = bulletinforms,form = form, paging=restful.GetPagingFromResult(bulletins))
 
@@ -439,9 +462,9 @@ def view_account():
         return redirect(url_for('view_account'))
     elif request.method =='GET' and account_id:
         form = logic.GetAccountFormById(account_id)
-        logic.LoadBasePageInfo('修改用户','输入并确定',form)
+        logic.LoadBasePageInfo('修改用户',form)
     else:
-        logic.LoadBasePageInfo('新建用户','输入并确定',form)
+        logic.LoadBasePageInfo('新建用户',form)
 
     if form.id.data:
         account = orm.Account.query.get(int(form.id.data))
@@ -462,7 +485,6 @@ def view_accounts():
     accountforms =[logic.GetAccountFormById(x[restful.ITEM_ID]) for x in accounts[restful.ITEM_OBJECTS]]
     while None in accountforms:
         accountforms.remove(None)
-    
 
     if request.method == 'POST':
         form = AccountForm(request.form)
@@ -472,7 +494,7 @@ def view_accounts():
             return redirect(url_for('view_accounts', page=page, q=q))
 
     form = PageInfo()        
-    logic.LoadBasePageInfo('所有用户','查看',form)
+    logic.LoadBasePageInfo('所有用户',form)
     
     return render_template('view_accounts.html',forms = accountforms,form = form, paging=restful.GetPagingFromResult(accounts))
 
