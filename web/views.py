@@ -94,7 +94,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
-            return redirect(request.args.get('next') or url_for('main.index'))
+            return redirect(request.args.get('next') or url_for('view_school'))
         flash(u'用户名或密码错误')
     elif request.method =='GET':
         logic.LoadBasePageInfo('登录',form)
@@ -105,7 +105,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('You have been logged out.')
+    flash(u'您已经退出登录.')
     return redirect(url_for('login'))
 
 
@@ -116,14 +116,18 @@ def register():
         user = User(email=form.email.data,
                     username=form.username.data,
                     password=form.password.data)
-        db.session.add(user)
-        db.session.commit()
         token = user.generate_confirmation_token()
-        send_email(user.email, 'Confirm Your Account',
-                   'auth/email/confirm', user=user, token=token)
-        print '发送邮件'
-        flash('已经向您的邮箱那个发送了一份邮件.')
-        return redirect(url_for('login'))
+        try:
+            send_email(user.email, 'Confirm Your Account',
+                       'auth/email/confirm', user=user, token=token)
+        except Exception:
+            flash(u'邮件发送失败.')
+            return redirect(url_for('register'))
+        else:
+            db.session.add(user)
+            db.session.commit()
+            flash(u'已经向您的邮箱那个发送了一份邮件.')
+            return redirect(url_for('login'))
     elif request.method == 'GET':
         logic.LoadBasePageInfo('注册', form)
     return render_template('auth/register.html', form=form)

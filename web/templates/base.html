@@ -83,7 +83,7 @@
 
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">个人信息</a>
+                      <a href="#" >个人信息</a>
                     </div>
                     <div class="pull-right">
                       <a href="{{ url_for('logout') }}">注销</a>
@@ -159,7 +159,7 @@
 	       {%  endif %}
 </a></li>
 	    {% if current_user.is_authenticated %}<li class="header">编辑</li>{% endif %}
-	    {% if form.user_type and form.user_type == '0'%}<li class="active"><a href="/bd/view_school"><i class="fa fa-circle-o"></i> 新建求租信息</a></li>{% endif %}
+	    {% if form.user_type %}<li class="active"><a href="/bd/view_school"><i class="fa fa-circle-o"></i> 新建求租信息</a></li>{% endif %}
 	    {% if form.user_type and form.user_type == '1'%}<li class="active"><a href="/bd/view_institution"><i class="fa fa-circle-o"></i> 新建出租信息</a></li>{% endif %}
 	    {% if form.user_type and form.user_type == '1'%}<li class="active"><a href="/bd/view_bulletin"><i class="fa fa-circle-o"></i> 新建公告</a></li>{% endif %}
 
