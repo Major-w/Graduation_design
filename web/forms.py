@@ -23,6 +23,7 @@ class RegistrationForm(Form):
                                           'numbers, dots or underscores')])
     password = PasswordField(u'密码', validators=[Required(), EqualTo('password2', message=u'两次输入必须相同')])
     password2 = PasswordField(u'确认密码', validators=[Required()])
+    user_type = SelectField(u'用户类型', validators=[Required()] ,choices=[('0', u'房客'),('1', u'房东')])
     submit = SubmitField(u'注册')
 
     def validate_email(self, field):

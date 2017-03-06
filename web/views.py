@@ -43,7 +43,7 @@ def password_reset(token):
             flash(u'您的密码已经更新.')
             return redirect(url_for('login'))
         else:
-            return redirect(url_for('index'))
+            return redirect(url_for('view_school'))
     return render_template('auth/reset_password.html', form=form)
 
 
@@ -99,6 +99,14 @@ def login():
     elif request.method =='GET':
         logic.LoadBasePageInfo('登录',form)
     return render_template('auth/login.html', form=form)
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out.')
+    return redirect(url_for('login'))
 
 
 @app.route('/register', methods=['GET', 'POST'])

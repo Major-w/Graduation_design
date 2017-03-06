@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 
-ROOT_DOMAIN = 'http://192.168.0.116:5001'
+ROOT_DOMAIN = 'http://192.168.0.100:5001'
 ROOT_RESTFUL = ROOT_DOMAIN + '/bd/api/v1.0'
 
 RESTFUL_SCHOOL = ROOT_RESTFUL+'/school'
