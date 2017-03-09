@@ -321,4 +321,28 @@ class Terminal(db.Model):
         return '<Terminal %d,%d,%s>' % (self.account_id, self.type, self.code)
 
 
+class Rent(db.Model):
+    __tablename__ = 'rent'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    price = db.Column(db.Float)
+    description = db.Column(db.Text)
+    area_id = db.Column(db.ForeignKey(u'area.id'))#'区县'
+    rent_type = db.Column(db.Integer)
+    rental_mode = db.Column(db.String(20))
+    contacts = db.Column(db.String(20))
+    phone_number = db.Column(db.Integer)
+    date = db.Column(db.DateTime)
+
+    def __init__(self, area_id, title, price, description, rent_type, rental_mode, contacts, phone_number, date):
+        self.area_id = area_id
+        self.title = title
+        self.price = price
+        self.description = description
+        self.rent_type = rent_type
+        self.rental_mode = rental_mode
+        self.contacts = contacts
+        self.phone_number = phone_number
+        self.date = date
+
 

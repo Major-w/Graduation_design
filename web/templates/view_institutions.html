@@ -11,12 +11,13 @@
         <table class="table table-bordered">
           <tr>
 	    <th style="width: 10px">#</th>
-	    <th>培训机构名称</th>
+	    <th>小区名</th>
 	    <th>校区名</th>
 	    <th>地址</th>
 	    <th>区县</th>
 	    <th style="width: 40px"></th>
 	  </tr>
+
  {% if forms %}
    {% for f in forms %}
 	  <tr>
@@ -40,7 +41,7 @@
 	    <td>
 	      <form action="" method="post" name="edit_institution" onsubmit="return confirm('确认要提交吗?');">
 		{{f.hidden_tag()}}
-		<input type="submit" value="删除" name="delete">		    
+		{% if current_user.role_id == 1%}<input type="submit" value="删除" name="delete">{%endif%}
 	      </form>
 	    </td>
 	  </tr>

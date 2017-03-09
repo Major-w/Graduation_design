@@ -6,9 +6,9 @@ from app import db, login_manager
 
 
 class Permission:
-    FOLLOW = 0x01
-    COMMENT = 0x02
-    WRITE_ARTICLES = 0x04
+    Visitor = 0x01
+    Renter = 0x02
+    Lanlord = 0x04
     MODERATE_COMMENTS = 0x08
     ADMINISTER = 0x80
 
@@ -54,6 +54,7 @@ class User(UserMixin, db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
+    type = db.Column(db.Integer, unique=True)
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)

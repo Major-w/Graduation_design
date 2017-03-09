@@ -18,7 +18,7 @@ from models import User
 def rootDir_web(path):
     index_key = path.rfind('py')
     if index_key > (len(path)-4):
-        return redirect(url_for('view_schools'))
+        return redirect(url_for('view_rents'))
     return send_from_directory(os.path.join(app.root_path, '.'), path)
 
 
@@ -33,24 +33,24 @@ def rootDir():
 @app.route('/reset/<token>', methods=['GET', 'POST'])
 def password_reset(token):
     if not current_user.is_anonymous:
-        return redirect(url_for('view_school'))
+        return redirect(url_for('view_rent'))
     form = PasswordResetForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user is None:
-            return redirect(url_for('view_school'))
+            return redirect(url_for('view_rent'))
         if user.reset_password(token, form.password.data):
             flash(u'您的密码已经更新.')
             return redirect(url_for('login'))
         else:
-            return redirect(url_for('view_school'))
+            return redirect(url_for('view_rent'))
     return render_template('auth/reset_password.html', form=form)
 
 
 @app.route('/reset', methods=['GET', 'POST'])
 def password_reset_request():
     if not current_user.is_anonymous:
-        return redirect(url_for('view_school'))
+        return redirect(url_for('view_rent'))
     form = PasswordResetRequestForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -69,12 +69,12 @@ def password_reset_request():
 @login_required
 def confirm(token):
     if current_user.confirmed:
-        return redirect(url_for('view_school'))
+        return redirect(url_for('view_rent'))
     if current_user.confirm(token):
         flash(u'您已经激活了您的账户')
     else:
         flash(u'链接已失效')
-    return redirect(url_for('view_school'))
+    return redirect(url_for('view_rent'))
 
 
 @app.route('/confirm')
@@ -84,7 +84,7 @@ def resend_confirmation():
     send_email(current_user.email, 'Confirm Your Account',
                'auth/email/confirm', user=current_user, token=token)
     flash(u'已经发送了一封邮件到您的邮箱中，请确认')
-    return redirect(url_for('view_school'))
+    return redirect(url_for('view_rent'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -94,7 +94,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
-            return redirect(request.args.get('next') or url_for('view_school'))
+            return redirect(request.args.get('next') or url_for('view_rent'))
         flash(u'用户名或密码错误')
     elif request.method =='GET':
         logic.LoadBasePageInfo('登录',form)
@@ -113,9 +113,14 @@ def logout():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
+        if form.user_type.data == '0':
+            role = 2
+        else:
+            role = 3
         user = User(email=form.email.data,
                     username=form.username.data,
-                    password=form.password.data)
+                    password=form.password.data,
+                    role_id = role)
         token = user.generate_confirmation_token()
         try:
             send_email(user.email, 'Confirm Your Account',
@@ -133,19 +138,18 @@ def register():
     return render_template('auth/register.html', form=form)
 
 
-@app.route('/bd/view_school', methods=['GET', 'POST'])
-def view_school():
+@app.route('/bd/view_rent', methods=['GET', 'POST'])
+def view_rent():
     school_id = request.args.get('id')
     q = request.args.get('q')
     if q is not None:
-        return redirect(url_for('view_schools', page=1, q=q))        
+        return redirect(url_for('view_rents', page=1, q=q))        
     form = SchoolForm(request.form)
     form.area_id.choices = logic.g_choices_area
     form.schooltype_id.choices = logic.g_choices_schooltype
     form.feature_ids.choices = logic.g_choices_feature
 #    form.message = form.data
     if request.method == 'POST' and form.validate():
-        print "longitude:",form.longitude.data
         if form.id.data:
             school = orm.School.query.get(int(form.id.data))
             school.name = form.name.data
@@ -184,7 +188,7 @@ def view_school():
                 else:
                     os.remove(pathfile_server)
         else:
-            return redirect(url_for('view_school'))
+            return redirect(url_for('view_rent'))
     elif request.method =='GET' and school_id:
         form = logic.GetSchoolFormById(school_id)
         logic.LoadBasePageInfo('修改学校',form)
@@ -197,17 +201,17 @@ def view_school():
         if form.school:
             form.schoolimages = form.school.schoolimages
     
-    return render_template('view_school.html',form = form)
+    return render_template('view_rent.html',form = form)
 
 
 
-@app.route('/bd/view_schools' , methods=['GET', 'POST'])
-def view_schools():
+@app.route('/bd/view_rents' , methods=['GET', 'POST'])
+def view_rents():
     page = request.args.get('page', 1)
     q = request.args.get('q')
     schools = restful.GetSchools(int(page), q)
     if not schools.has_key(restful.ITEM_OBJECTS):
-        return redirect(url_for('view_schools'))        
+        return redirect(url_for('view_rents'))        
 
     schoolforms =[logic.GetSchoolFormById(x[restful.ITEM_ID]) for x in schools[restful.ITEM_OBJECTS]]
     while None in schoolforms:
@@ -224,12 +228,12 @@ def view_schools():
                     os.remove(pathfile_server)
             orm.db.session.delete(orm.School.query.get(int(form.id.data)))
             orm.db.session.commit()
-            return redirect(url_for('view_schools', page=page, q=q))
+            return redirect(url_for('view_rents', page=page, q=q))
 
     form = PageInfo()
-    logic.LoadBasePageInfo('所有学校',form)
+    logic.LoadBasePageInfo('所有求租信息',form)
     
-    return render_template('view_schools.html',forms = schoolforms,form = form, paging=restful.GetPagingFromResult(schools))
+    return render_template('view_rents.html',forms = schoolforms,form = form, paging=restful.GetPagingFromResult(schools))
 
 
 
@@ -348,7 +352,7 @@ def view_institutions():
             return redirect(url_for('view_institutions', page=page, q=q))
 
     form = PageInfo()
-    logic.LoadBasePageInfo('所有培训机构',form)
+    logic.LoadBasePageInfo('所有出租信息',form)
     
     return render_template('view_institutions.html',forms = institutionforms,form = form, paging=restful.GetPagingFromResult(institutions))
 
@@ -390,7 +394,10 @@ def view_bulletin():
                 if os.stat(pathfile_server).st_size <1*1024*1024:
                     bulletinimage = orm.Bulletinimage(bulletin.id,file_server)
                     orm.db.session.merge(bulletinimage)
-                    orm.db.session.commit()
+                    try:
+                        orm.db.session.commit()
+                    except:
+                        orm.db.session.rollback()
                 else:
                     os.remove(pathfile_server)
         else:
@@ -510,3 +517,7 @@ def view_accounts():
     
     return render_template('view_accounts.html',forms = accountforms,form = form, paging=restful.GetPagingFromResult(accounts))
 
+
+@app.route('/new/function', methods=['GET', 'POST'])
+def new_funciton():
+    return render_template('new_function.xml')
