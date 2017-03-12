@@ -141,6 +141,7 @@ manager.create_api(orm.Institution, methods=['GET'], url_prefix='/bd/api/v1.0', 
 manager.create_api(orm.InstitutionFeature, methods=['GET'], url_prefix='/bd/api/v1.0')
 manager.create_api(orm.School, results_per_page = 7, methods=['GET'], url_prefix='/bd/api/v1.0', postprocessors={'GET_SINGLE': [post_get_one],'GET_MANY':[post_get_many]})
 manager.create_api(orm.SchoolFeature, methods=['GET'], url_prefix='/bd/api/v1.0')
+manager.create_api(orm.Rent, methods=['GET'], url_prefix='/bd/api/v1.0', postprocessors={'GET_SINGLE': [post_get_one],'GET_MANY':[post_get_many]})
 manager.create_api(orm.Schooltype, methods=['GET'], url_prefix='/bd/api/v1.0')
 manager.create_api(orm.Account, methods=['GET', 'PUT', 'PATCH'], url_prefix='/bd/api/v1.0', preprocessors={'PATCH_SINGLE':[pre_put_single_account]}, exclude_columns=['checkcode','password'])
 # manager.create_api(orm.Account, methods=['POST'], url_prefix='/bd/api/v1.0/back', preprocessors={'POST':[pre_post_account]},postprocessors={'POST':[post_post_account]}, exclude_columns=['checkcode','password'])

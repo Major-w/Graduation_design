@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import StringField, BooleanField,HiddenField, TextAreaField, SelectField, DecimalField, SelectMultipleField, DateTimeField, BooleanField, PasswordField, SubmitField
+from wtforms import StringField, BooleanField,HiddenField, TextAreaField, SelectField, DecimalField, SelectMultipleField,\
+    DateTimeField, BooleanField, PasswordField, SubmitField, IntegerField
 from wtforms.validators import DataRequired, Length, Regexp, Required, Email, EqualTo
 from wtforms import ValidationError
 from flask.ext.uploads import UploadSet, IMAGES
@@ -124,3 +125,21 @@ class AccountForm(Form):
     def validate_username(self, field):
         if Account.query.filter_by(username=field.data).first():
             raise ValidationError(u'用户名已存在')
+
+
+class RentForm(Form):
+    id = HiddenField('id')
+    title = StringField(u'标题', validators=[Required(),Length(1, 64)])
+    price = IntegerField(u'租金')
+    description= TextAreaField(u'描述')
+    area_id = SelectField(u'所在区县', coerce=int)
+    rental_mode = SelectField(u'出租方式', validators=[Required()] ,choices=[('0', u'整套出租'),('1', u'单间出租'),('2', u'床位出租')])
+    rent_type = SelectField(u'押金方式', validators=[Required()] ,choices=[('0', u'押一付一'),('1', u'押一付三')])
+    contacts = StringField(u'联系人')
+    phone_number = IntegerField(u'联系方式')
+    # date = DataRequired(u'发布日期')
+    residential_id = SelectField(u'小区', coerce=int)
+    size = StringField(u'面积')
+    address= StringField(u'地址')
+    decorate_type = SelectField(u'装修情况', validators=[Required()] ,choices=[('0', u'简单装修'),('1', u'精装修')])
+

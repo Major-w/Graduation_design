@@ -159,7 +159,7 @@ class Institution(db.Model):
     telephone = db.Column(db.String(50)) #电话
     feedesc = db.Column(db.String(100)) # 学费标准
     timeopen = db.Column(db.DateTime) #开业时间
-    timeclose = db.Column(db.DateTime) #关门时间
+    timeclose = db.Column(db.DateTime) #关门y时间
     feetype_id = db.Column(db.ForeignKey(u'feetype.id'))
     longitude = db.Column(db.Float) #经度
     latitude = db.Column(db.Float)  #纬度
@@ -321,20 +321,39 @@ class Terminal(db.Model):
         return '<Terminal %d,%d,%s>' % (self.account_id, self.type, self.code)
 
 
+class Residential(db.Model):
+    __tablename__ = 'residential'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=True)
+
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return '<Residential %s>' % self.name
+
+
 class Rent(db.Model):
     __tablename__ = 'rent'
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50))
-    price = db.Column(db.Float)
-    description = db.Column(db.Text)
-    area_id = db.Column(db.ForeignKey(u'area.id'))#'区县'
-    rent_type = db.Column(db.Integer)
-    rental_mode = db.Column(db.String(20))
-    contacts = db.Column(db.String(20))
-    phone_number = db.Column(db.Integer)
-    date = db.Column(db.DateTime)
+    title = db.Column(db.String(50))  # 标题
+    price = db.Column(db.Integer)  # 价格
+    description = db.Column(db.Text)  # 描述
+    area_id = db.Column(db.ForeignKey(u'area.id'))  # 区县
+    rent_type = db.Column(db.Integer)  # 类型
+    rental_mode = db.Column(db.String(20))  # (整租，单间，合租)
+    contacts = db.Column(db.String(20))  # 联系人
+    phone_number = db.Column(db.Integer)   # 联系方式
+    date = db.Column(db.DateTime)   # 发布日期
+    residential_id = db.Column(db.ForeignKey(u'residential.id'))  # 小区名称
+    size = db.Column(db.String(20))    # 面积
+    address = db.Column(db.String(50))  # 地址
+    decorate_type = db.Column(db.Boolean)  # 装修类型
+    # 房屋类型
+    residential = db.relationship(u'Residential')
 
-    def __init__(self, area_id, title, price, description, rent_type, rental_mode, contacts, phone_number, date):
+    def __init__(self, area_id, title, price, description, rent_type, rental_mode, contacts, phone_number, date,
+                 residential_id, size, address, decorate_type):
         self.area_id = area_id
         self.title = title
         self.price = price
@@ -344,5 +363,11 @@ class Rent(db.Model):
         self.contacts = contacts
         self.phone_number = phone_number
         self.date = date
+        self.residential_id = residential_id
+        self.size = size
+        self.address = address
+        self.decorate_type = decorate_type
 
+    def __repr__(self):
+        return '<Rent %s>' % self.name
 

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<form action="" method="post" name="view_school" enctype="multipart/form-data">
+    {{form.hidden_tag()}}
+
+    <div class="row">
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.title, size=50)}}
+        </div>
+         <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.address, size=50)}}
+        </div>
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.residential_id)}}
+        </div>
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.area_id)}}
+        </div>
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.contacts)}}
+        </div>
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.phone_number)}}
+        </div>
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.decorate_type)}}
+        </div>
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.size,size = 8)}}<span>m²</span>
+        </div>
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.price, size = 8)}}<span>元/月</span>
+        </div>
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.rental_mode)}}
+        </div>
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.rent_type)}}
+        </div>
+         <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.description, rows="10", cols="100")}}
+        </div>
+
+
+    </div>
+
+
+    {{form.message}}
+
+
+    <p><input type="submit" value="确定" name="confirm"></p>
+</form>
+{% endblock %}

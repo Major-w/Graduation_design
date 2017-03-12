@@ -25,18 +25,19 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="50f34a2e-e130-47fd-931e-32f96c3a77d8">
-        <schema name="pg_catalog" object-types="table, view" />
+        <schema name="information_schema" object-types="function, table, view" />
+        <schema name="pg_catalog" object-types="function, table, view" />
         <schema name="public" object-types="column, function, table, view" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="50f34a2e-e130-47fd-931e-32f96c3a77d8">
-      <console name="Connection" type="STANDARD"><![CDATA[select  * from area;
+      <console name="Connection" type="STANDARD"><![CDATA[select  * from rent;
 
 insert into area values (30,'test')
 
-delete from users where email = '471397033@qq.com']]></console>
+delete from users where email = 'jikai05566@163.com']]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.EditorStateManager">

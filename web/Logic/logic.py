@@ -7,14 +7,29 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)),'../..')
 reload(sys)
 sys.setdefaultencoding('utf-8')
 from DB import orm
-from forms import SchoolForm, InstitutionForm, BulletinForm, AccountForm
+from forms import SchoolForm, InstitutionForm, BulletinForm, AccountForm, RentForm
 from Logic import restful
 
 g_choices_area = [(g.id, g.name) for g in orm.Area.query.order_by('name')]
+g_choices_residential = [(g.id, g.name) for g in orm.Residential.query.order_by('name')]
 g_choices_schooltype = [(g.id, g.name) for g in orm.Schooltype.query.order_by('name')]
 g_choices_feature = [(g.id, g.name) for g in orm.Feature.query.order_by('name')]
 g_choices_agespan = [(g.id, g.name) for g in orm.Agespan.query.order_by('name')]
 g_choices_feetype = [(g.id, g.name) for g in orm.Feetype.query.order_by('name')]
+
+def GetRentFormById(rent_id):
+    rent = orm.Rent.query.get(int(rent_id))
+    if rent is None:
+        return None
+    rentform = RentForm()
+    rentform.id.data = rent.id
+    rentform.area_id.data = rent.area_id
+    rentform.price.data = rent.price
+    rentform.description.data = rent.description
+    rentform.title.data = rent.title
+    rentform.rental_mode.data = rent.rental_mode
+    rentform.area_id.choices = g_choices_area
+    return rentform
 
 
 def GetSchoolFormById(school_id):
