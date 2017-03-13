@@ -137,9 +137,27 @@ class RentForm(Form):
     rent_type = SelectField(u'押金方式', validators=[Required()] ,choices=[('0', u'押一付一'),('1', u'押一付三')])
     contacts = StringField(u'联系人')
     phone_number = IntegerField(u'联系方式')
-    # date = DataRequired(u'发布日期')
     residential_id = SelectField(u'小区', coerce=int)
     size = StringField(u'面积')
     address= StringField(u'地址')
     decorate_type = SelectField(u'装修情况', validators=[Required()] ,choices=[('0', u'简单装修'),('1', u'精装修')])
+    image = FileField('上传图片', validators= [FileAllowed(['jpg', 'png'], 'Images only!')])
+
+
+class DemandForm(Form):
+    id = HiddenField('id')
+    contacts = StringField(u'联系人')
+    phone_number = IntegerField(u'联系方式')
+    area_id = SelectField(u'所在区县', coerce=int)
+    rental_mode = SelectField(u'出租方式', validators=[Required()] ,choices=[('0', u'整套出租'),('1', u'单间出租'),('2', u'床位出租')])
+    decorate_type = SelectField(u'装修情况', validators=[Required()] ,choices=[('0', u'简单装修'),('1', u'精装修')])
+    subway_line = SelectField(u'附近地铁线', coerce=int)
+    price_low = IntegerField(u'最低租金')
+    price_high = IntegerField(u'最高租金')
+    description = TextAreaField(u'描述')
+
+
+
+
+
 

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<form action="" method="post" name="view_demand" enctype="multipart/form-data">
+    {{form.hidden_tag()}}
+
+    <div class="row">
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.contacts, size=8)}}
+        </div>
+         <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.phone_number, size=15)}}
+        </div>
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.rental_mode)}}
+        </div>
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.area_id)}}
+        </div>
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.price_low, size = 8)}}<span>元/月</span>
+        </div>
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.price_high, size = 8)}}<span>元/月</span>
+        </div>
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.decorate_type)}}
+        </div>
+        <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.subway_line)}}
+        </div>
+         <div class="col-lg-5 col-xs-10">
+            {{ render_field(form.description, rows="10", cols="100")}}
+        </div>
+
+    </div>
+
+    <p><input type="submit" value="确定" name="confirm"></p>
+</form>
+{% endblock %}

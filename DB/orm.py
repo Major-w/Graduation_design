@@ -351,6 +351,7 @@ class Rent(db.Model):
     decorate_type = db.Column(db.Boolean)  # 装修类型
     # 房屋类型
     residential = db.relationship(u'Residential')
+    area = db.relationship(u'Area')
 
     def __init__(self, area_id, title, price, description, rent_type, rental_mode, contacts, phone_number, date,
                  residential_id, size, address, decorate_type):
@@ -371,3 +372,62 @@ class Rent(db.Model):
     def __repr__(self):
         return '<Rent %s>' % self.name
 
+
+class Rentimage(db.Model):
+    __tablename__ = 'rentimages'
+    id = db.Column(db.Integer, primary_key=True)
+    rent_id = db.Column(db.ForeignKey(u'rent.id'))
+    file = db.Column(db.String(500))
+
+    rent = db.relationship(u'Rent', backref = db.backref('rentimages', cascade="all, delete-orphan"))
+
+    def __init__(self, rent_id, file):
+        self.rent_id = rent_id
+        self.file = file
+
+    def __repr__(self):
+        return '<Rentimage %d,%s>' % (self.rent_id, self.file)
+
+
+class Demand(db.Model):
+    __tablename__ = 'demand'
+    id = db.Column(db.Integer, primary_key=True)
+    price_low = db.Column(db.Integer)  # 最低价格
+    price_high = db.Column(db.Integer)  # 最高价格
+    area_id = db.Column(db.ForeignKey(u'area.id'))  # 区县
+    contacts = db.Column(db.String(20))  # 联系人
+    phone_number = db.Column(db.Integer)  # 联系方式
+    rental_mode = db.Column(db.String(20))  # (整租，单间，合租)
+    decorate_type = db.Column(db.Boolean)  # 装修类型
+    subway_line = db.Column(db.ForeignKey(u'subway.id'))  # 地铁几号线附近
+    description = db.Column(db.Text)  # 描述
+
+
+    area = db.relationship(u'Area')
+    subway = db.relationship(u'Subway')
+
+    def __init__(self, price_low, price_high, area_id, contacts, phone_number, rental_mode, decorate_type, subway_line, description):
+        self.price_high = price_high
+        self.price_low = price_low
+        self.area_id = area_id
+        self.contacts = contacts
+        self.phone_number = phone_number
+        self.rental_mode = rental_mode
+        self.decorate_type = decorate_type
+        self.subway_line = subway_line
+        self.description = description
+
+    def __repr__(self):
+        return '<Demand %s>' % self.name
+
+
+class Subway(db.Model):
+    __tablename__ = 'subway'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=True)
+
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return '<Subway %s>' % self.name

@@ -6,7 +6,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from flask import Markup, request
 from app import app, db
 from forms import SchoolForm, PageInfo, InstitutionForm, BulletinForm, AccountForm, LoginForm, RegistrationForm,\
-    PasswordResetRequestForm, PasswordResetForm, RentForm
+    PasswordResetRequestForm, PasswordResetForm, RentForm, DemandForm
 from DB import orm
 from Utils import Util
 from Logic import restful, logic
@@ -25,7 +25,7 @@ def rootDir_web(path):
     return send_from_directory(os.path.join(app.root_path, '.'), path)
 
 
-UPLOAD_PATH = '/home/lynn/project/bd/python/web/files/'
+UPLOAD_PATH = '/Users/kai/practice_flask/Graduation_design'
 
 
 @auth.before_app_request
@@ -165,7 +165,6 @@ def view_rent1():
     form = RentForm(request.form)
     form.area_id.choices = logic.g_choices_area
     form.residential_id.choices = logic.g_choices_residential
-    # print form.validate()
     if request.method == 'POST' and form.validate():
         if form.id.data:
             rent = orm.Rent.query.get(int(form.id.data))
@@ -195,13 +194,69 @@ def view_rent1():
             except :
                 orm.db.session.rollback()
             form.id.data = rent.id
-            return redirect(url_for('view_rents'))
+            if request.form.has_key('upload'):
+                file = request.files['image']
+                if file:
+                    file_server = str(uuid.uuid1()) + Util.file_extension(file.filename)
+                    pathfile_server = os.path.join(UPLOAD_PATH, file_server)
+                    file.save(pathfile_server)
+                    if os.stat(pathfile_server).st_size < 1 * 1024 * 1024:
+                        rentimage = orm.Rentimage(rent.id, file_server)
+                        orm.db.session.merge(rentimage)   # merge 方法代替save
+                        orm.db.session.commit()
+                    else:
+                        os.remove(pathfile_server)
+            else:
+                return redirect(url_for('view_rents'))
     elif request.method =='GET' and rent_id:
         form = logic.GetRentFormById(rent_id)
         logic.LoadBasePageInfo('修改出租信息',form)
     else:
         logic.LoadBasePageInfo('新建出租信息',form)
     return render_template('view_rent1.html', form=form)
+
+
+@app.route('/bd/view_demand', methods=['GET', 'POST'])
+def view_demand():
+    demand_id = request.args.get('id')
+    q = request.args.get('q')
+    if q is not None:
+        return redirect(url_for('view_demands', page=1, q=q))
+    form = DemandForm(request.form)
+    form.area_id.choices = logic.g_choices_area
+    form.subway_line.choices = logic.g_choices_subway
+    if request.method == 'POST' and form.validate():
+        if form.id.data:
+            demand = orm.Demand.query.get(int(form.id.data))
+            demand.contacts = form.contacts.data
+            demand.phone_number = form.phone_number.data
+            demand.description = form.description.data
+            demand.price_low = form.price_low.data
+            demand.price_high = form.price_high.data
+            demand.area_id = form.area_id.data
+            demand.subway_line = form.subway_line.data
+            demand.decoration_type = form.decoration_type.data
+            demand.rental_mode = form.rental_mode.data
+        else:
+            if form.decorate_type.data == '0':
+                form.decorate_type.data = True
+            else:
+                form.decorate_type.data = False
+            demand = orm.Demand(form.price_low.data, form.price_high.data, form.area_id.data,form.contacts.data,
+                                form.phone_number.data, form.rental_mode.data, form.decorate_type.data,
+                                form.subway_line.dataform.description.data)
+            orm.db.session.add(demand)
+            try:
+                orm.db.session.commit()
+            except :
+                orm.db.session.rollback()
+            form.id.data = demand.id
+    elif request.method == 'GET' and demand_id:
+        form = logic.GetDemandFormById(demand_id)
+        logic.LoadBasePageInfo('修改求租信息', form)
+    else:
+        logic.LoadBasePageInfo('新建求租信息', form)
+    return render_template('view_demand.html', form=form)
 
 
 

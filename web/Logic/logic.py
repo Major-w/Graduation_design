@@ -12,6 +12,7 @@ from Logic import restful
 
 g_choices_area = [(g.id, g.name) for g in orm.Area.query.order_by('name')]
 g_choices_residential = [(g.id, g.name) for g in orm.Residential.query.order_by('name')]
+g_choices_subway = [(g.id, g.name) for g in orm.Subway.query.order_by('name')]
 g_choices_schooltype = [(g.id, g.name) for g in orm.Schooltype.query.order_by('name')]
 g_choices_feature = [(g.id, g.name) for g in orm.Feature.query.order_by('name')]
 g_choices_agespan = [(g.id, g.name) for g in orm.Agespan.query.order_by('name')]
