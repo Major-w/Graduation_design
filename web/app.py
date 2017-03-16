@@ -1,6 +1,7 @@
 import sys, os
 from flask_bootstrap import Bootstrap
 from flask_mail import Mail
+from flask_moment import Moment
 from flask import Flask, request
 from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
@@ -36,9 +37,11 @@ app.config['FLASKY_MAIL_SUBJECT_PREFIX'] = '[Flasky]'
 app.config['MAIL_USERNAME'] = '471397033'
 app.config['MAIL_PASSWORD'] = 'hjyelcgkrdhbbiig'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+app.config['FLASKY_COMMENTS_PER_PAGE'] = 10
 
 bootstrap.init_app(app)
 mail.init_app(app)
+moment = Moment(app)
 api = Api(app)
 db.init_app(app)
 login_manager.init_app(app)

@@ -1,9 +1,9 @@
 #-*- coding: utf-8 -*-
 import os
 import time, uuid, datetime
-from flask import render_template, send_from_directory, session, redirect, url_for, flash
+from flask import render_template, send_from_directory, session, redirect, url_for, flash, current_app
 from flask_login import login_user, logout_user, current_user, login_required
-from flask import Markup, request
+from flask import Markup, request, make_response
 from app import app, db
 from forms import SchoolForm, PageInfo, InstitutionForm, BulletinForm, AccountForm, LoginForm, RegistrationForm,\
     PasswordResetRequestForm, PasswordResetForm, RentForm, DemandForm
@@ -260,25 +260,32 @@ def view_rent():
     return render_template('view_rent.html', form=form)
 
 
-@app.route('/bd/view_rents' , methods=['GET', 'POST'])
-def view_rents():
-    page = request.args.get('page', 1)
-    q = request.args.get('q')
-    rents = restful.GetRents(int(page), q)
-    if not rents.has_key(restful.ITEM_OBJECTS):
-        return redirect(url_for('view_rents'))
+@app.route('/view_rent/<int:id>',methods=['GET', 'POST'])
+def view_rent_int():
+    pass
 
-    rentforms =[logic.GetRentFormById(x[restful.ITEM_ID]) for x in rents[restful.ITEM_OBJECTS]]
-    while None in rentforms:
-        rentforms.remove(None)
+
+@app.route('/bd/view_rents', methods=['GET', 'POST'])
+def view_rents():
+    page = request.args.get('page', 1, type=int)
+    q = request.args.get('q')
+    pagination = orm.Rent.query.order_by(orm.Rent.date.desc()).paginate(page,10)
+    rents = pagination.items
+    # rents = restful.GetRents(int(page), uq)
+    # if not rents.has_key(restful.ITEM_OBJECTS):
+    #     return redirect(url_for('view_rents'))
+
+    # rentforms =[logic.GetRentFormById(x[restful.ITEM_ID]) for x in rents[restful.ITEM_OBJECTS]]
+    # while None in rentforms:
+    #     rentforms.remove(None)
 
     if request.method == 'POST':
         form = RentForm(request.form)
         if request.form.has_key('delete'):
-            for x in orm.Rentimage.query.filter_by(rent_id=int(form.id.data)).all():
-                pathfile_server = os.path.join(UPLOAD_PATH, x.file)
-                if os.path.exists(pathfile_server):
-                    os.remove(pathfile_server)
+            # for x in orm.Rentimage.query.filter_by(rent_id=int(form.id.data)).all():
+            #     pathfile_server = os.path.join(UPLOAD_PATH, x.file)
+            #     if os.path.exists(pathfile_server):
+            #         os.remove(pathfile_server)
             orm.db.session.delete(orm.Rent.query.get(int(form.id.data)))
             orm.db.session.commit()
             return redirect(url_for('view_rents', page=page, q=q))
@@ -286,7 +293,7 @@ def view_rents():
     form = PageInfo()
     logic.LoadBasePageInfo('所有求租信息',form)
 
-    return render_template('view_rents.html', forms=rentforms, form=form, paging=restful.GetPagingFromResult(rents))
+    return render_template('view_rents.html', rents=rents, pagination=pagination, page=page, form=form)
 
 
 

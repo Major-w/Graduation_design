@@ -15,31 +15,36 @@
                         <th>描述</th>
                         <th>地址</th>
                         <th>区县</th>
+                        <th>发布日期</th>
                         <th style="width: 40px"></th>
                     </tr>
-                    {% if forms %}
-                    {% for f in forms %}
+                    {% if rents %}
+                    {% for f in rents %}
+                    <div class="comment-date">{{ moment(f.date).fromNow() }}</div>
                     <tr>
                         <td>
-                            {{f.id.data}}
+                            {{f.id}}
                         </td>
                         <td>
                             <a href="/bd/view_rent?id={{f.id.data}}">
-                                {{f.title.data}}dq
+                                {{f.title}}dq
                             </a>
                         </td>
                         <td>
-                            {{f.description.data}}
+                            {{f.description}}
                         </td>
                         <td>
-                            {{f.address.data}}
+                            {{f.address}}
                         </td>
                         <td>
-                            {{f.area_name}}
+                            {{f.area.name}}
+                        </td>
+                        <td>
+                            {{f.date}}
                         </td>
                         <td>
                             <form action="" method="post" name="edit_school" onsubmit="return confirm('确认要提交吗?');">
-                                {{f.hidden_tag()}}
+                                <input type="hidden" name="id" value="{{f.id}}">
                                 {% if current_user.role_id == 1%}<input type="submit" value="删除" name="delete">{% endif%}
                             </form>
                         </td>

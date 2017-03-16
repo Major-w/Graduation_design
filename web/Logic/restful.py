@@ -72,7 +72,7 @@ def GetPagingFromResult(result):
     page = int(result[ITEM_PAGE])
     page_from = max(1,page-5)
     page_to = min(total_pages,page+5)
-    return {'total_pages':total_pages, 'page': page, 'page_from':page_from, 'page_to': page_to}
+    return {'total_pages': total_pages, 'page': page, 'page_from':page_from, 'page_to': page_to}
 
 
 def GetAccounts(page, title=None):
