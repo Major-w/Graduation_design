@@ -37,7 +37,12 @@
 
 insert into area values (30,'test')
 
-delete from users where email = 'jikai05566@163.com']]></console>
+delete from users where email = 'jikai05566@163.com'
+
+select  * from account
+ insert into account values(1,'test')
+update  account set telephone = 110 where id  = 1
+delete  from account where id =1]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.EditorStateManager">

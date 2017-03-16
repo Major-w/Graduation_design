@@ -379,7 +379,7 @@ class Rentimage(db.Model):
     rent_id = db.Column(db.ForeignKey(u'rent.id'))
     file = db.Column(db.String(500))
 
-    rent = db.relationship(u'Rent', backref = db.backref('rentimages', cascade="all, delete-orphan"))
+    rent = db.relationship(u'Rent', backref=db.backref('rentimages', cascade="all, delete-orphan"))
 
     def __init__(self, rent_id, file):
         self.rent_id = rent_id

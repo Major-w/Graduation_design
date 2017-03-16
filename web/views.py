@@ -156,66 +156,6 @@ def register():
     return render_template('auth/register.html', form=form)
 
 
-@app.route('/bd/view_rent1', methods=['GET', 'POST'])
-def view_rent1():
-    rent_id = request.args.get('id')
-    q = request.args.get('q')
-    if q is not None:
-        return redirect(url_for('view_rents', page=1, q=q))
-    form = RentForm(request.form)
-    form.area_id.choices = logic.g_choices_area
-    form.residential_id.choices = logic.g_choices_residential
-    if request.method == 'POST' and form.validate():
-        if form.id.data:
-            rent = orm.Rent.query.get(int(form.id.data))
-            rent.title = form.title.data
-            rent.area_id = form.area_id.data
-            rent.description = form.description.data
-            rent.price = form.price.data
-            rent.rental_mode = form.rental_mode.data
-            rent.rent_type = form.rent_type.data
-            rent.contacts = form.contacts.data
-            rent.phone_number = form.phone_number.data
-            rent.size = form.size.data
-            rent.address = form.address.data
-            rent.decorate_type = form.decorate_type.data
-            rent.residential_id = form.residential_id.data
-        else:
-            if form.decorate_type.data == '0':
-                form.decorate_type.data = True
-            else:
-                form.decorate_type.data = False
-            rent = orm.Rent(form.area_id.data, form.title.data, form.price.data, form.description.data,
-                            form.rent_type.data, form.rental_mode.data, form.contacts.data, form.phone_number.data,
-                            today, form.residential_id.data, form.size.data, form.address.data, form.decorate_type.data)
-            orm.db.session.add(rent)
-            try:
-                orm.db.session.commit()
-            except :
-                orm.db.session.rollback()
-            form.id.data = rent.id
-            if request.form.has_key('upload'):
-                file = request.files['image']
-                if file:
-                    file_server = str(uuid.uuid1()) + Util.file_extension(file.filename)
-                    pathfile_server = os.path.join(UPLOAD_PATH, file_server)
-                    file.save(pathfile_server)
-                    if os.stat(pathfile_server).st_size < 1 * 1024 * 1024:
-                        rentimage = orm.Rentimage(rent.id, file_server)
-                        orm.db.session.merge(rentimage)   # merge 方法代替save
-                        orm.db.session.commit()
-                    else:
-                        os.remove(pathfile_server)
-            else:
-                return redirect(url_for('view_rents'))
-    elif request.method =='GET' and rent_id:
-        form = logic.GetRentFormById(rent_id)
-        logic.LoadBasePageInfo('修改出租信息',form)
-    else:
-        logic.LoadBasePageInfo('新建出租信息',form)
-    return render_template('view_rent1.html', form=form)
-
-
 @app.route('/bd/view_demand', methods=['GET', 'POST'])
 def view_demand():
     demand_id = request.args.get('id')
@@ -262,98 +202,91 @@ def view_demand():
 
 @app.route('/bd/view_rent', methods=['GET', 'POST'])
 def view_rent():
-    school_id = request.args.get('id')
+    rent_id = request.args.get('id')
     q = request.args.get('q')
     if q is not None:
         return redirect(url_for('view_rents', page=1, q=q))
-    form = SchoolForm(request.form)
+    form = RentForm(request.form)
     form.area_id.choices = logic.g_choices_area
-    form.schooltype_id.choices = logic.g_choices_schooltype
-    form.feature_ids.choices = logic.g_choices_feature
+    form.residential_id.choices = logic.g_choices_residential
     if request.method == 'POST' and form.validate():
         if form.id.data:
-            school = orm.School.query.get(int(form.id.data))
-            school.name = form.name.data
-            school.area_id = form.area_id.data
-            school.teachdesc = form.teachdesc.data
-            school.address = form.address.data
-            school.schooltype_id = form.schooltype_id.data
-            school.website = form.website.data
-            school.distinguish = form.distinguish.data
-            school.leisure = form.leisure.data
-            school.threashold = form.threashold.data
-            school.partner = form.partner.data
-            school.artsource = form.artsource.data
-            school.feedesc = form.feedesc.data
-            school.longitude = form.longitude.data
-            school.latitude = form.latitude.data
-            orm.db.session.commit()
+            rent = orm.Rent.query.get(int(form.id.data))
+            rent.title = form.title.data
+            rent.area_id = form.area_id.data
+            rent.description = form.description.data
+            rent.price = form.price.data
+            rent.rental_mode = form.rental_mode.data
+            rent.rent_type = form.rent_type.data
+            rent.contacts = form.contacts.data
+            rent.phone_number = form.phone_number.data
+            rent.size = form.size.data
+            rent.address = form.address.data
+            rent.decorate_type = form.decorate_type.data
+            rent.residential_id = form.residential_id.data
         else:
-            school = orm.School(form.name.data, form.area_id.data, form.teachdesc.data, form.address.data, form.schooltype_id.data, form.website.data, form.distinguish.data, form.leisure.data, form.threashold.data, form.partner.data, form.artsource.data, form.feedesc.data, form.longitude.data, form.latitude.data)
-            orm.db.session.add(school)
-            orm.db.session.commit()
-            form.id.data = school.id
-
-        logic.SetSchoolFeatures(int(form.id.data),form.feature_ids.data)
-
-        if request.form.has_key('upload'):
-            file = request.files['image']
-            if file :
-                file_server = str(uuid.uuid1())+Util.file_extension(file.filename)
-                pathfile_server = os.path.join(UPLOAD_PATH, file_server)
-                file.save(pathfile_server)
-                if os.stat(pathfile_server).st_size <1*1024*1024:
-                    schoolimage = orm.Schoolimage(school.id,file_server)
-                    orm.db.session.merge(schoolimage)
-                    orm.db.session.commit()
-                else:
-                    os.remove(pathfile_server)
-        else:
-            return redirect(url_for('view_rent'))
-    elif request.method =='GET' and school_id:
-        form = logic.GetSchoolFormById(school_id)
-        logic.LoadBasePageInfo('修改学校',form)
+            if form.decorate_type.data == '0':
+                form.decorate_type.data = True
+            else:
+                form.decorate_type.data = False
+            rent = orm.Rent(form.area_id.data, form.title.data, form.price.data, form.description.data,
+                            form.rent_type.data, form.rental_mode.data, form.contacts.data, form.phone_number.data,
+                            today, form.residential_id.data, form.size.data, form.address.data, form.decorate_type.data)
+            orm.db.session.add(rent)
+            try:
+                orm.db.session.commit()
+            except:
+                orm.db.session.rollback()
+            form.id.data = rent.id
+            if request.form.has_key('upload'):
+                file = request.files['image']
+                if file:
+                    file_server = str(uuid.uuid1()) + Util.file_extension(file.filename)
+                    pathfile_server = os.path.join(UPLOAD_PATH, file_server)
+                    file.save(pathfile_server)
+                    if os.stat(pathfile_server).st_size < 1 * 1024 * 1024:
+                        rentimage = orm.Rentimage(rent.id, file_server)
+                        orm.db.session.merge(rentimage)  # merge 方法代替save
+                        orm.db.session.commit()
+                    else:
+                        os.remove(pathfile_server)
+            else:
+                return redirect(url_for('view_rents'))
+    elif request.method == 'GET' and rent_id:
+        form = logic.GetRentFormById(rent_id)
+        logic.LoadBasePageInfo('修改出租信息', form)
     else:
-        logic.LoadBasePageInfo('新建学校',form)
-
-    if form.id.data:
-        school = orm.School.query.get(int(form.id.data))
-        form.school = school
-        if form.school:
-            form.schoolimages = form.school.schoolimages
-
-    return render_template('view_rent.html',form = form)
+        logic.LoadBasePageInfo('新建出租信息', form)
+    return render_template('view_rent.html', form=form)
 
 
 @app.route('/bd/view_rents' , methods=['GET', 'POST'])
 def view_rents():
     page = request.args.get('page', 1)
     q = request.args.get('q')
-    schools = restful.GetSchools(int(page), q)
-    if not schools.has_key(restful.ITEM_OBJECTS):
+    rents = restful.GetRents(int(page), q)
+    if not rents.has_key(restful.ITEM_OBJECTS):
         return redirect(url_for('view_rents'))
 
-    schoolforms =[logic.GetSchoolFormById(x[restful.ITEM_ID]) for x in schools[restful.ITEM_OBJECTS]]
-    while None in schoolforms:
-        schoolforms.remove(None)
+    rentforms =[logic.GetRentFormById(x[restful.ITEM_ID]) for x in rents[restful.ITEM_OBJECTS]]
+    while None in rentforms:
+        rentforms.remove(None)
 
-
-#    form.message = form.data
     if request.method == 'POST':
-        form = SchoolForm(request.form)
+        form = RentForm(request.form)
         if request.form.has_key('delete'):
-            for x in orm.Schoolimage.query.filter_by(school_id=int(form.id.data)).all():
+            for x in orm.Rentimage.query.filter_by(rent_id=int(form.id.data)).all():
                 pathfile_server = os.path.join(UPLOAD_PATH, x.file)
                 if os.path.exists(pathfile_server):
                     os.remove(pathfile_server)
-            orm.db.session.delete(orm.School.query.get(int(form.id.data)))
+            orm.db.session.delete(orm.Rent.query.get(int(form.id.data)))
             orm.db.session.commit()
             return redirect(url_for('view_rents', page=page, q=q))
 
     form = PageInfo()
     logic.LoadBasePageInfo('所有求租信息',form)
 
-    return render_template('view_rents.html',forms = schoolforms,form = form, paging=restful.GetPagingFromResult(schools))
+    return render_template('view_rents.html', forms=rentforms, form=form, paging=restful.GetPagingFromResult(rents))
 
 
 
@@ -526,7 +459,7 @@ def view_bulletin():
         form = logic.GetBulletinFormById(bulletin_id)
         logic.LoadBasePageInfo('修改公告',form)
     else:
-        form.dt.data = datetime.datetime.now()
+        form.dt.data = datetime.now()
         logic.LoadBasePageInfo('新建公告', form)
 
     if form.id.data:
@@ -595,7 +528,10 @@ def view_account():
         else:
             account = orm.Account(form.telephone.data, '1234', form.telephone.data, form.telephone.data, 0, 1 if form.flag_telephone.data else 0, '1234', form.source.data, form.dtcreate.data)
             orm.db.session.add(account)
-            orm.db.session.commit()
+            try:
+                orm.db.session.commit()
+            except:
+                orm.db.session.rollback()
             form.id.data = account.id
 
         return redirect(url_for('view_account'))
@@ -618,6 +554,7 @@ def view_accounts():
     page = request.args.get('page', 1)
     q = request.args.get('q')
     accounts = restful.GetAccounts(int(page),q)
+
     if not accounts.has_key(restful.ITEM_OBJECTS):
         return redirect(url_for('view_accounts'))
 
@@ -636,6 +573,24 @@ def view_accounts():
     logic.LoadBasePageInfo('所有用户',form)
 
     return render_template('view_accounts.html',forms = accountforms,form = form, paging=restful.GetPagingFromResult(accounts))
+
+
+@app.route('/bd/view_users' , methods=['GET', 'POST'])
+def view_users():
+    # page = request.args.get('page', 1)
+    # q = request.args.get('q')
+    # accounts = restful.GetAccounts(int(page), q)
+    # if not accounts.has_key(restful.ITEM_OBJECTS):
+    #     return redirect(url_for('view_users'))
+    accountforms = [logic.GetUserFormById(id)]
+    if request.method == 'POST':
+        form = RegistrationForm(request.form)
+        if request.form.has_key('delete'):
+            orm.db.session.delete(orm.Account.query.get(int(form.id.data)))
+            orm.db.session.commit()
+            return redirect(url_for('view_accounts', page=page, q=q))
+    form = PageInfo()
+    logic.LoadBasePageInfo('所有用户', form)
 
 
 @app.route('/new/function', methods=['GET', 'POST'])

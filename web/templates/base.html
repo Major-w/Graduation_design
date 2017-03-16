@@ -132,7 +132,7 @@
               </span>
             </div>
           </form>
-          <!-- /.search form -->
+          <!-- /.search form -->f
 	  <!-- }}} -->
 
           <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -153,14 +153,15 @@
                <small class="label pull-right bg-yellow">{{form.bulletin_count}}</small>
 	       {%  endif %}
 </a></li>
-	    <li class="active"><a href="/bd/view_accounts"><i class="fa fa-circle-o"></i> 用户帐号列表
+	    {% if current_user.role_id == 1 %}<li class="active"><a href="/bd/view_accounts"><i class="fa fa-circle-o"></i> 用户帐号列表
 		{% if form and form.account_count %}
                <small class="label pull-right bg-yellow">{{form.account_count}}</small>
 	       {%  endif %}
+              {% endif %}
 </a></li>
 	    {% if current_user.is_authenticated %}<li class="header">编辑</li>{% endif %}
-	    {% if current_user.role_id == 1 or current_user.role_id == 2 %}<li class="active"><a href="/bd/view_rent"><i class="fa fa-circle-o"></i> 新建求租信息</a></li>{% endif %}
-	    {% if current_user.role_id == 1 or current_user.role_id == 3 %}<li class="active"><a href="/bd/view_institution"><i class="fa fa-circle-o"></i> 新建出租信息</a></li>{% endif %}
+	    {% if current_user.role_id == 1 or current_user.role_id == 2 %}<li class="active"><a href="/bd/view_demand"><i class="fa fa-circle-o"></i> 新建求租信息</a></li>{% endif %}
+	    {% if current_user.role_id == 1 or current_user.role_id == 3 %}<li class="active"><a href="/bd/view_rent"><i class="fa fa-circle-o"></i> 新建出租信息</a></li>{% endif %}
 	    {% if current_user.role_id == 1%}<li class="active"><a href="/bd/view_bulletin"><i class="fa fa-circle-o"></i> 新建公告</a></li>{% endif %}
 
 	    <li class="header">新功能</li>

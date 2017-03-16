@@ -1,9 +1,9 @@
 #-*- coding: utf-8 -*-
 
-ROOT_DOMAIN = 'http://192.168.0.100:5001'
+ROOT_DOMAIN = 'http://192.168.0.73:5001'
 ROOT_RESTFUL = ROOT_DOMAIN + '/bd/api/v1.0'
 
-RESTFUL_SCHOOL = ROOT_RESTFUL+'/school'
+RESTFUL_RENT = ROOT_RESTFUL+'/rent'
 RESTFUL_INSTITUTION = ROOT_RESTFUL+ '/institution'
 RESTFUL_BULLETIN = ROOT_RESTFUL+ '/bulletin'
 RESTFUL_ACCOUNT = ROOT_RESTFUL+ '/account'
@@ -39,14 +39,14 @@ def PostAccount(body):
     data = json.dumps(body)
     return json.loads(requests.post('%s'%(RESTFUL_ACCOUNTBACK), data=data, headers=headers).text)
 
-def GetSchools(page, name=None):
+def GetRents(page, name=None):
     if name is None:
-        x = requests.get('%s?page=%d'%(RESTFUL_SCHOOL, page)).text
+        x = requests.get('%s?page=%d'%(RESTFUL_RENT, page)).text
         return json.loads(x)
     else:
         q_value = '{"filters":[{"name":"name","op":"like","val":"%%%s%%"}]}'%name
         q_value=urllib.quote(q_value.encode('utf-8'))
-        return json.loads(requests.get('%s?page=%d&q=%s'%(RESTFUL_SCHOOL, page, q_value)).text)
+        return json.loads(requests.get('%s?page=%d&q=%s'%(RESTFUL_RENT, page, q_value)).text)
 
 
 def GetInstitutions(page, name=None):
@@ -67,7 +67,6 @@ def GetBulletins(page, title=None):
         return json.loads(requests.get('%s?page=%d&q=%s'%(RESTFUL_BULLETIN, page, q_value)).text)
 
 
-
 def GetPagingFromResult(result):
     total_pages=int(result[ITEM_TOTAL_PAGES])
     page = int(result[ITEM_PAGE])
@@ -84,3 +83,11 @@ def GetAccounts(page, title=None):
         q_value=urllib.quote(q_value.encode('utf-8'))
         return json.loads(requests.get('%s?page=%d&q=%s'%(RESTFUL_BULLETIN, page, q_value)).text)
 
+
+def GetUsers(page, title=None):
+    if title is None:
+        return json.loads(requests.get('%s?page=%d'%(RESTFUL_ACCOUNT, page)).text)
+    else:
+        q_value = '{"filters":[{"or":[{"name":"username","op":"like","val":"%%%s%%"},{"name":"name","op":"like","val":"%%%s%%"},{"name":"telephone","op":"like","val":"%%%s%%"}]}]}'% (title, title, title)
+        q_value=urllib.quote(q_value.encode('utf-8'))
+        return json.loads(requests.get('%s?page=%d&q=%s'%(RESTFUL_BULLETIN, page, q_value)).text)

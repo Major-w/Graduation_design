@@ -6,9 +6,10 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)),'../..')
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
-from DB import orm
-from forms import SchoolForm, InstitutionForm, BulletinForm, AccountForm, RentForm
+from DB import orm, models
+from forms import SchoolForm, InstitutionForm, BulletinForm, AccountForm, RentForm, RegistrationForm
 from Logic import restful
+# from ..models import User
 
 g_choices_area = [(g.id, g.name) for g in orm.Area.query.order_by('name')]
 g_choices_residential = [(g.id, g.name) for g in orm.Residential.query.order_by('name')]
@@ -18,18 +19,29 @@ g_choices_feature = [(g.id, g.name) for g in orm.Feature.query.order_by('name')]
 g_choices_agespan = [(g.id, g.name) for g in orm.Agespan.query.order_by('name')]
 g_choices_feetype = [(g.id, g.name) for g in orm.Feetype.query.order_by('name')]
 
+
 def GetRentFormById(rent_id):
     rent = orm.Rent.query.get(int(rent_id))
     if rent is None:
         return None
     rentform = RentForm()
+    if rent.rentimages != []:
+        rentform.image.data = rent.rentimages[0].file
+    else:
+        rentform.image.date = []
     rentform.id.data = rent.id
     rentform.area_id.data = rent.area_id
+    rentform.area_name = rent.area.name
     rentform.price.data = rent.price
     rentform.description.data = rent.description
+    rentform.contacts.data = rent.contacts
+    rentform.phone_number.data = rent.phone_number
     rentform.title.data = rent.title
     rentform.rental_mode.data = rent.rental_mode
+    rentform.rent_type.data = rent.rent_type
+    rentform.address.data = rent.address
     rentform.area_id.choices = g_choices_area
+    rentform.residential_id.choices = g_choices_residential
     return rentform
 
 
@@ -141,6 +153,18 @@ def GetAccountFormById(account_id):
     accountform.source.data = account.source
     accountform.dtcreate.data = account.dtcreate
     return accountform
+
+
+def GetUserFormById(user_id):
+    user = models.User.query.get(int(user_id))
+    if user is None:
+        return None
+    userform = RegistrationForm()
+    userform.id.data = user.id
+    userform.username.data = user.username
+    userform.email.data = user.email
+    userform.user_type.data = user.user_type
+    return userform
 
 
 def LoadBasePageInfo(pagename, form):

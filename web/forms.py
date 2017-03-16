@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired, Length, Regexp, Required, Email, Eq
 from wtforms import ValidationError
 from flask.ext.uploads import UploadSet, IMAGES
 from flask.ext.wtf.file import FileField, FileAllowed, FileRequired
-from models import User
+from DB import models, orm
 images = UploadSet('images', IMAGES)
 
 
@@ -28,11 +28,11 @@ class RegistrationForm(Form):
     submit = SubmitField(u'注册')
 
     def validate_email(self, field):
-        if User.query.filter_by(email=field.data).first():
+        if models.User.query.filter_by(email=field.data).first():
             raise ValidationError(u'该邮箱已被注册')
 
     def validate_username(self, field):
-        if User.query.filter_by(username=field.data).first():
+        if models.User.query.filter_by(username=field.data).first():
             raise ValidationError(u'该用户已被注册')
 
 
@@ -51,7 +51,7 @@ class PasswordResetForm(Form):
     submit = SubmitField(u'重置密码')
 
     def validate_email(self, field):
-        if User.query.filter_by(email=field.data).first() is None:
+        if models.User.query.filter_by(email=field.data).first() is None:
             raise ValidationError(u'邮箱地址未知')
 
 
@@ -123,7 +123,7 @@ class AccountForm(Form):
     source = StringField('来源')
 
     def validate_username(self, field):
-        if Account.query.filter_by(username=field.data).first():
+        if orm.Account.query.filter_by(username=field.data).first():
             raise ValidationError(u'用户名已存在')
 
 
