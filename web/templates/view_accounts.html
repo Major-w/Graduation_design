@@ -13,33 +13,29 @@
 	    <th style="width: 10px">#</th>
 	    <th>注册邮箱</th>
 	    <th>用户名</th>
-	    <th>用户类型</th>
-	    <th></th>
+	    <th>用户角色</th>
 	    <th style="width: 40px"></th>
 	  </tr>
- {% if forms %}
-   {% for f in forms %}
+ {% if users %}
+   {% for f in users %}
 	  <tr>
 	    <td>
-	      {{f.id.data}}
+	      {{f.id}}
 	    </td>
 	    <td>
 <a href="/bd/view_account?id={{f.id.data}}">
-	      {{f.telephone.data}}
+	      {{f.email}}
 </a>
 	    </td>
 	    <td>
-	      {{f.flag_telephone.data}}
+			{{f.username}}
 	    </td>
-	    <td>
-	      {{f.source.data}}
-	    </td>
-	    <td>
-
+		  <td>
+			{{f.role.name}}
 	    </td>
 	    <td>
 	      <form action="" method="post" name="edit_account" onsubmit="return confirm('确认要提交吗?');">
-		{{f.hidden_tag()}}
+		<input type="hidden" name="id" value="{{f.id}}">
 		<input type="submit" value="删除" name="delete">		    
 	      </form>
 	    </td>

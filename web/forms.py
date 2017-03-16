@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired, Length, Regexp, Required, Email, Eq
 from wtforms import ValidationError
 from flask.ext.uploads import UploadSet, IMAGES
 from flask.ext.wtf.file import FileField, FileAllowed, FileRequired
-from DB import models, orm
+from DB import orm
 images = UploadSet('images', IMAGES)
 
 
@@ -28,11 +28,11 @@ class RegistrationForm(Form):
     submit = SubmitField(u'注册')
 
     def validate_email(self, field):
-        if models.User.query.filter_by(email=field.data).first():
+        if orm.User.query.filter_by(email=field.data).first():
             raise ValidationError(u'该邮箱已被注册')
 
     def validate_username(self, field):
-        if models.User.query.filter_by(username=field.data).first():
+        if orm.User.query.filter_by(username=field.data).first():
             raise ValidationError(u'该用户已被注册')
 
 
@@ -51,7 +51,7 @@ class PasswordResetForm(Form):
     submit = SubmitField(u'重置密码')
 
     def validate_email(self, field):
-        if models.User.query.filter_by(email=field.data).first() is None:
+        if orm.User.query.filter_by(email=field.data).first() is None:
             raise ValidationError(u'邮箱地址未知')
 
 
@@ -140,6 +140,7 @@ class RentForm(Form):
     residential_id = SelectField(u'小区', coerce=int)
     size = StringField(u'面积')
     address= StringField(u'地址')
+    subway_line = SelectField(u'地铁线', coerce=int)
     decorate_type = SelectField(u'装修情况', validators=[Required()] ,choices=[('0', u'简单装修'),('1', u'精装修')])
     image = FileField('上传图片', validators= [FileAllowed(['jpg', 'png'], 'Images only!')])
 

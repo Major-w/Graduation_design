@@ -6,10 +6,10 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)),'../..')
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
-from DB import orm, models
+from DB import orm
 from forms import SchoolForm, InstitutionForm, BulletinForm, AccountForm, RentForm, RegistrationForm
 from Logic import restful
-# from ..models import User
+
 
 g_choices_area = [(g.id, g.name) for g in orm.Area.query.order_by('name')]
 g_choices_residential = [(g.id, g.name) for g in orm.Residential.query.order_by('name')]
@@ -42,6 +42,7 @@ def GetRentFormById(rent_id):
     rentform.address.data = rent.address
     rentform.area_id.choices = g_choices_area
     rentform.residential_id.choices = g_choices_residential
+    rentform.subway_line.choices = g_choices_subway
     return rentform
 
 
@@ -156,7 +157,7 @@ def GetAccountFormById(account_id):
 
 
 def GetUserFormById(user_id):
-    user = models.User.query.get(int(user_id))
+    user = orm.User.query.get(int(user_id))
     if user is None:
         return None
     userform = RegistrationForm()

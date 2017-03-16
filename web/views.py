@@ -5,14 +5,12 @@ from flask import render_template, send_from_directory, session, redirect, url_f
 from flask_login import login_user, logout_user, current_user, login_required
 from flask import Markup, request, make_response
 from app import app, db
-from forms import SchoolForm, PageInfo, InstitutionForm, BulletinForm, AccountForm, LoginForm, RegistrationForm,\
+from forms import PageInfo, InstitutionForm, BulletinForm, AccountForm, LoginForm, RegistrationForm,\
     PasswordResetRequestForm, PasswordResetForm, RentForm, DemandForm
 from DB import orm
 from Utils import Util
 from Logic import restful, logic
 from .email import send_email
-from models import User
-from . import auth
 from datetime import datetime
 
 today = datetime.now().strftime('%Y-%m-%d')
@@ -28,12 +26,12 @@ def rootDir_web(path):
 UPLOAD_PATH = '/Users/kai/practice_flask/Graduation_design'
 
 
-@auth.before_app_request
-def before_request():
-    if current_user.is_authenticated:
-        current_user.ping()
-        if not current_user.confirmed :
-            return redirect(url_for('auth.unconfirmed'))
+# @app.before_request
+# def before_request():
+#     if current_user.is_authenticated:
+#         # current_user.ping()
+#         if not current_user.confirmed :
+#             return redirect(url_for('unconfirmed'))
 
 
 @app.route('/')
@@ -64,7 +62,7 @@ def password_reset_request():
         return redirect(url_for('view_rent'))
     form = PasswordResetRequestForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = orm.User.query.filter_by(email=form.email.data).first()
         if user:
             token = user.generate_reset_token()
             send_email(user.email, u'重置密码',
@@ -109,7 +107,7 @@ def unconfirmed():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = orm.User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
             return redirect(request.args.get('next') or url_for('view_rent'))
@@ -135,10 +133,7 @@ def register():
             role = 2
         else:
             role = 3
-        user = User(email=form.email.data,
-                    username=form.username.data,
-                    password=form.password.data,
-                    role_id = role)
+        user = orm.User(email=form.email.data, username=form.username.data, password=form.password.data, role_id = role)
         token = user.generate_confirmation_token()
         try:
             send_email(user.email, 'Confirm Your Account',
@@ -201,6 +196,7 @@ def view_demand():
 
 
 @app.route('/bd/view_rent', methods=['GET', 'POST'])
+@login_required
 def view_rent():
     rent_id = request.args.get('id')
     q = request.args.get('q')
@@ -209,6 +205,7 @@ def view_rent():
     form = RentForm(request.form)
     form.area_id.choices = logic.g_choices_area
     form.residential_id.choices = logic.g_choices_residential
+    form.subway_line.choices = logic.g_choices_subway
     if request.method == 'POST' and form.validate():
         if form.id.data:
             rent = orm.Rent.query.get(int(form.id.data))
@@ -224,6 +221,7 @@ def view_rent():
             rent.address = form.address.data
             rent.decorate_type = form.decorate_type.data
             rent.residential_id = form.residential_id.data
+            rent.subway_line = form.subway_line.data
         else:
             if form.decorate_type.data == '0':
                 form.decorate_type.data = True
@@ -231,7 +229,7 @@ def view_rent():
                 form.decorate_type.data = False
             rent = orm.Rent(form.area_id.data, form.title.data, form.price.data, form.description.data,
                             form.rent_type.data, form.rental_mode.data, form.contacts.data, form.phone_number.data,
-                            today, form.residential_id.data, form.size.data, form.address.data, form.decorate_type.data)
+                            today, form.residential_id.data, form.size.data, form.address.data, form.decorate_type.data, form.subway_line.data)
             orm.db.session.add(rent)
             try:
                 orm.db.session.commit()
@@ -271,13 +269,6 @@ def view_rents():
     q = request.args.get('q')
     pagination = orm.Rent.query.order_by(orm.Rent.date.desc()).paginate(page,10)
     rents = pagination.items
-    # rents = restful.GetRents(int(page), uq)
-    # if not rents.has_key(restful.ITEM_OBJECTS):
-    #     return redirect(url_for('view_rents'))
-
-    # rentforms =[logic.GetRentFormById(x[restful.ITEM_ID]) for x in rents[restful.ITEM_OBJECTS]]
-    # while None in rentforms:
-    #     rentforms.remove(None)
 
     if request.method == 'POST':
         form = RentForm(request.form)
@@ -558,46 +549,22 @@ def view_account():
 
 @app.route('/bd/view_accounts' , methods=['GET', 'POST'])
 def view_accounts():
-    page = request.args.get('page', 1)
+    page = request.args.get('page', 1, type=int)
     q = request.args.get('q')
-    accounts = restful.GetAccounts(int(page),q)
-
-    if not accounts.has_key(restful.ITEM_OBJECTS):
-        return redirect(url_for('view_accounts'))
-
-    accountforms =[logic.GetAccountFormById(x[restful.ITEM_ID]) for x in accounts[restful.ITEM_OBJECTS]]
-    while None in accountforms:
-        accountforms.remove(None)
+    pagination = orm.User.query.order_by(orm.User.id).paginate(page, 20)
+    users = pagination.items
 
     if request.method == 'POST':
         form = AccountForm(request.form)
         if request.form.has_key('delete'):
-            orm.db.session.delete(orm.Account.query.get(int(form.id.data)))
+            orm.db.session.delete(orm.User.query.get(int(form.id.data)))
             orm.db.session.commit()
             return redirect(url_for('view_accounts', page=page, q=q))
 
     form = PageInfo()
     logic.LoadBasePageInfo('所有用户',form)
 
-    return render_template('view_accounts.html',forms = accountforms,form = form, paging=restful.GetPagingFromResult(accounts))
-
-
-@app.route('/bd/view_users' , methods=['GET', 'POST'])
-def view_users():
-    # page = request.args.get('page', 1)
-    # q = request.args.get('q')
-    # accounts = restful.GetAccounts(int(page), q)
-    # if not accounts.has_key(restful.ITEM_OBJECTS):
-    #     return redirect(url_for('view_users'))
-    accountforms = [logic.GetUserFormById(id)]
-    if request.method == 'POST':
-        form = RegistrationForm(request.form)
-        if request.form.has_key('delete'):
-            orm.db.session.delete(orm.Account.query.get(int(form.id.data)))
-            orm.db.session.commit()
-            return redirect(url_for('view_accounts', page=page, q=q))
-    form = PageInfo()
-    logic.LoadBasePageInfo('所有用户', form)
+    return render_template('view_accounts.html', form=form, pagination=pagination, users=users)
 
 
 @app.route('/new/function', methods=['GET', 'POST'])
