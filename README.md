@@ -5,4 +5,4 @@
 
 Flask + bootstrap
 
-![](https://github.com/mr-betterman/Graduation_design/tree/master/Screenshot/index.png)
+![](https://github.com/mr-betterman/Graduation_design/tree/master/Screenshot/index.png?raw=true)
