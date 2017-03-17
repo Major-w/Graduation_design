@@ -170,11 +170,10 @@ def GetUserFormById(user_id):
 
 def LoadBasePageInfo(pagename, form):
     form.pagename = pagename;
-    # form.pagetask = pagetask;
     form.rent_count = orm.Rent.query.count()
     form.institution_count = orm.Institution.query.count()
     form.bulletin_count = orm.Bulletin.query.count()
-    form.account_count = orm.Account.query.count()
+    form.user_count = orm.User.query.count()
 
 
 def SetDefaultImage(obj):

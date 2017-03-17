@@ -10,7 +10,7 @@
             <div class="box-body">
                 <table class="table table-bordered">
                     <tr>
-                        <th style="width: 20px"></th>
+                        <th style="width: 10px">#</th>
                         <th>标题</th>
                         <th>描述</th>
                         <th>地址</th>
@@ -24,10 +24,10 @@
                     <div class="comment-date">{{ moment(f.date).fromNow() }}</div>
                     <tr>
                         <td>
-                            <img src='{{"/bd/web/static/"+f.rentimages.file}}' alt='{{f.rentimages.file}}' height="80" width="80"/>
+                            {{f.id}}
                         </td>
                         <td>
-                            <a href="/bd/view_rent?id={{f.id}}">
+                            <a href="/bd/view_rent?id={{f.id.data}}">
                                 {{f.title}}dq
                             </a>
                         </td>
@@ -57,23 +57,6 @@
                     {% endif %}
 
                 </table>
-
-            </div><!-- /.box-body -->
-            <div class="box-footer clearfix">
-                <ul class="pagination pagination-sm no-margin pull-right">
-                    {% if paging %}
-                    <li><a href="javascript:genPagingRef('/bd/view_rents?page=1');">&laquo;</a></li>
-                    {% for i in range(paging.page_from,paging.page_to+1) %}
-
-                    <li><a href="javascript:genPagingRef('/bd/view_rents?page={{i}}');">{{i}}</a></li>
-
-                    {% endfor %}
-                    <li><a href="javascript:genPagingRef('/bd/view_rents?page={{paging.total_pages}}');">&raquo;</a></li>
-                    {% endif %}
-
-                </ul>
-            </div>
-        </div><!-- /.box -->
     </div>
 </div>
 

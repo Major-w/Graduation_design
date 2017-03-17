@@ -150,7 +150,7 @@ class DemandForm(Form):
     contacts = StringField(u'联系人')
     phone_number = IntegerField(u'联系方式')
     area_id = SelectField(u'所在区县', coerce=int)
-    rental_mode = SelectField(u'出租方式', validators=[Required()] ,choices=[('0', u'整套出租'),('1', u'单间出租'),('2', u'床位出租')])
+    rental_mode = SelectField(u'求租方式', validators=[Required()] ,choices=[('0', u'整套出租'),('1', u'单间出租'),('2', u'床位出租')])
     decorate_type = SelectField(u'装修情况', validators=[Required()] ,choices=[('0', u'简单装修'),('1', u'精装修')])
     subway_line = SelectField(u'附近地铁线', coerce=int)
     price_low = IntegerField(u'最低租金')

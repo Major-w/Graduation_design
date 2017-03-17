@@ -61,14 +61,10 @@
             </div>
             <div class='box-body'>
               <div class='row'>
-                   {% if form.rentimages %}
-    {% for image in form.rentimages %}
                 <div class='col-sm-8 col-md-4'>
-		  <img src='{{"/bd/web/files/"+image.file}}' alt='{{image.file}}' height="200" width="200"/>
-		  <a href="javascript:genDeleteRef('{{image.file}}');">删除本图片</a>
+		  <img src='{{"/bd/web/static/"+form.images}}' alt='{{form.images.file}}' height="200" width="200"/>
+		  <a href="javascript:genDeleteRef('{{form.images}}');">删除本图片</a>
                 </div><!-- /.col -->
-    {% endfor %}
-  {% endif %}
 
 
                </div><!-- /.row -->

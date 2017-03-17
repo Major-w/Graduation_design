@@ -560,12 +560,14 @@ class Demand(db.Model):
     decorate_type = db.Column(db.Boolean)  # 装修类型
     subway_line = db.Column(db.ForeignKey(u'subway.id'))  # 地铁几号线附近
     description = db.Column(db.Text)  # 描述
+    date = db.Column(db.DateTime)  # 发布日期
 
 
     area = db.relationship(u'Area')
     subway = db.relationship(u'Subway')
 
-    def __init__(self, price_low, price_high, area_id, contacts, phone_number, rental_mode, decorate_type, subway_line, description):
+    def __init__(self, price_low, price_high, area_id, contacts, phone_number, rental_mode, decorate_type, subway_line,
+                 description, date):
         self.price_high = price_high
         self.price_low = price_low
         self.area_id = area_id
@@ -575,6 +577,7 @@ class Demand(db.Model):
         self.decorate_type = decorate_type
         self.subway_line = subway_line
         self.description = description
+        self.date = date
 
     def __repr__(self):
         return '<Demand %s>' % self.name

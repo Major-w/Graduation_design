@@ -43,7 +43,7 @@
       <!-- header -->
       <header class="main-header">
         <!-- Logo -->
-        <a href="/index.html" class="logo">
+        <a href="{{ url_for('view_rents') }}" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b></b></span>
           <!-- logo for regular state and mobile devices -->
@@ -154,8 +154,8 @@
 	       {%  endif %}
 </a></li>
 	    {% if current_user.role_id == 1 %}<li class="active"><a href="/bd/view_accounts"><i class="fa fa-circle-o"></i> 用户帐号列表
-		{% if form and form.account_count %}
-               <small class="label pull-right bg-yellow">{{form.account_count}}</small>
+		{% if form and form.user_count %}
+               <small class="label pull-right bg-yellow">{{form.user_count}}</small>
 	       {%  endif %}
               {% endif %}
 </a></li>

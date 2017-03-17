@@ -23,7 +23,7 @@ def rootDir_web(path):
     return send_from_directory(os.path.join(app.root_path, '.'), path)
 
 
-UPLOAD_PATH = '/Users/kai/practice_flask/Graduation_design'
+UPLOAD_PATH = '/Users/kai/practice_flask/Graduation_design/web/static'
 
 
 # @app.before_request
@@ -110,7 +110,7 @@ def login():
         user = orm.User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
-            return redirect(request.args.get('next') or url_for('view_rent'))
+            return redirect(request.args.get('next') or url_for('view_rents'))
         flash(u'用户名或密码错误')
     elif request.method =='GET':
         logic.LoadBasePageInfo('登录',form)
@@ -152,6 +152,7 @@ def register():
 
 
 @app.route('/bd/view_demand', methods=['GET', 'POST'])
+@login_required
 def view_demand():
     demand_id = request.args.get('id')
     q = request.args.get('q')
@@ -179,7 +180,7 @@ def view_demand():
                 form.decorate_type.data = False
             demand = orm.Demand(form.price_low.data, form.price_high.data, form.area_id.data,form.contacts.data,
                                 form.phone_number.data, form.rental_mode.data, form.decorate_type.data,
-                                form.subway_line.dataform.description.data)
+                                form.subway_line.dataform.description.data, today)
             orm.db.session.add(demand)
             try:
                 orm.db.session.commit()
@@ -193,6 +194,13 @@ def view_demand():
         logic.LoadBasePageInfo('新建求租信息', form)
     return render_template('view_demand.html', form=form)
 
+
+@app.route('/bd/view_demands', methods=['GET', 'POST'])
+def view_demands():
+    page = request.args.get('page', 1, type=int)
+    q = request.args.get('q')
+    pagination = orm.Demand.query.order_by(orm.Demand.date.desc()).paginate(page, 10)
+    rents = pagination.items
 
 
 @app.route('/bd/view_rent', methods=['GET', 'POST'])
@@ -222,6 +230,7 @@ def view_rent():
             rent.decorate_type = form.decorate_type.data
             rent.residential_id = form.residential_id.data
             rent.subway_line = form.subway_line.data
+            # rent.rentimages = form.
         else:
             if form.decorate_type.data == '0':
                 form.decorate_type.data = True
@@ -255,6 +264,12 @@ def view_rent():
         logic.LoadBasePageInfo('修改出租信息', form)
     else:
         logic.LoadBasePageInfo('新建出租信息', form)
+    if form.id.data:
+        rent = orm.Rent.query.get(int(form.id.data))
+        form.rent = rent
+        if form.rent:
+            form.images = form.rent.rentimages[0].file
+            pass
     return render_template('view_rent.html', form=form)
 
 
@@ -269,14 +284,14 @@ def view_rents():
     q = request.args.get('q')
     pagination = orm.Rent.query.order_by(orm.Rent.date.desc()).paginate(page,10)
     rents = pagination.items
-
+    for rent in rents:
+        if rent.rentimages != []:
+            rent.rentimages.file = rent.rentimages[0].file
+        else:
+            rent.rentimages.file = 'notfound.png'
     if request.method == 'POST':
         form = RentForm(request.form)
         if request.form.has_key('delete'):
-            # for x in orm.Rentimage.query.filter_by(rent_id=int(form.id.data)).all():
-            #     pathfile_server = os.path.join(UPLOAD_PATH, x.file)
-            #     if os.path.exists(pathfile_server):
-            #         os.remove(pathfile_server)
             orm.db.session.delete(orm.Rent.query.get(int(form.id.data)))
             orm.db.session.commit()
             return redirect(url_for('view_rents', page=page, q=q))
@@ -294,10 +309,10 @@ def delete_image():
     print "backurl......",backurl
     file = request.args.get('file')
     if file:
-        for x in orm.Schoolimage.query.filter_by(file=file).all():
+        for x in orm.Rentimage.query.filter_by(file=file).all():
             orm.db.session.delete(x)
-        for x in orm.Institutionimage.query.filter_by(file=file).all():
-            orm.db.session.delete(x)
+        # for x in orm.Institutionimage.query.filter_by(file=file).all():
+        #     orm.db.session.delete(x)
         for x in orm.Bulletinimage.query.filter_by(file=file).all():
             orm.db.session.delete(x)
         pathfile_server = os.path.join(UPLOAD_PATH, file)
@@ -308,72 +323,72 @@ def delete_image():
 
 
 
-@app.route('/bd/view_institution' , methods=['GET', 'POST'])
-def view_institution():
-    institution_id = request.args.get('id')
-    q = request.args.get('q')
-    if q is not None:
-        return redirect(url_for('view_institutions', page=1, q=q))
-    form = InstitutionForm(request.form)
-    form.area_id.choices = logic.g_choices_area
-    form.feature_ids.choices = logic.g_choices_feature
-    form.agespan_id.choices = logic.g_choices_agespan
-    form.feetype_id.choices = logic.g_choices_feetype
-    form.timeopen.data = datetime.time(8,30)
-    form.timeclose.data = datetime.time(22,00)
-#    form.message = form.data
-    if request.method == 'POST' and form.validate():
-        if form.id.data:
-            institution = orm.Institution.query.get(int(form.id.data))
-            institution.name = form.name.data
-            institution.agespan_id = form.agespan_id.data
-            institution.area_id = form.area_id.data
-            institution.address = form.address.data
-            institution.location = form.location.data
-            institution.website = form.website.data
-            institution.telephone = form.telephone.data
-            institution.feedesc = form.feedesc.data
-            institution.timeopen = form.timeopen.data
-            institution.timeclose = form.timeclose.data
-            institution.feetype_id = form.feetype_id.data
-            institution.longitude = form.longitude.data
-            institution.latitude = form.latitude.data
-            orm.db.session.commit()
-        else:
-            institution = orm.Institution(form.name.data, form.agespan_id.data, form.area_id.data, form.address.data, form.location.data, form.website.data, form.telephone.data, form.feedesc.data, form.timeopen.data, form.timeclose.data, form.feetype_id.data, form.longitude.data, form.latitude.data, None)
-            orm.db.session.add(institution)
-            orm.db.session.commit()
-            form.id.data = institution.id
-
-        logic.SetInstitutionFeatures(int(form.id.data),form.feature_ids.data)
-
-        if request.form.has_key('upload'):
-            file = request.files['image']
-            if file :
-                file_server = str(uuid.uuid1())+Util.file_extension(file.filename)
-                pathfile_server = os.path.join(UPLOAD_PATH, file_server)
-                file.save(pathfile_server)
-                if os.stat(pathfile_server).st_size <1*1024*1024:
-                    institutionimage = orm.Institutionimage(institution.id,file_server)
-                    orm.db.session.merge(institutionimage)
-                    orm.db.session.commit()
-                else:
-                    os.remove(pathfile_server)
-        else:
-            return redirect(url_for('view_institution'))
-    elif request.method =='GET' and institution_id:
-        form = logic.GetInstitutionFormById(institution_id)
-        logic.LoadBasePageInfo('修改培训机构',form)
-    else:
-        logic.LoadBasePageInfo('新建培训机构',form)
-
-    if form.id.data:
-        institution = orm.Institution.query.get(int(form.id.data))
-        form.institution = institution
-        if form.institution:
-            form.institutionimages = form.institution.institutionimages
-
-    return render_template('view_institution.html',form = form)
+# @app.route('/bd/view_institution' , methods=['GET', 'POST'])
+# def view_institution():
+#     institution_id = request.args.get('id')
+#     q = request.args.get('q')
+#     if q is not None:
+#         return redirect(url_for('view_institutions', page=1, q=q))
+#     form = InstitutionForm(request.form)
+#     form.area_id.choices = logic.g_choices_area
+#     form.feature_ids.choices = logic.g_choices_feature
+#     form.agespan_id.choices = logic.g_choices_agespan
+#     form.feetype_id.choices = logic.g_choices_feetype
+#     form.timeopen.data = datetime.time(8,30)
+#     form.timeclose.data = datetime.time(22,00)
+# #    form.message = form.data
+#     if request.method == 'POST' and form.validate():
+#         if form.id.data:
+#             institution = orm.Institution.query.get(int(form.id.data))
+#             institution.name = form.name.data
+#             institution.agespan_id = form.agespan_id.data
+#             institution.area_id = form.area_id.data
+#             institution.address = form.address.data
+#             institution.location = form.location.data
+#             institution.website = form.website.data
+#             institution.telephone = form.telephone.data
+#             institution.feedesc = form.feedesc.data
+#             institution.timeopen = form.timeopen.data
+#             institution.timeclose = form.timeclose.data
+#             institution.feetype_id = form.feetype_id.data
+#             institution.longitude = form.longitude.data
+#             institution.latitude = form.latitude.data
+#             orm.db.session.commit()
+#         else:
+#             institution = orm.Institution(form.name.data, form.agespan_id.data, form.area_id.data, form.address.data, form.location.data, form.website.data, form.telephone.data, form.feedesc.data, form.timeopen.data, form.timeclose.data, form.feetype_id.data, form.longitude.data, form.latitude.data, None)
+#             orm.db.session.add(institution)
+#             orm.db.session.commit()
+#             form.id.data = institution.id
+#
+#         logic.SetInstitutionFeatures(int(form.id.data),form.feature_ids.data)
+#
+#         if request.form.has_key('upload'):
+#             file = request.files['image']
+#             if file :
+#                 file_server = str(uuid.uuid1())+Util.file_extension(file.filename)
+#                 pathfile_server = os.path.join(UPLOAD_PATH, file_server)
+#                 file.save(pathfile_server)
+#                 if os.stat(pathfile_server).st_size <1*1024*1024:
+#                     institutionimage = orm.Institutionimage(institution.id,file_server)
+#                     orm.db.session.merge(institutionimage)
+#                     orm.db.session.commit()
+#                 else:
+#                     os.remove(pathfile_server)
+#         else:
+#             return redirect(url_for('view_institution'))
+#     elif request.method =='GET' and institution_id:
+#         form = logic.GetInstitutionFormById(institution_id)
+#         logic.LoadBasePageInfo('修改培训机构',form)
+#     else:
+#         logic.LoadBasePageInfo('新建培训机构',form)
+#
+#     if form.id.data:
+#         institution = orm.Institution.query.get(int(form.id.data))
+#         form.institution = institution
+#         if form.institution:
+#             form.institutionimages = form.institution.institutionimages
+#
+#     return render_template('view_institution.html',form = form)
 
 
 
