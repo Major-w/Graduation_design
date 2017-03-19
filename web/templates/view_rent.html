@@ -30,7 +30,7 @@
         <div class="col-lg-5 col-xs-10">
             {{ render_field(form.size,size = 8)}}<span>m²</span>
         </div>
-        <div class="col-lg-5 col-xs-10">
+        <div class="col-lg-5 col-xs-5">
             {{ render_field(form.price, size = 8)}}<span>元/月</span>
         </div>
         <div class="col-lg-5 col-xs-10">
@@ -39,12 +39,10 @@
         <div class="col-lg-5 col-xs-10">
             {{ render_field(form.rent_type)}}
         </div>
-        <div class="col-lg-5 col-xs-10">
+        <div class="col-lg-5 col-xs-5">
             {{ render_field(form.subway_line)}}
         </div>
-         <div class="col-lg-5 col-xs-10">
-            {{ render_field(form.description, rows="10", cols="100")}}
-        </div>
+
         <div class="col-lg-10 col-xs-10">
             {{ render_field(form.image, accept="image/png, image/jpeg")}}
             <p><input type="submit" value="上传" name="upload"> 注：接受jpg和png格式的图片，建议图片分辨率1000x800</p>
@@ -62,7 +60,6 @@
             <div class='box-body'>
               <div class='row'>
                 <div class='col-sm-8 col-md-4'>
-		  <img src='{{"/bd/web/static/"+form.images}}' alt='{{form.images.file}}' height="200" width="200"/>
 		  <a href="javascript:genDeleteRef('{{form.images}}');">删除本图片</a>
                 </div><!-- /.col -->
 

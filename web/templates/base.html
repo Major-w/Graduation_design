@@ -138,14 +138,14 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">导航</li>
-	    <li class="active"><a href="/bd/view_rents"><i class="fa fa-circle-o"></i> 所有求租信息
-		{% if form and form.rent_count %}
-               <small class="label pull-right bg-yellow">{{form.rent_count}}</small>
+	    <li class="active"><a href="/bd/view_demands"><i class="fa fa-circle-o"></i> 所有求租信息
+		{% if form and form.demand_count %}
+               <small class="label pull-right bg-yellow">{{form.demand_count}}</small>
 	       {%  endif %}
 </a></li>
-	    <li class="active"><a href="/bd/view_institutions"><i class="fa fa-circle-o"></i> 所有出租信息
-		{% if form and form.institution_count %}
-               <small class="label pull-right bg-yellow">{{form.institution_count}}</small>
+	    <li class="active"><a href="/bd/view_rents"><i class="fa fa-circle-o"></i> 所有出租信息
+		{% if form and form.rent_count %}
+               <small class="label pull-right bg-yellow">{{form.rent_count}}</small>
 	       {%  endif %}
 </a></li>
 	    <li class="active"><a href="/bd/view_bulletins"><i class="fa fa-circle-o"></i> 新闻公告列表
@@ -159,7 +159,7 @@
 	       {%  endif %}
               {% endif %}
 </a></li>
-	    {% if current_user.is_authenticated %}<li class="header">编辑</li>{% endif %}
+	    {% if current_user.is_authenticated and current_user.role_id == 1 %}<li class="header">编辑</li>{% endif %}
 	    {% if current_user.role_id == 1 or current_user.role_id == 2 %}<li class="active"><a href="/bd/view_demand"><i class="fa fa-circle-o"></i> 新建求租信息</a></li>{% endif %}
 	    {% if current_user.role_id == 1 or current_user.role_id == 3 %}<li class="active"><a href="/bd/view_rent"><i class="fa fa-circle-o"></i> 新建出租信息</a></li>{% endif %}
 	    {% if current_user.role_id == 1%}<li class="active"><a href="/bd/view_bulletin"><i class="fa fa-circle-o"></i> 新建公告</a></li>{% endif %}

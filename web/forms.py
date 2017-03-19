@@ -156,6 +156,11 @@ class DemandForm(Form):
     price_low = IntegerField(u'最低租金')
     price_high = IntegerField(u'最高租金')
     description = TextAreaField(u'描述')
+    title = StringField(u'标题')
+
+    def validate_price_low(self, field):
+        if self.price_high.data < self.price_low.data:
+            raise ValidationError(u'最低值不能大于最高值')
 
 
 

@@ -24,7 +24,7 @@ login_manager.login_view = 'login'
 app = Flask(__name__)
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+pg8000://postgres:123456@localhost/xuemc_bd'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+pg8000://postgres:rootroot@localhost/Graduation'
 app.config['WTF_CSRF_ENABLED'] = True
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 'hard to guess string'
 app.config['FLASKY_ADMIN'] = os.environ.get('FLASKY_ADMIN')

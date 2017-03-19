@@ -7,7 +7,7 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)),'../..')
 reload(sys)
 sys.setdefaultencoding('utf-8')
 from DB import orm
-from forms import SchoolForm, InstitutionForm, BulletinForm, AccountForm, RentForm, RegistrationForm
+from forms import SchoolForm, InstitutionForm, BulletinForm, AccountForm, RentForm, RegistrationForm, DemandForm
 from Logic import restful
 
 
@@ -32,6 +32,7 @@ def GetRentFormById(rent_id):
     rentform.id.data = rent.id
     rentform.area_id.data = rent.area_id
     rentform.area_name = rent.area.name
+    rentform.subway_name = rent.subway.name
     rentform.price.data = rent.price
     rentform.description.data = rent.description
     rentform.contacts.data = rent.contacts
@@ -45,6 +46,29 @@ def GetRentFormById(rent_id):
     rentform.subway_line.choices = g_choices_subway
     return rentform
 
+
+def GetDemandFormById(demand_id):
+    demand = orm.Demand.query.get(int(demand_id))
+    if demand is None:
+        return None
+    demandform = DemandForm()
+
+    demandform.id.data = demand.id
+    demandform.area_id.data = demand.area_id
+    demandform.area_name = demand.area.name
+    demandform.subway_name = demand.subway.name
+    demandform.price_high.data = demand.price_high
+    demandform.price_low.data = demand.price_low
+    demandform.description.data = demand.description
+    demandform.contacts.data = demand.contacts
+    demandform.phone_number.data = demand.phone_number
+    demandform.decorate_type.data = demand.decorate_type
+    demandform.title.data = demand.title
+    demandform.rental_mode.data = demand.rental_mode
+    demandform.rent_type.data = demand.rent_type
+    demandform.area_id.choices = g_choices_area
+    demandform.subway_line.choices = g_choices_subway
+    return demandform
 
 def GetSchoolFormById(school_id):
     school = orm.School.query.get(int(school_id))
@@ -74,15 +98,6 @@ def GetSchoolFormById(school_id):
     schoolform.schooltype_id.choices = g_choices_schooltype
     schoolform.feature_ids.choices = g_choices_feature
     return schoolform
-
-
-def SetSchoolFeatures(school_id, feature_ids):
-    for x in orm.SchoolFeature.query.filter_by(school_id=school_id).all():
-        orm.db.session.delete(x)
-    for x in feature_ids:
-        sf = orm.SchoolFeature(school_id, x)
-        orm.db.session.add(sf)
-    orm.db.session.commit()
 
 
 def SetInstitutionFeatures(institution_id, feature_ids):
@@ -171,7 +186,7 @@ def GetUserFormById(user_id):
 def LoadBasePageInfo(pagename, form):
     form.pagename = pagename;
     form.rent_count = orm.Rent.query.count()
-    form.institution_count = orm.Institution.query.count()
+    form.demand_count = orm.Demand.query.count()
     form.bulletin_count = orm.Bulletin.query.count()
     form.user_count = orm.User.query.count()
 

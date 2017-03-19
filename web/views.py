@@ -12,6 +12,7 @@ from Utils import Util
 from Logic import restful, logic
 from .email import send_email
 from datetime import datetime
+from wtforms import ValidationError
 
 today = datetime.now().strftime('%Y-%m-%d')
 
@@ -23,7 +24,7 @@ def rootDir_web(path):
     return send_from_directory(os.path.join(app.root_path, '.'), path)
 
 
-UPLOAD_PATH = '/Users/kai/practice_flask/Graduation_design/web/static'
+UPLOAD_PATH = 'E:\Python\Graduation_design\web\static'
 
 
 # @app.before_request
@@ -161,7 +162,7 @@ def view_demand():
     form = DemandForm(request.form)
     form.area_id.choices = logic.g_choices_area
     form.subway_line.choices = logic.g_choices_subway
-    if request.method == 'POST' and form.validate():
+    if request.method == 'POST' and form.validate_on_submit():
         if form.id.data:
             demand = orm.Demand.query.get(int(form.id.data))
             demand.contacts = form.contacts.data
@@ -173,14 +174,17 @@ def view_demand():
             demand.subway_line = form.subway_line.data
             demand.decoration_type = form.decoration_type.data
             demand.rental_mode = form.rental_mode.data
+            demand.title = form.title.data
         else:
             if form.decorate_type.data == '0':
                 form.decorate_type.data = True
             else:
                 form.decorate_type.data = False
+            # if form.price_high < form.price_low:
+            #     flash(u'最低租金应该小于最高租金')
             demand = orm.Demand(form.price_low.data, form.price_high.data, form.area_id.data,form.contacts.data,
                                 form.phone_number.data, form.rental_mode.data, form.decorate_type.data,
-                                form.subway_line.dataform.description.data, today)
+                                form.subway_line.data, form.description.data, today, form.title.data)
             orm.db.session.add(demand)
             try:
                 orm.db.session.commit()
@@ -200,7 +204,55 @@ def view_demands():
     page = request.args.get('page', 1, type=int)
     q = request.args.get('q')
     pagination = orm.Demand.query.order_by(orm.Demand.date.desc()).paginate(page, 10)
-    rents = pagination.items
+    demands = pagination.items
+    if request.method == 'POST':
+        form = DemandForm(request.form)
+        if request.has_keuy('delete'):
+            orm.db.session.delete(orm.Demand.query.get(int(form.id.data)))
+            orm.db.session.commit()
+            return redirect(url_for('view_demands', page=page, q=q))
+    form = PageInfo()
+    logic.LoadBasePageInfo('所有求租信息', form)
+
+    return render_template('view_demands.html', demands=demands, pagination=pagination, page=page, form=form)
+
+
+@app.route('/bd/view_area', methods=['GET', 'POST'])
+def view_area():
+    page = request.args.get('page', 1, type=int)
+    area_id = request.args.get('id')
+    q = request.args.get('q')
+    rents = orm.Rent.query.filter_by(area_id = int(area_id)).all()
+    for rent in rents:
+        if rent.rentimages != []:
+            rent.rentimages.file = rent.rentimages[0].file
+        else:
+            rent.rentimages.file = 'notfound.png'
+    if request.method == 'POST':
+        form = RentForm(request.form)
+    form = PageInfo()
+    logic.LoadBasePageInfo(orm.Area.query.filter_by(id=int(area_id)).all()[0].name+ '出租信息',form)
+
+    return render_template('view_rents.html', rents=rents, page=page, form=form)
+
+
+@app.route('/bd/view_subway', methods=['GET', 'POST'])
+def view_subway():
+    page = request.args.get('page', 1, type=int)
+    subway_id = request.args.get('id')
+    q = request.args.get('q')
+    rents = orm.Rent.query.filter_by(subway_id = int(subway_id)).all()
+    for rent in rents:
+        if rent.rentimages != []:
+            rent.rentimages.file = rent.rentimages[0].file
+        else:
+            rent.rentimages.file = 'notfound.png'
+    if request.method == 'POST':
+        form = RentForm(request.form)
+    form = PageInfo()
+    logic.LoadBasePageInfo(orm.Subway.query.filter_by(id=int(subway_id)).all()[0].name+ '出租信息',form)
+
+    return render_template('view_rents.html', rents=rents, page=page, form=form)
 
 
 @app.route('/bd/view_rent', methods=['GET', 'POST'])
@@ -267,9 +319,8 @@ def view_rent():
     if form.id.data:
         rent = orm.Rent.query.get(int(form.id.data))
         form.rent = rent
-        if form.rent:
+        if form.rent and form.rent.rentimages != [] :
             form.images = form.rent.rentimages[0].file
-            pass
     return render_template('view_rent.html', form=form)
 
 
@@ -283,7 +334,12 @@ def view_rents():
     page = request.args.get('page', 1, type=int)
     q = request.args.get('q')
     pagination = orm.Rent.query.order_by(orm.Rent.date.desc()).paginate(page,10)
+    pagination_area = orm.Area.query.order_by(orm.Area.id).paginate(page,20)
+    pagination_subway = orm.Subway.query.order_by(orm.Subway.id).paginate(page,20)
+    # paginat
     rents = pagination.items
+    areas = pagination_area.items
+    subways = pagination_subway.items
     for rent in rents:
         if rent.rentimages != []:
             rent.rentimages.file = rent.rentimages[0].file
@@ -297,9 +353,9 @@ def view_rents():
             return redirect(url_for('view_rents', page=page, q=q))
 
     form = PageInfo()
-    logic.LoadBasePageInfo('所有求租信息',form)
+    logic.LoadBasePageInfo('所有出租信息',form)
 
-    return render_template('view_rents.html', rents=rents, pagination=pagination, page=page, form=form)
+    return render_template('view_rents.html', rents=rents, pagination=pagination, page=page, form=form, areas=areas, subways=subways)
 
 
 

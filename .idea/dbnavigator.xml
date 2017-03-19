@@ -16,7 +16,7 @@
       <scope value="GLOBAL" />
       <destination value="FILE" />
       <format value="EXCEL" />
-      <charset value="UTF-8" />
+      <charset value="GBK" />
     </export-instructions>
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -25,9 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="50f34a2e-e130-47fd-931e-32f96c3a77d8">
-        <schema name="information_schema" object-types="function, table, view" />
         <schema name="pg_catalog" object-types="function, table, view" />
-        <schema name="pg_toast_temp_1" object-types="table, view" />
         <schema name="public" object-types="column, function, table, view" />
       </connection>
     </loaded-nodes>
@@ -45,7 +43,14 @@ select  * from users
 update  account set telephone = 110 where id  = 1
 delete  from account where id =1
 update users set confirmed = True where role_id =1
-delete from users where email = 'jikai05566@163.com']]></console>
+delete from users where email = 'jikai05566@163.com'
+
+select  * from rent
+delete from demand where area_id = 30
+
+select * from "area" ;
+
+delete from "area" where name = 'test']]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
@@ -77,18 +82,18 @@ delete from users where email = 'jikai05566@163.com']]></console>
           <description value="" />
           <database-type value="POSTGRES" />
           <config-type value="BASIC" />
-          <database-version value="9.6" />
+          <database-version value="9.5" />
           <driver-source value="BUILTIN" />
           <driver-library value="" />
           <driver value="" />
           <url-type value="DATABASE" />
           <host value="localhost" />
           <port value="5432" />
-          <database value="xuemc_bd" />
+          <database value="Graduation" />
           <os-authentication value="false" />
           <empty-password value="false" />
           <user value="postgres" />
-          <password value="MTIzNDU2" />
+          <password value="cm9vdHJvb3Q=" />
         </database>
         <properties>
           <auto-commit value="false" />
@@ -107,12 +112,13 @@ delete from users where email = 'jikai05566@163.com']]></console>
           <charset value="UTF-8" />
           <ddl-file-binding value="true" />
           <database-logging value="true" />
+          <connect-automatically value="true" />
+          <restore-workspace value="true" />
           <environment-type value="default" />
           <idle-time-to-disconnect value="30" />
           <password-expiry-time value="10" />
           <max-connection-pool-size value="7" />
           <alternative-statement-delimiter value="" />
-          <connect-automatically value="true" />
         </details>
         <object-filters hide-empty-schemas="false">
           <object-type-filter use-master-settings="true">
@@ -272,8 +278,11 @@ delete from users where email = 'jikai05566@163.com']]></console>
           <content-type name="DTD" enabled="true" />
           <content-type name="HTML" enabled="true" />
           <content-type name="XHTML" enabled="true" />
+          <content-type name="CSS" enabled="true" />
           <content-type name="SQL" enabled="true" />
           <content-type name="PL/SQL" enabled="true" />
+          <content-type name="JavaScript" enabled="true" />
+          <content-type name="YAML" enabled="true" />
         </content-types>
       </qualified-text-editor>
       <record-navigation>
@@ -282,7 +291,7 @@ delete from users where email = 'jikai05566@163.com']]></console>
     </dataset-editor-settings>
     <code-editor-settings>
       <general>
-        <show-object-navigation-gutter value="false" />
+        <show-object-navigation-gutter value="true" />
         <show-spec-declaration-navigation-gutter value="true" />
       </general>
       <confirmations>
