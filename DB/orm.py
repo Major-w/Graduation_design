@@ -63,6 +63,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
     type = db.Column(db.Integer, unique=True)
+    last_seen = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -97,6 +98,7 @@ class User(UserMixin, db.Model):
             return False
         self.confirmed = True
         db.session.add(self)
+        db.session.commit()
         return True
 
     def generate_reset_token(self, expiration=3600):
@@ -143,9 +145,6 @@ class User(UserMixin, db.Model):
         self.last_seen = datetime.datetime.utcnow()
         db.session.add(self)
 
-    def is_administrator(self):
-        return self.can(Permission.ADMINISTER)
-
     def __repr__(self):
         return '<User %r>' % self.username
 
@@ -153,9 +152,6 @@ class User(UserMixin, db.Model):
 class AnonymousUser(AnonymousUserMixin):
     def can(self, permissions):
         return False
-
-    def is_administrator(self):
-        return
 
 
 login_manager.anonymous_user = AnonymousUser
@@ -302,77 +298,6 @@ class Feetype(db.Model):
 
     def __repr__(self):
         return '<Feetype %s>' % self.name
-
-
-class Institution(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100)) # 品牌名
-    agespan_id = db.Column(db.ForeignKey(u'agespan.id')) #招生年龄
-    area_id = db.Column(db.ForeignKey(u'area.id')) #区县
-    address = db.Column(db.String(100)) #校区地址
-    location = db.Column(db.String(100)) # 校区名
-    website = db.Column(db.String(100)) #网址
-    telephone = db.Column(db.String(50)) #电话
-    feedesc = db.Column(db.String(100)) # 学费标准
-    timeopen = db.Column(db.DateTime) #开业时间
-    timeclose = db.Column(db.DateTime) #关门y时间
-    feetype_id = db.Column(db.ForeignKey(u'feetype.id'))
-    longitude = db.Column(db.Float) #经度
-    latitude = db.Column(db.Float)  #纬度
-    featuredesc = db.Column(db.String(200)) #特色小项描述
-
-    feetype = db.relationship(u'Feetype')
-    area = db.relationship(u'Area')
-    agespan = db.relationship(u'Agespan')
-
-    def __init__(self, name, agespan_id, area_id, address, location, website, telephone, feedesc, timeopen, timeclose, feetype_id, longitude, latitude, featuredesc):
-        self.name = name
-        self.agespan_id = agespan_id
-        self.area_id = area_id
-        self.address = address
-        self.location = location
-        self.website = website
-        self.telephone = telephone
-        self.feedesc = feedesc
-        self.timeopen = timeopen
-        self.timeclose = timeclose
-        self.feetype_id = feetype_id
-        self.longitude = longitude
-        self.latitude = latitude
-        self.featuredesc = featuredesc
-
-    def __repr__(self):
-        return '<Institution %s>' % self.name
-
-
-class InstitutionFeature(db.Model):
-    institution_id = db.Column(db.ForeignKey(u'institution.id'), primary_key=True)
-    feature_id = db.Column(db.ForeignKey(u'feature.id'), primary_key=True)
-
-    institution = db.relationship(u'Institution', backref = db.backref('institutionfeatures', cascade="all, delete-orphan"))
-    feature = db.relationship(u'Feature')
-
-    def __init__(self, institution_id, feature_id):
-        self.institution_id = institution_id
-        self.feature_id = feature_id
-
-    def __repr__(self):
-        return '<InstitutionFeature %s>' % self.name
-
-
-class Institutionimage(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    institution_id = db.Column(db.ForeignKey(u'institution.id'))
-    file = db.Column(db.String(500))
-
-    institution = db.relationship(u'Institution', backref = db.backref('institutionimages', cascade="all, delete-orphan"))
-
-    def __init__(self, institution_id, file):
-        self.institution_id = institution_id
-        self.file = file
-
-    def __repr__(self):
-        return '<Institutionimage %d,%s>' % (self.institution_id, self.file)
 
 
 class School(db.Model):

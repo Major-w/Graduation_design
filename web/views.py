@@ -5,7 +5,7 @@ from flask import render_template, send_from_directory, session, redirect, url_f
 from flask_login import login_user, logout_user, current_user, login_required
 from flask import Markup, request, make_response
 from app import app, db
-from forms import PageInfo, InstitutionForm, BulletinForm, AccountForm, LoginForm, RegistrationForm,\
+from forms import PageInfo, BulletinForm, AccountForm, LoginForm, RegistrationForm,\
     PasswordResetRequestForm, PasswordResetForm, RentForm, DemandForm
 from DB import orm
 from Utils import Util
@@ -27,12 +27,12 @@ def rootDir_web(path):
 UPLOAD_PATH = 'E:\Python\Graduation_design\web\static'
 
 
-# @app.before_request
-# def before_request():
-#     if current_user.is_authenticated:
-#         # current_user.ping()
-#         if not current_user.confirmed :
-#             return redirect(url_for('unconfirmed'))
+@app.before_request
+def before_request():
+    if current_user.is_authenticated() and current_user.is_anonymous() is False:
+        current_user.ping()
+        if not current_user.confirmed and request.endpoint and request.endpoint[:4] == 'view' and request.endpoint != 'static':
+            return redirect(url_for('unconfirmed'))
 
 
 @app.route('/')
@@ -99,9 +99,11 @@ def resend_confirmation():
 
 @app.route('/unconfirmed')
 def unconfirmed():
-    if current_user.is_anonymous or current_user.confirmed:
+    if current_user.is_anonymous() is True or current_user.confirmed:
         return redirect(url_for('view_rents'))
-    return render_template('auth/unconfirmed.html')
+    form = PageInfo()
+    logic.LoadBasePageInfo('账户未激活', form)
+    return render_template('auth/unconfirmed.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -207,7 +209,7 @@ def view_demands():
     demands = pagination.items
     if request.method == 'POST':
         form = DemandForm(request.form)
-        if request.has_keuy('delete'):
+        if request.form.has_key('delete'):
             orm.db.session.delete(orm.Demand.query.get(int(form.id.data)))
             orm.db.session.commit()
             return redirect(url_for('view_demands', page=page, q=q))
@@ -241,7 +243,7 @@ def view_subway():
     page = request.args.get('page', 1, type=int)
     subway_id = request.args.get('id')
     q = request.args.get('q')
-    rents = orm.Rent.query.filter_by(subway_id = int(subway_id)).all()
+    rents = orm.Rent.query.filter_by(subway_line = int(subway_id)).all()
     for rent in rents:
         if rent.rentimages != []:
             rent.rentimages.file = rent.rentimages[0].file
@@ -250,7 +252,7 @@ def view_subway():
     if request.method == 'POST':
         form = RentForm(request.form)
     form = PageInfo()
-    logic.LoadBasePageInfo(orm.Subway.query.filter_by(id=int(subway_id)).all()[0].name+ '出租信息',form)
+    logic.LoadBasePageInfo(orm.Subway.query.filter_by(id=int(subway_id)).all()[0].name+ '附近出租信息',form)
 
     return render_template('view_rents.html', rents=rents, page=page, form=form)
 
@@ -367,8 +369,6 @@ def delete_image():
     if file:
         for x in orm.Rentimage.query.filter_by(file=file).all():
             orm.db.session.delete(x)
-        # for x in orm.Institutionimage.query.filter_by(file=file).all():
-        #     orm.db.session.delete(x)
         for x in orm.Bulletinimage.query.filter_by(file=file).all():
             orm.db.session.delete(x)
         pathfile_server = os.path.join(UPLOAD_PATH, file)
@@ -376,110 +376,6 @@ def delete_image():
             os.remove(pathfile_server)
         orm.db.session.commit()
     return redirect(backurl)
-
-
-
-# @app.route('/bd/view_institution' , methods=['GET', 'POST'])
-# def view_institution():
-#     institution_id = request.args.get('id')
-#     q = request.args.get('q')
-#     if q is not None:
-#         return redirect(url_for('view_institutions', page=1, q=q))
-#     form = InstitutionForm(request.form)
-#     form.area_id.choices = logic.g_choices_area
-#     form.feature_ids.choices = logic.g_choices_feature
-#     form.agespan_id.choices = logic.g_choices_agespan
-#     form.feetype_id.choices = logic.g_choices_feetype
-#     form.timeopen.data = datetime.time(8,30)
-#     form.timeclose.data = datetime.time(22,00)
-# #    form.message = form.data
-#     if request.method == 'POST' and form.validate():
-#         if form.id.data:
-#             institution = orm.Institution.query.get(int(form.id.data))
-#             institution.name = form.name.data
-#             institution.agespan_id = form.agespan_id.data
-#             institution.area_id = form.area_id.data
-#             institution.address = form.address.data
-#             institution.location = form.location.data
-#             institution.website = form.website.data
-#             institution.telephone = form.telephone.data
-#             institution.feedesc = form.feedesc.data
-#             institution.timeopen = form.timeopen.data
-#             institution.timeclose = form.timeclose.data
-#             institution.feetype_id = form.feetype_id.data
-#             institution.longitude = form.longitude.data
-#             institution.latitude = form.latitude.data
-#             orm.db.session.commit()
-#         else:
-#             institution = orm.Institution(form.name.data, form.agespan_id.data, form.area_id.data, form.address.data, form.location.data, form.website.data, form.telephone.data, form.feedesc.data, form.timeopen.data, form.timeclose.data, form.feetype_id.data, form.longitude.data, form.latitude.data, None)
-#             orm.db.session.add(institution)
-#             orm.db.session.commit()
-#             form.id.data = institution.id
-#
-#         logic.SetInstitutionFeatures(int(form.id.data),form.feature_ids.data)
-#
-#         if request.form.has_key('upload'):
-#             file = request.files['image']
-#             if file :
-#                 file_server = str(uuid.uuid1())+Util.file_extension(file.filename)
-#                 pathfile_server = os.path.join(UPLOAD_PATH, file_server)
-#                 file.save(pathfile_server)
-#                 if os.stat(pathfile_server).st_size <1*1024*1024:
-#                     institutionimage = orm.Institutionimage(institution.id,file_server)
-#                     orm.db.session.merge(institutionimage)
-#                     orm.db.session.commit()
-#                 else:
-#                     os.remove(pathfile_server)
-#         else:
-#             return redirect(url_for('view_institution'))
-#     elif request.method =='GET' and institution_id:
-#         form = logic.GetInstitutionFormById(institution_id)
-#         logic.LoadBasePageInfo('修改培训机构',form)
-#     else:
-#         logic.LoadBasePageInfo('新建培训机构',form)
-#
-#     if form.id.data:
-#         institution = orm.Institution.query.get(int(form.id.data))
-#         form.institution = institution
-#         if form.institution:
-#             form.institutionimages = form.institution.institutionimages
-#
-#     return render_template('view_institution.html',form = form)
-
-
-
-@app.route('/bd/view_institutions' , methods=['GET', 'POST'])
-def view_institutions():
-    page = request.args.get('page', 1)
-    q = request.args.get('q')
-    institutions = restful.GetInstitutions(int(page),q)
-    if not institutions.has_key(restful.ITEM_OBJECTS):
-        return redirect(url_for('view_institutions'))
-
-    institutionforms =[logic.GetInstitutionFormById(x[restful.ITEM_ID]) for x in institutions[restful.ITEM_OBJECTS]]
-    while None in institutionforms:
-        institutionforms.remove(None)
-
-
-#    form.message = form.data
-    if request.method == 'POST':
-        form = InstitutionForm(request.form)
-        if request.form.has_key('delete'):
-            for x in orm.Institutionimage.query.filter_by(institution_id=int(form.id.data)).all():
-                pathfile_server = os.path.join(UPLOAD_PATH, x.file)
-                if os.path.exists(pathfile_server):
-                    os.remove(pathfile_server)
-            orm.db.session.delete(orm.Institution.query.get(int(form.id.data)))
-            orm.db.session.commit()
-            return redirect(url_for('view_institutions', page=page, q=q))
-
-    form = PageInfo()
-    logic.LoadBasePageInfo('所有出租信息',form)
-
-    return render_template('view_institutions.html',forms = institutionforms,form = form, paging=restful.GetPagingFromResult(institutions))
-
-
-
 
 
 @app.route('/bd/view_bulletin' , methods=['GET', 'POST'])
@@ -490,8 +386,6 @@ def view_bulletin():
         return redirect(url_for('view_bulletins', page=1, q=q))
 
     form = BulletinForm(request.form)
-
-
     if request.method == 'POST' and form.validate():
         if form.id.data:
             bulletin = orm.Bulletin.query.get(int(form.id.data))
@@ -543,23 +437,19 @@ def view_bulletin():
 
 @app.route('/bd/view_bulletins' , methods=['GET', 'POST'])
 def view_bulletins():
-    page = request.args.get('page', 1)
+    page = request.args.get('page', 1, type=int)
     q = request.args.get('q')
-    bulletins = restful.GetBulletins(int(page),q)
-    if not bulletins.has_key(restful.ITEM_OBJECTS):
-        return redirect(url_for('view_bulletins'))
-
-    bulletinforms =[logic.GetBulletinFormById(x[restful.ITEM_ID]) for x in bulletins[restful.ITEM_OBJECTS]]
-    while None in bulletinforms:
-        bulletinforms.remove(None)
+    pagination = orm.Bulletin.query.order_by(orm.Bulletin.dt.desc()).paginate(page, 10)
+    bulletins = pagination.items
+    for bulletin in bulletins:
+        if bulletin.bulletinimages != []:
+            bulletin.bulletinimages.file = bulletin.bulletinimages[0].file
+        else:
+            bulletin.bulletinimages.file = 'notfound.png'
 
     if request.method == 'POST':
         form = BulletinForm(request.form)
         if request.form.has_key('delete'):
-            for x in orm.Bulletinimage.query.filter_by(bulletin_id=int(form.id.data)).all():
-                pathfile_server = os.path.join(UPLOAD_PATH, x.file)
-                if os.path.exists(pathfile_server):
-                    os.remove(pathfile_server)
             orm.db.session.delete(orm.Bulletin.query.get(int(form.id.data)))
             orm.db.session.commit()
             return redirect(url_for('view_bulletins', page=page, q=q))
@@ -567,9 +457,7 @@ def view_bulletins():
     form = PageInfo()
     logic.LoadBasePageInfo('所有公告',form)
 
-    return render_template('view_bulletins.html',forms = bulletinforms,form = form, paging=restful.GetPagingFromResult(bulletins))
-
-
+    return render_template('view_bulletins.html',bulletins = bulletins,form = form, pagination=pagination, page=page)
 
 
 @app.route('/bd/view_account' , methods=['GET', 'POST'])

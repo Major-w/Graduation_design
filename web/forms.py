@@ -80,26 +80,6 @@ class SchoolForm(Form):
     image = FileField('上传图片', validators= [FileAllowed(['jpg', 'png'], 'Images only!')])
 
 
-class InstitutionForm(Form):
-    id = HiddenField('id')
-    name = StringField('品牌名', validators=[Length(min=1, max= 50)]) 
-    agespan_id = SelectField(u'招生年龄', coerce=int)
-    area_id = SelectField(u'所在区县', coerce=int)
-    address = StringField('地址') #
-    location = StringField('校区名')
-    website = StringField('网址') #
-    telephone = StringField('电话')
-    feedesc = StringField('学费标准') #
-    timeopen = DateTimeField('开业时间', format='%H:%M')
-    timeclose = DateTimeField('关门时间', format='%H:%M')
-    feetype_id = SelectField('收费类型', coerce=int)
-    longitude = DecimalField('经度', places=4)
-    latitude =  DecimalField('纬度', places=4)
-    #featuredesc = db.Column(db.String(200)) #特色小项描述
-    feature_ids =  SelectMultipleField(u'培训方向', coerce=int)
-    image = FileField('上传图片', validators= [FileAllowed(['jpg', 'png'], 'Images only!')])
-
-
 class BulletinForm(Form):
     id = HiddenField('id')
     dt = DateTimeField('发布时间', format = '%Y-%m-%d %H:%M:%S')

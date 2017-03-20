@@ -50,7 +50,10 @@ delete from demand where area_id = 30
 
 select * from "area" ;
 
-delete from "area" where name = 'test']]></console>
+delete from "area" where name = 'test'
+
+insert into subway values(2,'娴滃苯褰跨痪锟�')
+select * from users]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.EditorStateManager">

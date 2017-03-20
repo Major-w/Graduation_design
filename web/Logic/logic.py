@@ -7,13 +7,13 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)),'../..')
 reload(sys)
 sys.setdefaultencoding('utf-8')
 from DB import orm
-from forms import SchoolForm, InstitutionForm, BulletinForm, AccountForm, RentForm, RegistrationForm, DemandForm
+from forms import SchoolForm, BulletinForm, AccountForm, RentForm, RegistrationForm, DemandForm
 from Logic import restful
 
 
 g_choices_area = [(g.id, g.name) for g in orm.Area.query.order_by('name')]
 g_choices_residential = [(g.id, g.name) for g in orm.Residential.query.order_by('name')]
-g_choices_subway = [(g.id, g.name) for g in orm.Subway.query.order_by('name')]
+g_choices_subway = [(g.id, g.name) for g in orm.Subway.query.order_by('id')]
 g_choices_schooltype = [(g.id, g.name) for g in orm.Schooltype.query.order_by('name')]
 g_choices_feature = [(g.id, g.name) for g in orm.Feature.query.order_by('name')]
 g_choices_agespan = [(g.id, g.name) for g in orm.Agespan.query.order_by('name')]
@@ -107,38 +107,6 @@ def SetInstitutionFeatures(institution_id, feature_ids):
         sf = orm.InstitutionFeature(institution_id, x)
         orm.db.session.add(sf)
     orm.db.session.commit()
-
-
-def GetInstitutionFormById(institution_id):
-    institution = orm.Institution.query.get(int(institution_id))
-    if institution is None: return None
-    institutionform = InstitutionForm()
-    institutionform.id.data = institution.id
-    institutionform.name.data = institution.name
-    institutionform.agespan_id.data = institution.agespan_id
-    institutionform.agespan_name = institution.agespan.name
-    institutionform.area_id.data = institution.area_id
-    institutionform.area_name = institution.area.name
-    institutionform.address.data = institution.address
-    institutionform.location.data = institution.location
-    institutionform.website.data = institution.website
-    institutionform.telephone.data = institution.telephone
-    institutionform.feedesc.data = institution.feedesc
-    institutionform.timeopen.data =institution.timeopen
-    institutionform.timeclose.data = institution.timeclose
-    institutionform.feetype_id.data = institution.feetype_id
-    institutionform.feetype_name = institution.feetype.name
-    institutionform.longitude.data =institution.longitude
-    institutionform.latitude.data = institution.latitude
-    institutionform.institutionimages = institution.institutionimages
-    institutionform.feature_ids.data = [x.feature_id for x in institution.institutionfeatures]
-
-    institutionform.area_id.choices = g_choices_area
-    institutionform.feature_ids.choices = g_choices_feature
-    institutionform.agespan_id.choices =g_choices_agespan
-    institutionform.feetype_id.choices = g_choices_feetype
-
-    return institutionform
 
 
 def GetBulletinFormById(bulletin_id):
