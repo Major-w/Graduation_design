@@ -14,6 +14,7 @@
 	    <th>注册邮箱</th>
 	    <th>用户名</th>
 	    <th>用户角色</th>
+		<th>是否激活</th>
 	    <th style="width: 40px"></th>
 	  </tr>
  {% if users %}
@@ -23,7 +24,6 @@
 	      {{f.id}}
 	    </td>
 	    <td>
-<a href="/bd/view_account?id={{f.id.data}}">
 	      {{f.email}}
 </a>
 	    </td>
@@ -33,6 +33,9 @@
 		  <td>
 			{{f.role.name}}
 	    </td>
+		<td>
+			{% if f.confirmed %}是{% else%}否{% endif %}
+		</td>
 	    <td>
 	      <form action="" method="post" name="edit_account" onsubmit="return confirm('确认要提交吗?');">
 		<input type="hidden" name="id" value="{{f.id}}">

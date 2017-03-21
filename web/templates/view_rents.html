@@ -5,22 +5,22 @@
     <div class="col-md-10">
         <div class="box">
             <div class="box-header with-border">
-                <table>
+                <table >
                     <tr>
                         {% if areas%}
                         <th>区域</th>
                         <td>{% for area in areas%}
                             <a href="/bd/view_area?id={{area.id}}">
-                                {{area.name}}</a>
+                                {{area.name}}</a>&nbsp;
                             {% endfor %}</td>
                         {% endif %}
                     </tr>
                     <tr>
                         {% if subways%}
-                        <th>地铁线路</th>
+                        <th>地铁线路&nbsp;&nbsp;&nbsp;</th>
                         <td>{% for subway in subways%}
                             <a href="/bd/view_subway?id={{subway.id}}">
-                                {{subway.name}}</a>
+                                {{subway.name}}</a>&nbsp;&nbsp;
                             {% endfor%}</td>
                         {% endif %}
                     </tr>

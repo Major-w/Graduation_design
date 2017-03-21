@@ -14,7 +14,7 @@ from .email import send_email
 from datetime import datetime
 from wtforms import ValidationError
 
-today = datetime.now().strftime('%Y-%m-%d')
+now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 @app.route('/bd/web/<path:path>')
 def rootDir_web(path):
@@ -164,6 +164,7 @@ def view_demand():
     form = DemandForm(request.form)
     form.area_id.choices = logic.g_choices_area
     form.subway_line.choices = logic.g_choices_subway
+    form.mode_id.choices = logic.g_choices_mode
     if request.method == 'POST' and form.validate_on_submit():
         if form.id.data:
             demand = orm.Demand.query.get(int(form.id.data))
@@ -175,7 +176,7 @@ def view_demand():
             demand.area_id = form.area_id.data
             demand.subway_line = form.subway_line.data
             demand.decoration_type = form.decoration_type.data
-            demand.rental_mode = form.rental_mode.data
+            demand.mode_id = form.mode_id.data
             demand.title = form.title.data
         else:
             if form.decorate_type.data == '0':
@@ -185,8 +186,8 @@ def view_demand():
             # if form.price_high < form.price_low:
             #     flash(u'最低租金应该小于最高租金')
             demand = orm.Demand(form.price_low.data, form.price_high.data, form.area_id.data,form.contacts.data,
-                                form.phone_number.data, form.rental_mode.data, form.decorate_type.data,
-                                form.subway_line.data, form.description.data, today, form.title.data)
+                                form.phone_number.data, form.mode_id.data, form.decorate_type.data,
+                                form.subway_line.data, form.description.data, now, form.title.data)
             orm.db.session.add(demand)
             try:
                 orm.db.session.commit()
@@ -268,6 +269,7 @@ def view_rent():
     form.area_id.choices = logic.g_choices_area
     form.residential_id.choices = logic.g_choices_residential
     form.subway_line.choices = logic.g_choices_subway
+    form.mode_id.choices = logic.g_choices_mode
     if request.method == 'POST' and form.validate():
         if form.id.data:
             rent = orm.Rent.query.get(int(form.id.data))
@@ -275,7 +277,7 @@ def view_rent():
             rent.area_id = form.area_id.data
             rent.description = form.description.data
             rent.price = form.price.data
-            rent.rental_mode = form.rental_mode.data
+            rent.mode_id = form.mode_id.data
             rent.rent_type = form.rent_type.data
             rent.contacts = form.contacts.data
             rent.phone_number = form.phone_number.data
@@ -291,13 +293,11 @@ def view_rent():
             else:
                 form.decorate_type.data = False
             rent = orm.Rent(form.area_id.data, form.title.data, form.price.data, form.description.data,
-                            form.rent_type.data, form.rental_mode.data, form.contacts.data, form.phone_number.data,
-                            today, form.residential_id.data, form.size.data, form.address.data, form.decorate_type.data, form.subway_line.data)
+                            form.rent_type.data, form.mode_id.data, form.contacts.data, form.phone_number.data,
+                            now, form.residential_id.data, form.size.data, form.address.data, form.decorate_type.data, form.subway_line.data)
             orm.db.session.add(rent)
-            try:
-                orm.db.session.commit()
-            except:
-                orm.db.session.rollback()
+            # try:
+            orm.db.session.commit()
             form.id.data = rent.id
             if request.form.has_key('upload'):
                 file = request.files['image']
@@ -326,9 +326,18 @@ def view_rent():
     return render_template('view_rent.html', form=form)
 
 
-@app.route('/view_rent/<int:id>',methods=['GET', 'POST'])
+@app.route('/view_rent',methods=['GET', 'POST'])
 def view_rent_int():
-    pass
+    rent_id = request.args.get('id')
+    rents = orm.Rent.query.filter_by(id=int(rent_id)).all()
+    for rent in rents:
+        if rent.rentimages != []:
+            rent.rentimages.file = rent.rentimages[0].file
+        else:
+            rent.rentimages.file = 'notfound.png'
+    form = PageInfo()
+    logic.LoadBasePageInfo('出租信息', form)
+    return render_template('rent.html', form=form, rents=rents)
 
 
 @app.route('/bd/view_rents', methods=['GET', 'POST'])
@@ -351,7 +360,10 @@ def view_rents():
         form = RentForm(request.form)
         if request.form.has_key('delete'):
             orm.db.session.delete(orm.Rent.query.get(int(form.id.data)))
-            orm.db.session.commit()
+            try:
+                orm.db.session.commit()
+            except:
+                orm.db.session.rollback()
             return redirect(url_for('view_rents', page=page, q=q))
 
     form = PageInfo()

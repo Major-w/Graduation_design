@@ -14,6 +14,7 @@ from Logic import restful
 g_choices_area = [(g.id, g.name) for g in orm.Area.query.order_by('name')]
 g_choices_residential = [(g.id, g.name) for g in orm.Residential.query.order_by('name')]
 g_choices_subway = [(g.id, g.name) for g in orm.Subway.query.order_by('id')]
+g_choices_mode = [(g.id, g.name) for g in orm.Mode.query.order_by('id')]
 g_choices_schooltype = [(g.id, g.name) for g in orm.Schooltype.query.order_by('name')]
 g_choices_feature = [(g.id, g.name) for g in orm.Feature.query.order_by('name')]
 g_choices_agespan = [(g.id, g.name) for g in orm.Agespan.query.order_by('name')]
@@ -38,7 +39,7 @@ def GetRentFormById(rent_id):
     rentform.contacts.data = rent.contacts
     rentform.phone_number.data = rent.phone_number
     rentform.title.data = rent.title
-    rentform.rental_mode.data = rent.rental_mode
+    rentform.mode_id.data = rent.mode_id
     rentform.rent_type.data = rent.rent_type
     rentform.address.data = rent.address
     rentform.area_id.choices = g_choices_area
@@ -64,7 +65,7 @@ def GetDemandFormById(demand_id):
     demandform.phone_number.data = demand.phone_number
     demandform.decorate_type.data = demand.decorate_type
     demandform.title.data = demand.title
-    demandform.rental_mode.data = demand.rental_mode
+    demandform.mode_id.data = demand.mode_id
     demandform.rent_type.data = demand.rent_type
     demandform.area_id.choices = g_choices_area
     demandform.subway_line.choices = g_choices_subway

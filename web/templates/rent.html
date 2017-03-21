@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+    {% if rents%}
+    {% for r in rents%}
+    <div class="house-title">
+        <h1 class="c_333 f20">{{r.title}}</h1>
+    </div>
+    <p class="house-update-info c_888 f12">{{r.date}}发布</p>
+    <table>
+        <tr>
+            <td rowspan="6">
+                <img src='{{"/bd/web/static/"+r.rentimages.file}}' alt='1/11' height="300" width="400"/>
+            </td>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td>{{r.price}}元/月&nbsp;&nbsp;{% if r.rent_type==0 %}押一付一{% else %}押一付三{% endif%}</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>租赁方式：{{r.mode.name}}</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>所在小区：{{r.residential.name}}</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>所属区域：{{r.area.name}}</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>详细地址：{{r.address}}</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>联系人：{{r.contacts}}&nbsp;&nbsp;联系方式：{{r.phone_number}}</td>
+        </tr>
+    </table>
+    <div>
+        &nbsp;
+    </div>
+    <div>
+    <h3>房源描述：</h3>
+    <div>{{r.description}}</div>
+    </div>
+    {% endfor %}
+    {% endif %}
+{% endblock %}

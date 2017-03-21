@@ -414,6 +414,18 @@ class Residential(db.Model):
         return '<Residential %s>' % self.name
 
 
+class Mode(db.Model):
+    __tablename__ = 'mode'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=True)
+
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return '<Mode %s>' % self.name
+
+
 class Rent(db.Model):
     __tablename__ = 'rent'
     id = db.Column(db.Integer, primary_key=True)
@@ -422,7 +434,7 @@ class Rent(db.Model):
     description = db.Column(db.Text)  # 描述
     area_id = db.Column(db.ForeignKey(u'area.id'))  # 区县
     rent_type = db.Column(db.Integer)  # 类型
-    rental_mode = db.Column(db.String(20))  # (整租，单间，合租)
+    mode_id = db.Column(db.ForeignKey(u'mode.id'))  # (整租，单间，合租)
     contacts = db.Column(db.String(20))  # 联系人
     phone_number = db.Column(db.Integer)   # 联系方式
     date = db.Column(db.DateTime)   # 发布日期
@@ -435,15 +447,16 @@ class Rent(db.Model):
     residential = db.relationship(u'Residential')
     area = db.relationship(u'Area')
     subway = db.relationship(u'Subway')
+    mode = db.relationship(u'Mode')
 
-    def __init__(self, area_id, title, price, description, rent_type, rental_mode, contacts, phone_number, date,
+    def __init__(self, area_id, title, price, description, rent_type, mode_id, contacts, phone_number, date,
                  residential_id, size, address, decorate_type, subway_line):
         self.area_id = area_id
         self.title = title
         self.price = price
         self.description = description
         self.rent_type = rent_type
-        self.rental_mode = rental_mode
+        self.mode_id = mode_id
         self.contacts = contacts
         self.phone_number = phone_number
         self.date = date
@@ -481,7 +494,7 @@ class Demand(db.Model):
     area_id = db.Column(db.ForeignKey(u'area.id'))  # 区县
     contacts = db.Column(db.String(20))  # 联系人
     phone_number = db.Column(db.Integer)  # 联系方式
-    rental_mode = db.Column(db.String(20))  # (整租，单间，合租)
+    mode_id = db.Column(db.ForeignKey(u'mode.id'))  # (整租，单间，合租)
     decorate_type = db.Column(db.Boolean)  # 装修类型
     subway_line = db.Column(db.ForeignKey(u'subway.id'))  # 地铁几号线附近
     description = db.Column(db.Text)  # 描述
@@ -490,15 +503,16 @@ class Demand(db.Model):
 
     area = db.relationship(u'Area')
     subway = db.relationship(u'Subway')
+    mode = db.relationship(u'Mode')
 
-    def __init__(self, price_low, price_high, area_id, contacts, phone_number, rental_mode, decorate_type, subway_line,
+    def __init__(self, price_low, price_high, area_id, contacts, phone_number, mode_id, decorate_type, subway_line,
                  description, date, title):
         self.price_high = price_high
         self.price_low = price_low
         self.area_id = area_id
         self.contacts = contacts
         self.phone_number = phone_number
-        self.rental_mode = rental_mode
+        self.mode_id = mode_id
         self.decorate_type = decorate_type
         self.subway_line = subway_line
         self.description = description
