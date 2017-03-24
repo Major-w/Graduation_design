@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="pusher">
+    <div class="ui divider"></div>
+    <div class="ui equal width grid" style="margin:5px 0 5px 0;width:70%">
+        <div class="row">
+            <div class="column">
+                <div class="ui container segment">
+                    <div class="menu">
+                        <select class="ui simple dropdown item" id="test">
+                            {% for area in areas %}
+                            <option value="{{area.id}}" class="item">{{area.name}}</option>
+                            {% endfor%}
+                        </select>
+                    </div>
+                    <div class="ui container" id="chart1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    $(function(){
+        $("#test").click(function(){
+            $.ajax({
+                type : "post",
+                url : "/bd/new_function",
+                data : {'area_id':$("#test").val()},
+                dataType : "String"
+            });
+        });
+    });
+</script>
+<script>
+    $('#menu').click(function () {
+        $('.ui.sidebar').sidebar('toggle');
+    });
+</script>
+<script>
+    $('#test').click(function () {
+        $('#chart1').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: '{{area_name}}房屋租金分布'
+            },
+            xAxis: {
+                categories: ['低于600元', '600-1000元', '1000-1500元', '1500-2000元', '2000-3000元', '3000-5000元', '5000-8000元']
+            },
+            yAxis: {
+                title: {
+                    text: '{{area_name}}房屋租金分布'
+                }
+            },
+            series: [
+                {% if series %}
+        {% for serie in series[:-1] %}
+        {
+            name: '{{serie['name']}}',
+                data: [{{serie['data']}}]
+        },
+        {%endfor%}
+        {
+            name:'{{series[-1]['name']}}',
+                data: [{{series[-1]['data']}}]
+        }
+        {% endif %}
+        ]
+    });
+    });
+</script>
+{% endblock %}

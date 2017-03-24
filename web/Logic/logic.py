@@ -43,6 +43,7 @@ def GetRentFormById(rent_id):
     rentform.rent_type.data = rent.rent_type
     rentform.address.data = rent.address
     rentform.area_id.choices = g_choices_area
+    rentform.mode_id.choices = g_choices_mode
     rentform.residential_id.choices = g_choices_residential
     rentform.subway_line.choices = g_choices_subway
     return rentform

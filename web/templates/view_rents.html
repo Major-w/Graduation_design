@@ -10,7 +10,7 @@
                         {% if areas%}
                         <th>区域</th>
                         <td>{% for area in areas%}
-                            <a href="/bd/view_area?id={{area.id}}">
+                            <a href="/bd/view_rents?area_id={{area.id}}">
                                 {{area.name}}</a>&nbsp;
                             {% endfor %}</td>
                         {% endif %}
@@ -19,9 +19,40 @@
                         {% if subways%}
                         <th>地铁线路&nbsp;&nbsp;&nbsp;</th>
                         <td>{% for subway in subways%}
-                            <a href="/bd/view_subway?id={{subway.id}}">
+                            <a href="/bd/view_rents?subway_id={{subway.id}}">
                                 {{subway.name}}</a>&nbsp;&nbsp;
                             {% endfor%}</td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        {% if subways or areas%}
+                        <th>租金&nbsp;&nbsp;&nbsp;</th>
+                        <td class="link">
+                            <a href="/bd/view_rents?price=600">
+                                600元以下
+                            </a>
+                            <a href="/bd/view_rents?price=1000">
+                                600-1000元]
+                            </a>
+                            <a href="/bd/view_rents?price=1500">
+                                1000-1500元
+                            </a>
+                            <a href="/bd/view_rents?price=2000">
+                                1500-2000元
+                            </a>
+                            <a href="/bd/view_rents?price=3000">
+                                2000-3000元
+                            </a>
+                            <a href="/bd/view_rents?price=5000">
+                                3000-5000元
+                            </a>
+                            <a href="/bd/view_rents?price=8000">
+                                5000-8000元
+                            </a>
+                            <a href="/bd/view_rents?price=8001">
+                                8000元以上
+                            </a>
+                        </td>
                         {% endif %}
                     </tr>
                 </table>
@@ -46,7 +77,9 @@
                             <img src='{{"/bd/web/static/"+f.rentimages.file}}' alt='{{f.rentimages.file}}' height="80" width="80"/>
                         </td>
                         <td>
-                            <a href="/view_rent?id={{f.id}}">
+                            {% if current_user.role_id == 1%}<a href="/bd/view_rent?id={{f.id}}">
+                            {% else %}<a href="/view_rent?id={{f.id}}">
+                            {% endif %}
                                 {{f.title}}
                             </a>
                         </td>

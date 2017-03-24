@@ -21,11 +21,13 @@
         <div class="col-lg-5 col-xs-10">
             {{ render_field(form.area_id)}}
         </div>
-        <div class="col-lg-5 col-xs-10">
-            {{ render_field(form.price_low, size = 8)}}<span>元/月</span>
+        <div class="col-lg-5 col-xs-10" id="price_low">
+            {{ render_field(form.price_low, size = 8)}}
+            <div class="ui basic label">元/月</div>
         </div>
-        <div class="col-lg-5 col-xs-10">
-            {{ render_field(form.price_high, size = 8)}}<span>元/月</span>
+        <div class="col-lg-5 col-xs-10" id="price_high">
+            {{ render_field(form.price_high, size = 8)}}
+            <div class="ui basic label">元/月</div>
         </div>
         <div class="col-lg-5 col-xs-10">
             {{ render_field(form.decorate_type)}}

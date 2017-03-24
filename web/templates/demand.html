@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+    {% if demands%}
+    {% for r in demands%}
+    <div class="house-title">
+        <h1 class="c_333 f20">{{r.title}}</h1>
+    </div>
+    <p class="c_888 f12">{{r.date}}??</p>
+    <table>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td>
+                <span class="c_ff552e">
+                    <b class="f36">{{r.price}}</b>
+                    ?/?
+                </span>
+                &nbsp;&nbsp;{% if r.rent_type==0 %}????{% else %}????{% endif%}</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <span class="c_888">?????</span>{{r.mode.name}}</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <span class="c_888">?????</span>{{r.area.name}}</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <span class="c_888">?????</span>{{r.address}}</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <span class="c_888">????</span>{{r.contacts}}</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <span class="c_888">?????</span>{{r.phone_number}}</td>
+        </tr>
+    </table>
+    <div class="house-fraud-tip">
+        <h3>?????</h3>
+        <div>{{r.description}}</div>
+        <i class="add to calendar icon"></i> <i class="alarm outline icon"></i> <i class="alarm mute outline icon"></i> <i class="alarm mute icon"></i> <i class="alarm icon"></i> <i class="at icon"></i> <i class="browser icon"></i> <i class="bug icon"></i> <i class="calendar outline icon"></i> <i class="calendar icon"></i> <i class="checked calendar icon"></i> <i class="cloud icon"></i> <i class="code icon"></i> <i class="comment outline icon"></i> <i class="comment icon"></i> <i class="comments outline icon"></i> <i class="comments icon"></i> <i class="copyright icon"></i> <i class="creative commons icon"></i> <i class="dashboard icon"></i> <i class="delete calendar icon"></i> <i class="external square icon"></i> <i class="external icon"></i> <i class="eyedropper icon"></i> <i class="feed icon"></i> <i class="find icon"></i> <i class="hand pointer icon"></i> <i class="hashtag icon"></i> <i class="heartbeat icon"></i> <i class="history icon"></i>
+
+    </div>
+    {% endfor %}
+    {% endif %}
+{% endblock %}

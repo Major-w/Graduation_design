@@ -13,6 +13,7 @@ from Logic import restful, logic
 from .email import send_email
 from datetime import datetime
 from wtforms import ValidationError
+from Parsing import page_parsing
 
 now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
@@ -220,31 +221,19 @@ def view_demands():
     return render_template('view_demands.html', demands=demands, pagination=pagination, page=page, form=form)
 
 
-@app.route('/bd/view_area', methods=['GET', 'POST'])
-def view_area():
-    page = request.args.get('page', 1, type=int)
-    area_id = request.args.get('id')
-    q = request.args.get('q')
-    rents = orm.Rent.query.filter_by(area_id = int(area_id)).all()
-    for rent in rents:
-        if rent.rentimages != []:
-            rent.rentimages.file = rent.rentimages[0].file
-        else:
-            rent.rentimages.file = 'notfound.png'
-    if request.method == 'POST':
-        form = RentForm(request.form)
-    form = PageInfo()
-    logic.LoadBasePageInfo(orm.Area.query.filter_by(id=int(area_id)).all()[0].name+ '出租信息',form)
-
-    return render_template('view_rents.html', rents=rents, page=page, form=form)
-
-
-@app.route('/bd/view_subway', methods=['GET', 'POST'])
+@app.route('/bd/rent', methods=['GET', 'POST'])
 def view_subway():
     page = request.args.get('page', 1, type=int)
-    subway_id = request.args.get('id')
+    subway_id = request.args.get('subway_id')
+    area_id = request.args.get('area_id')
     q = request.args.get('q')
-    rents = orm.Rent.query.filter_by(subway_line = int(subway_id)).all()
+    form = PageInfo()
+    if subway_id:
+        rents = orm.Rent.query.filter_by(subway_line = int(subway_id)).all()
+        logic.LoadBasePageInfo(orm.Subway.query.filter_by(id=int(subway_id)).all()[0].name + '附近出租信息', form)
+    elif area_id:
+        rents = orm.Rent.query.filter_by(area_id=int(area_id)).all()
+        logic.LoadBasePageInfo(orm.Area.query.filter_by(id=int(area_id)).all()[0].name + '出租信息', form)
     for rent in rents:
         if rent.rentimages != []:
             rent.rentimages.file = rent.rentimages[0].file
@@ -252,9 +241,6 @@ def view_subway():
             rent.rentimages.file = 'notfound.png'
     if request.method == 'POST':
         form = RentForm(request.form)
-    form = PageInfo()
-    logic.LoadBasePageInfo(orm.Subway.query.filter_by(id=int(subway_id)).all()[0].name+ '附近出租信息',form)
-
     return render_template('view_rents.html', rents=rents, page=page, form=form)
 
 
@@ -296,8 +282,10 @@ def view_rent():
                             form.rent_type.data, form.mode_id.data, form.contacts.data, form.phone_number.data,
                             now, form.residential_id.data, form.size.data, form.address.data, form.decorate_type.data, form.subway_line.data)
             orm.db.session.add(rent)
-            # try:
-            orm.db.session.commit()
+            try:
+                orm.db.session.commit()
+            except:
+                orm.db.session.rollback()
             form.id.data = rent.id
             if request.form.has_key('upload'):
                 file = request.files['image']
@@ -326,6 +314,15 @@ def view_rent():
     return render_template('view_rent.html', form=form)
 
 
+@app.route('/view_demand',methods=['GET', 'POST'])
+def view_demand_int():
+    demand_id = request.args.get('id')
+    demands = orm.Demand.query.filter_by(id=int(demand_id)).all()
+    form = PageInfo()
+    logic.LoadBasePageInfo('求租信息', form)
+    return render_template('demand.html', form=form, demands=demands)
+
+
 @app.route('/view_rent',methods=['GET', 'POST'])
 def view_rent_int():
     rent_id = request.args.get('id')
@@ -344,18 +341,11 @@ def view_rent_int():
 def view_rents():
     page = request.args.get('page', 1, type=int)
     q = request.args.get('q')
-    pagination = orm.Rent.query.order_by(orm.Rent.date.desc()).paginate(page,10)
-    pagination_area = orm.Area.query.order_by(orm.Area.id).paginate(page,20)
-    pagination_subway = orm.Subway.query.order_by(orm.Subway.id).paginate(page,20)
-    # paginat
-    rents = pagination.items
-    areas = pagination_area.items
-    subways = pagination_subway.items
-    for rent in rents:
-        if rent.rentimages != []:
-            rent.rentimages.file = rent.rentimages[0].file
-        else:
-            rent.rentimages.file = 'notfound.png'
+    p = request.args.get('price')
+    subway_id = request.args.get('subway_id')
+    area_id = request.args.get('area_id')
+    price =int(p) if p else None
+    form = PageInfo()
     if request.method == 'POST':
         form = RentForm(request.form)
         if request.form.has_key('delete'):
@@ -365,12 +355,40 @@ def view_rents():
             except:
                 orm.db.session.rollback()
             return redirect(url_for('view_rents', page=page, q=q))
-
-    form = PageInfo()
-    logic.LoadBasePageInfo('所有出租信息',form)
-
-    return render_template('view_rents.html', rents=rents, pagination=pagination, page=page, form=form, areas=areas, subways=subways)
-
+    if subway_id:
+        rents = orm.Rent.query.filter_by(subway_line=int(subway_id)).all()
+        logic.LoadBasePageInfo(orm.Subway.query.filter_by(id=int(subway_id)).all()[0].name + '附近出租信息', form)
+        rent_image(rents)
+        return render_template('view_rents.html', rents=rents, page=page, form=form)
+    elif area_id:
+        rents = orm.Rent.query.filter_by(area_id=int(area_id)).all()
+        logic.LoadBasePageInfo(orm.Area.query.filter_by(id=int(area_id)).all()[0].name + '出租信息', form)
+        rent_image(rents)
+        return render_template('view_rents.html', rents=rents, page=page, form=form)
+    else:
+        if p is None:
+            pagination = orm.Rent.query.order_by(orm.Rent.date.desc()).paginate(page,10)
+        elif price == 600:
+            pagination = orm.Rent.query.filter(orm.Rent.price <= price).paginate(page, 10)
+        elif price == 1000:
+            pagination = orm.Rent.query.filter(600 < orm.Rent.price , orm.Rent.price <= price).paginate(page, 10)
+        elif price == 1500:
+            pagination = orm.Rent.query.filter(1000 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 10)
+        elif price == 2000:
+            pagination = orm.Rent.query.filter(1500 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 10)
+        elif price == 3000:
+            pagination = orm.Rent.query.filter(2000 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 10)
+        elif price == 5000:
+            pagination = orm.Rent.query.filter(3000 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 10)
+        pagination_area = orm.Area.query.order_by(orm.Area.id).paginate(page,20)
+        pagination_subway = orm.Subway.query.order_by(orm.Subway.id).paginate(page,20)
+        # paginat
+        rents = pagination.items
+        areas = pagination_area.items
+        subways = pagination_subway.items
+        logic.LoadBasePageInfo('所有出租信息', form)
+        rent_image(rents)
+        return render_template('view_rents.html', rents=rents, page=page, form=form, areas=areas, subways=subways)
 
 
 @app.route('/bd/delete_image' , methods=['GET', 'POST'])
@@ -538,6 +556,28 @@ def view_accounts():
     return render_template('view_accounts.html', form=form, pagination=pagination, users=users)
 
 
-@app.route('/new/function', methods=['GET', 'POST'])
+@app.route('/bd/new_function', methods=['GET', 'POST'])
 def new_funciton():
-    return render_template('new_function.xml')
+    page = request.args.get('page', 1, type=int)
+    areas = orm.Area.query.order_by(orm.Area.id).paginate(page, 20).items
+    form = PageInfo()
+    logic.LoadBasePageInfo('房屋租金分布', form)
+    if request.method == 'POST':
+        area_id = request.form.get('area_id')
+        area_id = int(area_id)
+        area_name = orm.Area.query.filter_by(id=area_id).first().name
+        series = [data for data in page_parsing.get_area_price(area_name)]
+        return render_template('new_function.html', form=form, areas=areas, area_id=area_id,area_name=area_name,series=series)
+    else:
+        area_id = 1
+        area_name = orm.Area.query.filter_by(id=area_id).first().name
+        series = [data for data in page_parsing.get_area_price(area_name)]
+        return render_template('new_function.html',form=form, areas=areas, area_id=area_id,area_name=area_name,series=series)
+
+
+def rent_image(rents):
+    for rent in rents:
+        if rent.rentimages != []:
+            rent.rentimages.file = rent.rentimages[0].file
+        else:
+            rent.rentimages.file = 'notfound.png'
