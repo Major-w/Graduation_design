@@ -215,21 +215,6 @@ class Advert(db.Model):
         return '<Advert %s>' % self.title
 
 
-class Agespan(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Unicode(50, collation='utf8_bin'))
-    fromage = db.Column(db.Integer)
-    toage = db.Column(db.Integer)
-
-    def __init__(self, name, fromage, toage):
-        self.name = name
-        self.fromage = fromage
-        self.toage = toage
-
-    def __repr__(self):
-        return '<Agespan %s>' % self.name
-
-
 class Area(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True)
@@ -248,15 +233,17 @@ class Bulletin(db.Model):
     content = db.Column(db.String(3000))
     valid = db.Integer
     source = db.Column(db.String(68))
-    author = db.Column(db.String(68))
+    author_id = db.Column(db.ForeignKey(u'users.id'))
 
-    def __init__(self, dt, title, content, source, author):
+    author = db.relationship(u'User')
+
+    def __init__(self, dt, title, content, source, author_id):
         self.dt = dt
         self.title = title
         self.content = content
         self.valid = 1
         self.source = source
-        self.author = author
+        self.author_id = author_id
 
     def __repr__(self):
         return '<Bulletin %s>' % self.title
@@ -443,14 +430,16 @@ class Rent(db.Model):
     address = db.Column(db.String(50))  # 地址
     subway_line = db.Column(db.ForeignKey(u'subway.id'))  # 地铁几号线附近
     decorate_type = db.Column(db.Boolean)  # 装修类型
+    author_id = db.Column(db.ForeignKey(u'users.id')) # 发布人
     # 房屋类型
     residential = db.relationship(u'Residential')
     area = db.relationship(u'Area')
     subway = db.relationship(u'Subway')
     mode = db.relationship(u'Mode')
+    author = db.relationship(u'User')
 
     def __init__(self, area_id, title, price, description, rent_type, mode_id, contacts, phone_number, date,
-                 residential_id, size, address, decorate_type, subway_line):
+                 residential_id, size, address, decorate_type, subway_line, author_id):
         self.area_id = area_id
         self.title = title
         self.price = price
@@ -465,6 +454,7 @@ class Rent(db.Model):
         self.address = address
         self.decorate_type = decorate_type
         self.subway_line = subway_line
+        self.author_id = author_id
 
     def __repr__(self):
         return '<Rent %s>' % self.name
@@ -500,13 +490,15 @@ class Demand(db.Model):
     description = db.Column(db.Text)  # 描述
     date = db.Column(db.DateTime)  # 发布日期
     title = db.Column(db.String(50))  # 标题
+    author_id = db.Column(db.ForeignKey(u'users.id'))  # 发布人
 
     area = db.relationship(u'Area')
     subway = db.relationship(u'Subway')
     mode = db.relationship(u'Mode')
+    author = db.relationship(u'User')
 
     def __init__(self, price_low, price_high, area_id, contacts, phone_number, mode_id, decorate_type, subway_line,
-                 description, date, title):
+                 description, date, title, author_id):
         self.price_high = price_high
         self.price_low = price_low
         self.area_id = area_id
@@ -518,6 +510,7 @@ class Demand(db.Model):
         self.description = description
         self.date = date
         self.title = title
+        self.author_id = author_id
 
     def __repr__(self):
         return '<Demand %s>' % self.name

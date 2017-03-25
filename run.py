@@ -132,7 +132,6 @@ manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=orm.db)
 # Create API endpoints, which will be available at /api/<tablename> by
 # default. Allowed HTTP methods can be specified as well.
 manager.create_api(orm.Advert, methods=['GET'], url_prefix='/bd/api/v1.0')
-manager.create_api(orm.Agespan, methods=['GET'], url_prefix='/bd/api/v1.0')
 manager.create_api(orm.Area, methods=['GET'], url_prefix='/bd/api/v1.0')
 manager.create_api(orm.Bulletin, methods=['GET'], url_prefix='/bd/api/v1.0', postprocessors={'GET_SINGLE': [post_get_one],'GET_MANY':[post_get_many]})
 manager.create_api(orm.Feature, methods=['GET'], url_prefix='/bd/api/v1.0')

@@ -2,498 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="026b0f4c-1c37-4f4f-bf05-9bc1c82dc0d5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Parsing/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Parsing/page_parsing.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/templates/demand.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/templates/new_function.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/bootstrap/css/bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/bootstrap/css/bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/bootstrap/js/bootstrap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/bootstrap/js/bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/bootstrap/js/npm.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/._.DS_Store" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/._css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/._img" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/._js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/css/._skins" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._.DS_Store" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._avatar.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._avatar04.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._avatar2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._avatar3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._avatar5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._boxed-bg.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._boxed-bg.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._credit" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._default-50x50.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._icons.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._photo1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._photo2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._user.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._user1-128x128.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._user2-160x160.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._user2-160x160.old.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._user3-128x128.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._user4-128x128.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._user5-128x128.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._user6-128x128.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._user7-128x128.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/._user8-128x128.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/credit/._american-express.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/credit/._cirrus.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/credit/._mastercard.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/credit/._mestro.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/credit/._paypal.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/credit/._paypal2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/credit/._visa.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/img/user.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/dist/js/._pages" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/bootstrap-slider/bootstrap-slider.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/bootstrap-slider/slider.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/chartjs/Chart.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/chartjs/Chart.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/adapters/jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/build-config.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/ckeditor.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/config.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/contents.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/af.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/ar.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/bg.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/bn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/bs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/ca.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/cs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/cy.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/da.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/de.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/el.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/en-au.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/en-ca.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/en-gb.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/en.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/eo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/es.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/et.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/eu.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/fa.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/fi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/fo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/fr-ca.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/fr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/gl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/gu.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/he.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/hi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/hr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/hu.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/id.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/is.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/it.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/ja.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/ka.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/km.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/ko.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/ku.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/lt.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/lv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/mk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/mn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/ms.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/nb.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/nl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/no.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/pl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/pt-br.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/pt.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/ro.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/ru.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/si.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/sk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/sl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/sq.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/sr-latn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/sr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/sv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/th.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/tr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/ug.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/uk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/vi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/zh-cn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/lang/zh.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/a11yhelp.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/ar.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/bg.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/ca.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/cs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/cy.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/da.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/de.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/el.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/en.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/eo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/es.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/et.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/fa.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/fi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/fr-ca.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/fr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/gl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/gu.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/he.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/hi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/hr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/hu.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/id.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/it.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/ja.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/km.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/ko.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/ku.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/lt.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/lv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/mk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/mn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/nb.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/nl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/no.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/pl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/pt-br.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/pt.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/ro.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/ru.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/si.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/sk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/sl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/sq.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/sr-latn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/sr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/sv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/th.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/tr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/ug.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/uk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/vi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/zh-cn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/a11yhelp/dialogs/lang/zh.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/about/dialogs/about.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/clipboard/dialogs/paste.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/dialog/dialogDefinition.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/image/dialogs/image.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/link/dialogs/anchor.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/link/dialogs/link.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/pastefromword/filter/default.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/scayt/dialogs/options.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/scayt/dialogs/toolbar.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/ar.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/bg.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/ca.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/cs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/cy.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/de.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/el.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/en.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/eo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/es.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/et.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/fa.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/fi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/fr-ca.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/fr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/gl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/he.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/hr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/hu.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/id.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/it.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/ja.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/km.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/ku.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/lv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/nb.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/nl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/no.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/pl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/pt-br.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/pt.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/ru.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/si.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/sk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/sl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/sq.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/sv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/th.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/tr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/ug.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/uk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/vi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/zh-cn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/lang/zh.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/specialchar/dialogs/specialchar.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/table/dialogs/table.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/tabletools/dialogs/tableCell.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/wsc/dialogs/wsc.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/wsc/dialogs/wsc.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/wsc/dialogs/wsc_ie.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/skins/moono/dialog.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/skins/moono/dialog_ie.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/skins/moono/dialog_ie7.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/skins/moono/dialog_ie8.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/skins/moono/dialog_iequirks.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/skins/moono/dialog_opera.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/skins/moono/editor.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/skins/moono/editor_gecko.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/skins/moono/editor_ie.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/skins/moono/editor_ie7.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/skins/moono/editor_ie8.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/skins/moono/editor_iequirks.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/styles.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/colorpicker/bootstrap-colorpicker.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/colorpicker/bootstrap-colorpicker.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/colorpicker/bootstrap-colorpicker.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/colorpicker/bootstrap-colorpicker.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/dataTables.bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/dataTables.bootstrap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/AutoFill/css/dataTables.autoFill.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/AutoFill/css/dataTables.autoFill.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/AutoFill/js/dataTables.autoFill.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/AutoFill/js/dataTables.autoFill.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/ColReorder/js/dataTables.colReorder.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/ColVis/css/dataTables.colVis.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/ColVis/css/dataTables.colVis.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/ColVis/css/dataTables.colvis.jqueryui.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/ColVis/js/dataTables.colVis.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/ColVis/js/dataTables.colVis.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/FixedColumns/css/dataTables.fixedColumns.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/FixedColumns/css/dataTables.fixedColumns.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/FixedColumns/js/dataTables.fixedColumns.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/FixedColumns/js/dataTables.fixedColumns.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/FixedHeader/css/dataTables.fixedHeader.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/FixedHeader/css/dataTables.fixedHeader.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/FixedHeader/js/dataTables.fixedHeader.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/FixedHeader/js/dataTables.fixedHeader.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/KeyTable/css/dataTables.keyTable.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/KeyTable/css/dataTables.keyTable.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/KeyTable/js/dataTables.keyTable.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/KeyTable/js/dataTables.keyTable.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/Responsive/js/dataTables.responsive.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/Scroller/css/dataTables.scroller.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/Scroller/js/dataTables.scroller.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/Scroller/js/dataTables.scroller.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/TableTools/css/dataTables.tableTools.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/TableTools/css/dataTables.tableTools.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/jquery.dataTables.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/jquery.dataTables.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/jquery.dataTables.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/jquery.dataTables.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datatables/jquery.dataTables_themeroller.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/bootstrap-datepicker.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/datepicker3.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.ar.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.az.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.bg.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.ca.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.cs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.cy.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.da.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.de.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.el.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.es.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.et.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.fa.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.fi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.fr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.gl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.he.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.hr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.hu.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.id.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.is.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.it.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.ja.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.ka.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.kk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.kr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.lt.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.lv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.mk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.ms.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.nb.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.nl-BE.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.nl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.no.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.pl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.pt-BR.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.pt.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.ro.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.rs-latin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.rs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.ru.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.sk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.sl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.sq.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.sv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.sw.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.th.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.tr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.ua.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.vi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/datepicker/locales/bootstrap-datepicker.zh-TW.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/daterangepicker/daterangepicker.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/daterangepicker/moment.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/daterangepicker/moment.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/fastclick/fastclick.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/fastclick/fastclick.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/excanvas.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/excanvas.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.colorhelpers.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.colorhelpers.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.canvas.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.canvas.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.categories.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.categories.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.crosshair.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.crosshair.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.errorbars.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.errorbars.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.fillbetween.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.fillbetween.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.image.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.image.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.navigate.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.navigate.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.pie.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.pie.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.resize.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.resize.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.selection.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.selection.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.stack.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.stack.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.symbol.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.symbol.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.threshold.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.threshold.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.time.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/flot/jquery.flot.time.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/fullcalendar/fullcalendar.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/fullcalendar/fullcalendar.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/fullcalendar/fullcalendar.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/fullcalendar/fullcalendar.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/fullcalendar/fullcalendar.print.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/all.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/flat/_all.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/flat/aero.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/flat/blue.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/flat/flat.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/flat/green.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/flat/grey.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/flat/orange.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/flat/pink.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/flat/purple.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/flat/red.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/flat/yellow.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/futurico/futurico.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/icheck.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/icheck.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/line/_all.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/line/aero.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/line/blue.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/line/green.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/line/grey.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/line/line.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/line/orange.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/line/pink.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/line/purple.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/line/red.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/line/yellow.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/minimal/_all.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/minimal/aero.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/minimal/blue.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/minimal/green.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/minimal/grey.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/minimal/minimal.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/minimal/orange.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/minimal/pink.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/minimal/purple.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/minimal/red.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/minimal/yellow.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/polaris/polaris.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/square/_all.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/square/aero.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/square/blue.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/square/green.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/square/grey.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/square/orange.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/square/pink.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/square/purple.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/square/red.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/square/square.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/iCheck/square/yellow.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/input-mask/jquery.inputmask.date.extensions.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/input-mask/jquery.inputmask.extensions.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/input-mask/jquery.inputmask.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/input-mask/jquery.inputmask.numeric.extensions.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/input-mask/jquery.inputmask.phone.extensions.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/input-mask/jquery.inputmask.regex.extensions.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ionslider/ion.rangeSlider.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ionslider/ion.rangeSlider.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ionslider/ion.rangeSlider.skinFlat.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ionslider/ion.rangeSlider.skinNice.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/jQueryUI/jquery-ui-1.10.3.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/jQueryUI/jquery-ui-1.10.3.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/knob/jquery.knob.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/morris/morris.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/morris/morris.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/morris/morris.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/pace/pace.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/slimScroll/jquery.slimscroll.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/sparkline/jquery.sparkline.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/sparkline/jquery.sparkline.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/timepicker/bootstrap-timepicker.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/timepicker/bootstrap-timepicker.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/timepicker/bootstrap-timepicker.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/templates/new_function.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/templates/view_institution.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/templates/view_institutions.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/CHANGES.md" afterPath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/CHANGES.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/LICENSE.md" afterPath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/LICENSE.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/scayt/LICENSE.md" afterPath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/scayt/LICENSE.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/scayt/README.md" afterPath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/scayt/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/wsc/LICENSE.md" afterPath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/wsc/LICENSE.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/wsc/README.md" afterPath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/plugins/wsc/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/skins/moono/readme.md" afterPath="$PROJECT_DIR$/web/AdminLTE/plugins/ckeditor/skins/moono/readme.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DB/orm.py" afterPath="$PROJECT_DIR$/DB/orm.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Parsing/page_parsing.py" afterPath="$PROJECT_DIR$/Parsing/page_parsing.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run.py" afterPath="$PROJECT_DIR$/run.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/Logic/logic.py" afterPath="$PROJECT_DIR$/web/Logic/logic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/static/font-awesome.min.css" afterPath="$PROJECT_DIR$/web/static/font-awesome.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/forms.py" afterPath="$PROJECT_DIR$/web/forms.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/templates/base.html" afterPath="$PROJECT_DIR$/web/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/templates/rent.html" afterPath="$PROJECT_DIR$/web/templates/rent.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/templates/view_demand.html" afterPath="$PROJECT_DIR$/web/templates/view_demand.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/templates/new_function.html" afterPath="$PROJECT_DIR$/web/templates/new_function.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/templates/view_bulletin.html" afterPath="$PROJECT_DIR$/web/templates/view_bulletin.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/templates/view_bulletins.html" afterPath="$PROJECT_DIR$/web/templates/view_bulletins.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/templates/view_demands.html" afterPath="$PROJECT_DIR$/web/templates/view_demands.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/templates/view_rent.html" afterPath="$PROJECT_DIR$/web/templates/view_rent.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/templates/view_rents.html" afterPath="$PROJECT_DIR$/web/templates/view_rents.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/views.py" afterPath="$PROJECT_DIR$/web/views.py" />
     </list>
@@ -509,7 +30,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Graduation_design$start.coverage" NAME="start Coverage Results" MODIFIED="1490370512469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Graduation_design$start.coverage" NAME="start Coverage Results" MODIFIED="1490419094731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -533,11 +54,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="322" column="43" selection-start-line="322" selection-start-column="43" selection-end-line="322" selection-end-column="43" />
+            <state relative-caret-position="-495">
+              <caret line="159" column="4" selection-start-line="159" selection-start-column="4" selection-end-line="159" selection-end-column="4" />
               <folding>
                 <element signature="e#23#32#0" expanded="true" />
               </folding>
@@ -545,21 +66,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view_demand.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/templates/view_demand.html">
+      <file leaf-file-name="view_rents.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/templates/view_rents.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+            <state relative-caret-position="200">
+              <caret line="79" column="95" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="95" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="demand.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/templates/demand.html">
+      <file leaf-file-name="orm.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DB/orm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="49" column="882" selection-start-line="49" selection-start-column="882" selection-end-line="49" selection-end-column="894" />
+            <state relative-caret-position="124">
+              <caret line="478" column="6" selection-start-line="478" selection-start-column="6" selection-end-line="478" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-86">
+              <caret line="120" column="15" selection-start-line="120" selection-start-column="15" selection-end-line="120" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -568,8 +99,8 @@
       <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="178">
+              <caret line="167" column="68" selection-start-line="167" selection-start-column="68" selection-end-line="167" selection-end-column="68" />
               <folding>
                 <element signature="n#style#0;n#ul#0;n#section#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -577,21 +108,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="semantic.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/static/semantic.css">
+      <file leaf-file-name="view_demands.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/templates/view_demands.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-513">
-              <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
+            <state relative-caret-position="228">
+              <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view_demands.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/templates/view_demands.html">
+      <file leaf-file-name="logic.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/Logic/logic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="490">
-              <caret line="46" column="17" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
+            <state relative-caret-position="142">
+              <caret line="68" column="14" selection-start-line="68" selection-start-column="14" selection-end-line="68" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -644,27 +175,29 @@
         <option value="[Connection] CONSOLE - Connection" />
         <option value="$PROJECT_DIR$/web/templates/auth/unconfirmed.html" />
         <option value="$PROJECT_DIR$/uwsgi.ini" />
-        <option value="$PROJECT_DIR$/run.py" />
-        <option value="$PROJECT_DIR$/web/templates/view_bulletins.html" />
         <option value="$PROJECT_DIR$/web/AdminLTE/dist/js/app.min.js" />
-        <option value="$PROJECT_DIR$/DB/orm.py" />
-        <option value="$PROJECT_DIR$/web/forms.py" />
         <option value="$PROJECT_DIR$/web/templates/view_accounts.html" />
         <option value="$PROJECT_DIR$/web/AdminLTE/dist/css/AdminLTE.css" />
         <option value="$PROJECT_DIR$/web/templates/rent.html" />
         <option value="$PROJECT_DIR$/web/static/font-awesome.min.css" />
         <option value="$PROJECT_DIR$/web/AdminLTE/bootstrap/css/bootstrap.min.css" />
         <option value="$PROJECT_DIR$/web/templates/new_function.xml" />
-        <option value="$PROJECT_DIR$/web/templates/view_demands.html" />
-        <option value="$PROJECT_DIR$/web/templates/view_rents.html" />
-        <option value="$PROJECT_DIR$/web/Logic/logic.py" />
         <option value="$PROJECT_DIR$/web/templates/view_rent.html" />
-        <option value="$PROJECT_DIR$/Parsing/page_parsing.py" />
         <option value="$PROJECT_DIR$/web/templates/view_demand.html" />
-        <option value="$PROJECT_DIR$/web/views.py" />
-        <option value="$PROJECT_DIR$/web/templates/new_function.html" />
         <option value="$PROJECT_DIR$/web/templates/demand.html" />
+        <option value="$PROJECT_DIR$/Parsing/page_parsing.py" />
+        <option value="$PROJECT_DIR$/web/templates/new_function.html" />
+        <option value="$PROJECT_DIR$/web/static/semantic.css" />
         <option value="$PROJECT_DIR$/web/templates/base.html" />
+        <option value="$PROJECT_DIR$/web/forms.py" />
+        <option value="$PROJECT_DIR$/web/templates/view_bulletin.html" />
+        <option value="$PROJECT_DIR$/web/templates/view_bulletins.html" />
+        <option value="$PROJECT_DIR$/run.py" />
+        <option value="$PROJECT_DIR$/DB/orm.py" />
+        <option value="$PROJECT_DIR$/web/templates/view_rents.html" />
+        <option value="$PROJECT_DIR$/web/views.py" />
+        <option value="$PROJECT_DIR$/web/templates/view_demands.html" />
+        <option value="$PROJECT_DIR$/web/Logic/logic.py" />
       </list>
     </option>
   </component>
@@ -693,7 +226,7 @@
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
-      <showMembers />
+      <showMembers ProjectPane="true" />
       <showModules />
       <showLibraryContents />
       <hideEmptyPackages />
@@ -733,8 +266,80 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="run.py" />
+              <option name="myItemType" value="com.jetbrains.python.projectView.PyFileNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views.py" />
+              <option name="myItemType" value="com.jetbrains.python.projectView.PyFileNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="forms.py" />
+              <option name="myItemType" value="com.jetbrains.python.projectView.PyFileNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="forms.py" />
+              <option name="myItemType" value="com.jetbrains.python.projectView.PyFileNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DemandForm" />
+              <option name="myItemType" value="com.jetbrains.python.projectView.PyElementNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -783,8 +388,110 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Logic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Logic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logic.py" />
+              <option name="myItemType" value="com.jetbrains.python.projectView.PyFileNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Parsing" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="orm.py" />
+              <option name="myItemType" value="com.jetbrains.python.projectView.PyFileNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="orm.py" />
+              <option name="myItemType" value="com.jetbrains.python.projectView.PyFileNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Demand" />
+              <option name="myItemType" value="com.jetbrains.python.projectView.PyElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Graduation_design" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="orm.py" />
+              <option name="myItemType" value="com.jetbrains.python.projectView.PyFileNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bulletin" />
+              <option name="myItemType" value="com.jetbrains.python.projectView.PyElementNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -803,15 +510,15 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="D:/360安全浏览器下载/Semantic-UI-master" />
-    <property name="SearchEverywhereHistoryKey" value="base&#9;FILE&#9;file://E:/Python/Graduation_design/web/templates/base.html&#10;boots&#9;FILE&#9;file://E:/Python/Graduation_design/web/AdminLTE/bootstrap/css/bootstrap.min.css&#10;bootstr&#9;FILE&#9;file://E:/Python/Graduation_design/web/AdminLTE/bootstrap/js/bootstrap.min.js&#10;view&#9;FILE&#9;file://E:/Python/Graduation_design/web/templates/view_rents.html&#10;app&#9;FILE&#9;file://E:/Python/Graduation_design/web/app.py&#10;view_demands&#9;FILE&#9;file://E:/Python/Graduation_design/web/templates/view_demands.html&#10;favicon&#9;FILE&#9;file://E:/Python/Graduation_design/web/static/favicon.ico&#10;view_demand&#9;FILE&#9;file://E:/Python/Graduation_design/web/templates/view_demand.html&#10;resst&#9;null&#9;null&#10;rest&#9;FILE&#9;file:///Users/kai/practice_flask/Graduation_design/web/Logic/restful.py&#10;restf&#9;FILE&#9;file:///Users/kai/practice_flask/Graduation_design/web/Logic/restful.py" />
+    <property name="SearchEverywhereHistoryKey" value="form&#9;FILE&#9;file://E:/Python/Graduation_design/web/forms.py&#10;base&#9;FILE&#9;file://E:/Python/Graduation_design/web/templates/base.html&#10;sema&#9;FILE&#9;file://E:/Python/Graduation_design/web/static/semantic.css&#10;boots&#9;FILE&#9;file://E:/Python/Graduation_design/web/AdminLTE/bootstrap/css/bootstrap.min.css&#10;bootstr&#9;FILE&#9;file://E:/Python/Graduation_design/web/AdminLTE/bootstrap/js/bootstrap.min.js&#10;view&#9;FILE&#9;file://E:/Python/Graduation_design/web/templates/view_rents.html&#10;app&#9;FILE&#9;file://E:/Python/Graduation_design/web/app.py&#10;view_demands&#9;FILE&#9;file://E:/Python/Graduation_design/web/templates/view_demands.html&#10;favicon&#9;FILE&#9;file://E:/Python/Graduation_design/web/static/favicon.ico&#10;view_demand&#9;FILE&#9;file://E:/Python/Graduation_design/web/templates/view_demand.html&#10;resst&#9;null&#9;null&#10;rest&#9;FILE&#9;file:///Users/kai/practice_flask/Graduation_design/web/Logic/restful.py&#10;restf&#9;FILE&#9;file:///Users/kai/practice_flask/Graduation_design/web/Logic/restful.py" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="PostgreSQL" />
   </component>
@@ -1090,7 +797,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1099,18 +806,18 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1503268" sideWeight="0.5234493" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2875817" sideWeight="0.47655067" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25490198" sideWeight="0.47655067" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19667171" sideWeight="0.47688565" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23298033" sideWeight="0.47688565" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2494382" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24810892" sideWeight="0.5231144" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2777778" sideWeight="0.48108926" order="3" side_tool="false" content_ui="tabs" x="22" y="254" width="1322" height="220" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29248366" sideWeight="0.48108926" order="5" side_tool="false" content_ui="tabs" x="22" y="254" width="1322" height="220" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1153,12 +860,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/DB/orm.py</url>
-          <line>453</line>
+          <line>442</line>
           <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/DB/orm.py</url>
-          <line>481</line>
+          <line>471</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1168,17 +875,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/web/views.py</url>
-          <line>555</line>
+          <line>578</line>
           <option name="timeStamp" value="118" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/web/views.py</url>
-          <line>191</line>
-          <option name="timeStamp" value="140" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/DB/orm.py</url>
-          <line>510</line>
+          <line>502</line>
           <option name="timeStamp" value="142" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -1203,33 +905,38 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/web/views.py</url>
-          <line>249</line>
-          <option name="timeStamp" value="191" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/web/views.py</url>
-          <line>390</line>
+          <line>415</line>
           <option name="timeStamp" value="194" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/web/views.py</url>
-          <line>257</line>
-          <option name="timeStamp" value="197" />
+          <line>596</line>
+          <option name="timeStamp" value="220" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/web/views.py</url>
-          <line>313</line>
-          <option name="timeStamp" value="198" />
+          <line>512</line>
+          <option name="timeStamp" value="226" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/web/views.py</url>
-          <line>569</line>
-          <option name="timeStamp" value="211" />
+          <line>495</line>
+          <option name="timeStamp" value="227" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/web/views.py</url>
-          <line>571</line>
-          <option name="timeStamp" value="212" />
+          <line>328</line>
+          <option name="timeStamp" value="229" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/web/views.py</url>
+          <line>330</line>
+          <option name="timeStamp" value="230" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/web/views.py</url>
+          <line>178</line>
+          <option name="timeStamp" value="231" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -1242,7 +949,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="213" />
+      <option name="time" value="232" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -1252,15 +959,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="db://[Connection] CONSOLE - Connection" />
-    <entry file="db://[Connection] CONSOLE - Connection" />
-    <entry file="file://$PROJECT_DIR$/web/templates/auth/email/confirm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/uwsgi.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -1360,9 +1058,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-14155">
           <caret line="65" column="3" selection-start-line="65" selection-start-column="3" selection-end-line="65" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1412,7 +1107,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1420,31 +1114,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
           <caret line="47" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="61" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="138" column="30" selection-start-line="138" selection-start-column="30" selection-end-line="138" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DB/orm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="459" column="0" selection-start-line="459" selection-start-column="0" selection-end-line="459" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/Logic/logic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1452,17 +1121,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/templates/view_bulletin.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="893">
-          <caret line="47" column="2" selection-start-line="47" selection-start-column="2" selection-end-line="47" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1470,42 +1128,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="34" column="38" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Parsing/page_parsing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="94" column="13" selection-start-line="94" selection-start-column="13" selection-end-line="94" selection-end-column="13" />
-          <folding>
-            <element signature="e#16#45#0" expanded="true" />
-            <marker date="1490352291291" expanded="true" signature="119:308" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/templates/view_bulletins.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="160" column="8" selection-start-line="160" selection-start-column="8" selection-end-line="160" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/templates/view_rents.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="80" column="38" selection-start-line="80" selection-start-column="38" selection-end-line="80" selection-end-column="71" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1525,20 +1147,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web/static/icon.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/static/icon.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-627">
+          <caret line="0" column="3" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parsing/page_parsing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <element signature="e#16#45#0" expanded="true" />
+            <marker date="1490409219116" expanded="true" signature="102:291" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/static/semantic.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="27837" column="16" selection-start-line="27837" selection-start-column="16" selection-end-line="27837" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/web/templates/new_function.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="53" column="20" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="20" />
+        <state relative-caret-position="185">
+          <caret line="12" column="91" selection-start-line="12" selection-start-column="91" selection-end-line="12" selection-end-column="91" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/templates/view_demands.html">
+    <entry file="file://$PROJECT_DIR$/web/templates/demand.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="46" column="17" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
+        <state relative-caret-position="256">
+          <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
           <folding />
         </state>
       </provider>
@@ -1551,39 +1208,97 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/DB/mongo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/templates/view_bulletins.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/templates/view_bulletin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="134" column="0" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/web/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state relative-caret-position="178">
+          <caret line="167" column="68" selection-start-line="167" selection-start-column="68" selection-end-line="167" selection-end-column="68" />
           <folding>
             <element signature="n#style#0;n#ul#0;n#section#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/templates/demand.html">
+    <entry file="file://$PROJECT_DIR$/DB/orm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="49" column="882" selection-start-line="49" selection-start-column="882" selection-end-line="49" selection-end-column="894" />
+        <state relative-caret-position="124">
+          <caret line="478" column="6" selection-start-line="478" selection-start-column="6" selection-end-line="478" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/static/semantic.css">
+    <entry file="file://$PROJECT_DIR$/web/templates/view_rents.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-513">
-          <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
+        <state relative-caret-position="200">
+          <caret line="79" column="95" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="95" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="322" column="43" selection-start-line="322" selection-start-column="43" selection-end-line="322" selection-end-column="43" />
+        <state relative-caret-position="-495">
+          <caret line="159" column="4" selection-start-line="159" selection-start-column="4" selection-end-line="159" selection-end-column="4" />
           <folding>
             <element signature="e#23#32#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/templates/view_demands.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-86">
+          <caret line="120" column="15" selection-start-line="120" selection-start-column="15" selection-end-line="120" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/Logic/logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="68" column="14" selection-start-line="68" selection-start-column="14" selection-end-line="68" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>

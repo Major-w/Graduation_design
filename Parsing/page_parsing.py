@@ -3,8 +3,7 @@ from bs4 import BeautifulSoup
 import requests
 import pymongo
 from time import sleep
-# import charts
-#
+
 
 client = pymongo.MongoClient('localhost', 27017)
 graduation = client['graduation']
@@ -95,14 +94,3 @@ def get_area_price(area, rent_type=None):
             }
             yield data
             length += 1
-# #
-# # series = [data for data in get_area_price("闵行",'column','合租')]
-# # print series
-# # options = {
-# #     'chart'   : {'zoomType':'xy'},
-# #     'title'   : {'text': '松江区房屋租金分布'},
-# #     'subtitle': {'text': 'Source: WorldClimate.com'},
-# #     'xAxis'   : {'categories': ['租金']},
-# #     'yAxis'   : {'title': {'text': '户'}}
-# #     }
-# # charts.plot(series,options,show='inline')

@@ -87,7 +87,6 @@ class BulletinForm(Form):
     content = TextAreaField('详情')
     valid = BooleanField('是否有效')
     source = StringField('来源')
-    author =StringField('作者')
     image = FileField('上传图片', validators= [FileAllowed(['jpg', 'png'], 'Images only!')])
 
 

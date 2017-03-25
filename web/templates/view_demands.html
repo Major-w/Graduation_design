@@ -26,7 +26,9 @@
                             {{f.id}}
                         </td>
                         <td>
-                            <a href="/view_demand?id={{f.id}}">
+                            {% if current_user.role_id == 1 or current_user.id == f.author_id%}<a href="/bd/view_demand?id={{f.id}}">
+                            {%else%}<a href="/view_demand?id={{f.id}}">
+                            {%endif%}
                                 {{f.title}}
                             </a>
                         </td>

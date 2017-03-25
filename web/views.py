@@ -176,7 +176,7 @@ def view_demand():
             demand.price_high = form.price_high.data
             demand.area_id = form.area_id.data
             demand.subway_line = form.subway_line.data
-            demand.decoration_type = form.decoration_type.data
+            demand.decorate_type = form.decorate_type.data
             demand.mode_id = form.mode_id.data
             demand.title = form.title.data
         else:
@@ -184,17 +184,17 @@ def view_demand():
                 form.decorate_type.data = True
             else:
                 form.decorate_type.data = False
-            # if form.price_high < form.price_low:
-            #     flash(u'最低租金应该小于最高租金')
+
             demand = orm.Demand(form.price_low.data, form.price_high.data, form.area_id.data,form.contacts.data,
                                 form.phone_number.data, form.mode_id.data, form.decorate_type.data,
-                                form.subway_line.data, form.description.data, now, form.title.data)
+                                form.subway_line.data, form.description.data, now, form.title.data, current_user.id)
             orm.db.session.add(demand)
             try:
                 orm.db.session.commit()
             except :
                 orm.db.session.rollback()
             form.id.data = demand.id
+            return redirect(url_for('view_demands'))
     elif request.method == 'GET' and demand_id:
         form = logic.GetDemandFormById(demand_id)
         logic.LoadBasePageInfo('修改求租信息', form)
@@ -272,7 +272,6 @@ def view_rent():
             rent.decorate_type = form.decorate_type.data
             rent.residential_id = form.residential_id.data
             rent.subway_line = form.subway_line.data
-            # rent.rentimages = form.
         else:
             if form.decorate_type.data == '0':
                 form.decorate_type.data = True
@@ -280,12 +279,13 @@ def view_rent():
                 form.decorate_type.data = False
             rent = orm.Rent(form.area_id.data, form.title.data, form.price.data, form.description.data,
                             form.rent_type.data, form.mode_id.data, form.contacts.data, form.phone_number.data,
-                            now, form.residential_id.data, form.size.data, form.address.data, form.decorate_type.data, form.subway_line.data)
+                            now, form.residential_id.data, form.size.data, form.address.data, form.decorate_type.data,
+                            form.subway_line.data, current_user.id)
             orm.db.session.add(rent)
-            try:
-                orm.db.session.commit()
-            except:
-                orm.db.session.rollback()
+            # try:
+            orm.db.session.commit()
+            # except:
+            #     orm.db.session.rollback()
             form.id.data = rent.id
             if request.form.has_key('upload'):
                 file = request.files['image']
@@ -312,6 +312,31 @@ def view_rent():
         if form.rent and form.rent.rentimages != [] :
             form.images = form.rent.rentimages[0].file
     return render_template('view_rent.html', form=form)
+
+
+@app.route('/bd/my_demand_publish',methods=['GET', 'POST'])
+def my_demand_publish():
+    page = request.args.get('page', 1, type=int)
+    q = request.args.get('q')
+    demands = orm.Demand.query.filter_by(author_id=current_user.id).all()
+    form = PageInfo()
+    logic.LoadBasePageInfo('我的发布', form)
+    return render_template('view_demands.html', demands=demands, form=form)
+
+
+@app.route('/bd/my_rent_publish',methods=['GET', 'POST'])
+def my_rent_publish():
+    page = request.args.get('page', 1, type=int)
+    q = request.args.get('q')
+    rents = orm.Rent.query.filter_by(author_id=current_user.id).all()
+    for rent in rents:
+        if rent.rentimages != []:
+            rent.rentimages.file = rent.rentimages[0].file
+        else:
+            rent.rentimages.file = 'notfound.png'
+    form = PageInfo()
+    logic.LoadBasePageInfo('我的发布', form)
+    return render_template('view_rents.html',rents=rents,form=form)
 
 
 @app.route('/view_demand',methods=['GET', 'POST'])
@@ -423,10 +448,9 @@ def view_bulletin():
             bulletin.title = form.title.data
             bulletin.content = form.content.data
             bulletin.source = form.source.data
-            bulletin.author = form.author.data
             orm.db.session.commit()
         else:
-            bulletin = orm.Bulletin(form.dt.data, form.title.data, form.content.data, form.source.data, form.author.data)
+            bulletin = orm.Bulletin(form.dt.data, form.title.data, form.content.data, form.source.data, current_user.id)
             orm.db.session.add(bulletin)
             orm.db.session.commit()
             form.id.data = bulletin.id
@@ -462,7 +486,6 @@ def view_bulletin():
             form.bulletinimages = form.bulletin.bulletinimages
 
     return render_template('view_bulletin.html',form = form)
-
 
 
 @app.route('/bd/view_bulletins' , methods=['GET', 'POST'])
@@ -559,20 +582,19 @@ def view_accounts():
 @app.route('/bd/new_function', methods=['GET', 'POST'])
 def new_funciton():
     page = request.args.get('page', 1, type=int)
+    area_id = request.args.get('area_id')
     areas = orm.Area.query.order_by(orm.Area.id).paginate(page, 20).items
     form = PageInfo()
     logic.LoadBasePageInfo('房屋租金分布', form)
-    if request.method == 'POST':
-        area_id = request.form.get('area_id')
+    if area_id != None:
         area_id = int(area_id)
         area_name = orm.Area.query.filter_by(id=area_id).first().name
         series = [data for data in page_parsing.get_area_price(area_name)]
-        return render_template('new_function.html', form=form, areas=areas, area_id=area_id,area_name=area_name,series=series)
+        return render_template('new_function.html', form=form, areas=areas, area_id=area_id,
+                               area_name=area_name,series=series)
+    # modes = orm.Mode.query.order_by(orm.Mode.id).paginate(page, 20).items
     else:
-        area_id = 1
-        area_name = orm.Area.query.filter_by(id=area_id).first().name
-        series = [data for data in page_parsing.get_area_price(area_name)]
-        return render_template('new_function.html',form=form, areas=areas, area_id=area_id,area_name=area_name,series=series)
+        return render_template('new_function.html',form=form, areas=areas)
 
 
 def rent_image(rents):

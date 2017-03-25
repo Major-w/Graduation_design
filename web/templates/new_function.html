@@ -6,15 +6,21 @@
         <div class="row">
             <div class="column">
                 <div class="ui container segment">
-                    <div class="menu">
-                        <select class="ui simple dropdown item" id="test">
-                            {% for area in areas %}
-                            <option value="{{area.id}}" class="item">{{area.name}}</option>
-                            {% endfor%}
-                        </select>
+                    <div class="ui compact menu">
+                        <div class="ui simple dropdown item">
+                            区域
+                            <i class="dropdown icon"></i>
+                            <div class="menu" style=" overflow:scroll; width:60px; height:300px;">
+                                {% for area in areas%}
+                                {%if area_id == area.id%}{%else%}<a href="/bd/new_function?area_id={{area.id}}">{%endif%}
+                                <div class="item" id="{{area.id}}">{{area.name}}</div>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
-                    <div class="ui container" id="chart1"></div>
                 </div>
+                <div class="ui container" id="chart1"></div>
             </div>
         </div>
     </div>
@@ -23,37 +29,28 @@
 {% endblock %}
 {% block script %}
 <script>
-    $(function(){
-        $("#test").click(function(){
-            $.ajax({
-                type : "post",
-                url : "/bd/new_function",
-                data : {'area_id':$("#test").val()},
-                dataType : "String"
-            });
-        });
-    });
-</script>
-<script>
     $('#menu').click(function () {
         $('.ui.sidebar').sidebar('toggle');
     });
 </script>
 <script>
-    $('#test').click(function () {
+    $('#{{area_id}}').click(function () {
         $('#chart1').highcharts({
             chart: {
                 type: 'column'
+            },
+            credits: {
+                enabled: false
             },
             title: {
                 text: '{{area_name}}房屋租金分布'
             },
             xAxis: {
-                categories: ['低于600元', '600-1000元', '1000-1500元', '1500-2000元', '2000-3000元', '3000-5000元', '5000-8000元']
+                categories: ['租金']
             },
             yAxis: {
                 title: {
-                    text: '{{area_name}}房屋租金分布'
+                    text: '{{area_name}}房屋租金分布数量'
                 }
             },
             series: [

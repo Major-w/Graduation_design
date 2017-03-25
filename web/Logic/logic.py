@@ -17,7 +17,6 @@ g_choices_subway = [(g.id, g.name) for g in orm.Subway.query.order_by('id')]
 g_choices_mode = [(g.id, g.name) for g in orm.Mode.query.order_by('id')]
 g_choices_schooltype = [(g.id, g.name) for g in orm.Schooltype.query.order_by('name')]
 g_choices_feature = [(g.id, g.name) for g in orm.Feature.query.order_by('name')]
-g_choices_agespan = [(g.id, g.name) for g in orm.Agespan.query.order_by('name')]
 g_choices_feetype = [(g.id, g.name) for g in orm.Feetype.query.order_by('name')]
 
 
@@ -67,7 +66,7 @@ def GetDemandFormById(demand_id):
     demandform.decorate_type.data = demand.decorate_type
     demandform.title.data = demand.title
     demandform.mode_id.data = demand.mode_id
-    demandform.rent_type.data = demand.rent_type
+    demandform.mode_id.choices = g_choices_mode
     demandform.area_id.choices = g_choices_area
     demandform.subway_line.choices = g_choices_subway
     return demandform
@@ -121,7 +120,6 @@ def GetBulletinFormById(bulletin_id):
     bulletinform.dt.data = bulletin.dt
     bulletinform.valid.data = bulletin.valid
     bulletinform.source.data = bulletin.source
-    bulletinform.author.data = bulletin.author
     return bulletinform
 
 

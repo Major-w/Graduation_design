@@ -11,6 +11,8 @@
     <link href="/bd/web/static/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons 2.0.0 -->
     <link href="/bd/web/static/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/bd/web/static/icon.min.css" rel="stylesheet" type="text/css" />
+    <link href="/bd/web/static/icon.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="/bd/web/AdminLTE/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
@@ -163,10 +165,12 @@
 	    {% if current_user.is_authenticated() %}<li class="header">编辑</li>{% endif %}
 	    {% if current_user.role_id == 1 or current_user.role_id == 2 %}<li class="active"><a href="/bd/view_demand"><i class="fa fa-circle-o"></i> 新建求租信息</a></li>{% endif %}
 	    {% if current_user.role_id == 1 or current_user.role_id == 3 %}<li class="active"><a href="/bd/view_rent"><i class="fa fa-circle-o"></i> 新建出租信息</a></li>{% endif %}
-	    {% if current_user.role_id == 1%}<li class="active"><a href="/bd/view_bulletin"><i class="fa fa-circle-o"></i> 新建公告</a></li>{% endif %}
+	    {% if current_user.role_id == 1 or current_user.role_id == 3%}<li class="active"><a href="/bd/view_bulletin"><i class="fa fa-circle-o"></i> 新建公告</a></li>{% endif %}
+	    {% if current_user.role_id == 2%}<li class="active"><a href="/bd/my_demand_publish"><i class="fa fa-circle-o"></i> 我的发布</a></li>{% endif %}
+	    {% if current_user.role_id == 3%}<li class="active"><a href="/bd/my_rent_publish"><i class="fa fa-circle-o"></i> 我的发布</a></li>{% endif %}
 
 	    <li class="header">新功能</li>
-            <li><a href="/bd/new_function"><i class="fa fa-circle-o text-red"></i> <span>新功能1</span></a></li>
+            <li><a href="/bd/new_function"><i class="fa fa-circle-o text-red"></i> <span>房屋租金分布</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>新功能2</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>新功能3</span></a></li>
           </ul>
@@ -186,7 +190,7 @@
             {{form.pagename}}
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="{{ url_for('view_rents') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
             <li class="active">{{form.pagename}}</li>
           </ol>
         </section>
