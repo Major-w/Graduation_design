@@ -5,44 +5,47 @@
     <h1>{{bulletin.title}}</h1>
     <div class="">
         &nbsp;
-        <span class="f12">{{bulletin.source}}</span>
         <span class="c_888 f12">{{bulletin.dt}}</span>
+        &nbsp;&nbsp;&nbsp;
+        <span class="c_888 f12">{{bulletin.source}}</span>
+        &nbsp;&nbsp;&nbsp;
         {% if current_user.role_id == 1 or current_user.id == bulletin.author_id %}
-            <a href="/bd/view_bulletin?id={{bulletin.id}}"><i class="icon1"></i>编辑</a>
+        <a href="/bd/view_bulletin?id={{bulletin.id}}"><i class="icon1"></i>编辑</a>
         {% endif %}
     </div>
-
 </div>
 <div class="bd">
-    <div class="left_image">
+    <div class="banner" id="b04">
         <ul>
-            {% if bulletin.bulletinimages %}
+            {% if bulletin.bulletinimages and bulletin.bulletinimages|length >1 %}
             {% for image in bulletin.bulletinimages%}
-            <li><img src='{{"/bd/web/static/"+image.file}}'/></li>
-            {%endfor%}
-            {%else%}
-            <li><img src='{{"/bd/web/static/"+bulletin.bulletinimages.file}}'width:"600",height:"334"/></li>
-            {%endif%}
+            <li><img src="{{"/bd/web/static/"+image.file}}" width="640" height="400" ></li>
+            {% endfor%}
+            <a href="javascript:void(0);" class="unslider-arrow04 prev"><img class="arrow" id="al" src="/bd/web/static/arrowl.png" alt="prev" width="20" height="35"></a>
+            <a href="javascript:void(0);" class="unslider-arrow04 next"><img class="arrow" id="ar" src="/bd/web/static/arrowr.png" alt="next" width="20" height="37"></a>
+            {% else%}<img src="{{"/bd/web/static/"+bulletin.bulletinimages.file}}" width="640" height="400" >
+            {% endif %}
         </ul>
-        <ol>
-            <li></li>
-            <li></li>
-            <li></li>
 
-        </ol>
     </div>
-    <p class="f12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{bulletin.content}}
-        </p>
+    <br>
+    <p class="f16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{bulletin.content}}
+    </p>
 </div>
 {% endfor %}
 
 {% endblock %}
 {% block script %}
 <script>
-    $(function(){
-        <!--调用Luara示例-->
-        $(".left_image").luara({width:"600",height:"334",interval:4500,selected:"seleted",deriction:"left"});
-
+    $(document).ready(function(e) {
+        var unslider04 = $('#b04').unslider({
+                    dots: true
+                }),
+                data04 = unslider04.data('unslider');
+        $('.unslider-arrow04').click(function() {
+            var fn = this.className.split(' ')[1];
+            data04[fn]();
+        });
     });
 </script>
 {% endblock %}

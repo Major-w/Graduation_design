@@ -179,6 +179,11 @@ def view_demand():
             demand.decorate_type = form.decorate_type.data
             demand.mode_id = form.mode_id.data
             demand.title = form.title.data
+            try:
+                orm.db.session.commit()
+            except:
+                orm.db.session.rollback()
+            return redirect(url_for('view_demands'))
         else:
             if form.decorate_type.data == '0':
                 form.decorate_type.data = True
@@ -286,6 +291,11 @@ def view_rent():
                         orm.db.session.commit()
                     else:
                         os.remove(pathfile_server)
+            try:
+                orm.db.session.commit()
+            except:
+                orm.db.session.rollback()
+            return redirect(url_for('view_rents'))
         else:
             if form.decorate_type.data == '0':
                 form.decorate_type.data = True
@@ -484,11 +494,11 @@ def view_bulletin():
             bulletin.content = form.content.data
             bulletin.source = form.source.data
             bulletin.dt = now
-            return  redirect(url_for('view_bulletins'))
             try:
                 orm.db.session.commit()
             except:
                 orm.db.session.rollback()
+            return redirect(url_for('view_bulletins'))
         else:
             bulletin = orm.Bulletin(now, form.title.data, form.content.data, form.source.data, current_user.id)
             orm.db.session.add(bulletin)
