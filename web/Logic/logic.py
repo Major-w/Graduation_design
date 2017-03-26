@@ -117,7 +117,6 @@ def GetBulletinFormById(bulletin_id):
     bulletinform.id.data = bulletin.id
     bulletinform.title.data = bulletin.title
     bulletinform.content.data = bulletin.content
-    bulletinform.dt.data = bulletin.dt
     bulletinform.valid.data = bulletin.valid
     bulletinform.source.data = bulletin.source
     return bulletinform

@@ -2,61 +2,93 @@
 {% block content %}
 
 
-    {% if rents%}
-    {% for r in rents%}
-    <div class="house-title">
-        <h1 class="c_333 f20">{{r.title}}</h1>
-    </div>
+{% if rents%}
+{% for r in rents%}
+<div class="house-title">
+    <h1 class="c_333 f20">{{r.title}}</h1>
     <p class="c_888 f12">{{r.date}}发布</p>
-    <table>
-        <tr>
-            <td rowspan="7">
-                <img src='{{"/bd/web/static/"+r.rentimages.file}}' alt='1/11' height="300" width="400"/>
-            </td>
-            <td>&nbsp;&nbsp;&nbsp;</td>
-            <td>
+    {% if current_user.role_id == 1 or current_user.id == r.author_id %}
+    <div class="title-right-info">
+        <a href="/bd/view_rent?id={{r.id}}"><i class="icon1"></i>编辑</a>
+    </div>
+    {% endif %}
+</div>
+<table>
+    <tr>
+        <td rowspan="7">
+            <div class="left_image">
+                <ul>
+                    {% if r.rentimages %}
+                    {% for image in r.rentimages%}
+                    <li><img src='{{"/bd/web/static/"+image.file}}'/></li>
+                    {%endfor%}
+                    {%else%}
+                    <li><img src='{{"/bd/web/static/"+r.rentimages.file}}'width:"500",height:"334"/></li>
+                    {%endif%}
+                </ul>
+                <ol>
+                    {% if r.rentimages|length >1%}
+                    {% for image in r.rentimages%}
+                    <li></li>
+                    {%endfor%}
+                    {% endif %}
+
+                </ol>
+            </div>
+        </td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
                 <span class="c_ff552e">
                     <b class="f36">{{r.price}}</b>
                     元/月
                 </span>
-                &nbsp;&nbsp;{% if r.rent_type==0 %}押一付一{% else %}押一付三{% endif%}</td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <span class="c_888">租赁方式：</span>{{r.mode.name}}</td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <span class="c_888">所在小区：</span>{{r.residential.name}}</td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <span class="c_888">所属区域：</span>{{r.area.name}}</td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <span class="c_888">详细地址：</span>{{r.address}}</td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <span class="c_888">联系人：</span>{{r.contacts}}</td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <span class="c_888">联系方式：</span>{{r.phone_number}}</td>
-        </tr>
-    </table>
-    <div class="house-fraud-tip">
-        <h3>房源描述：</h3>
-        <div>{{r.description}}</div>
+            &nbsp;&nbsp;{% if r.rent_type==0 %}押一付一{% else %}押一付三{% endif%}</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>
+            <span class="c_888">租赁方式：</span>{{r.mode.name}}</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>
+            <span class="c_888">所在小区：</span>{{r.residential.name}}</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>
+            <span class="c_888">所属区域：</span>{{r.area.name}}</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>
+            <span class="c_888">详细地址：</span>{{r.address}}</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>
+            <span class="c_888">联系人：</span>{{r.contacts}}</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>
+            <span class="c_888">联系方式：</span>{{r.phone_number}}</td>
+    </tr>
+</table>
+<div class="house-fraud-tip">
+    <h3>房源描述：</h3>
+    <div>{{r.description}}</div>
 
-    </div>
-    {% endfor %}
-    {% endif %}
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}
+{% block script %}
+<script>
+    $(function(){
+        <!--调用Luara示例-->
+        $(".left_image").luara({width:"500",height:"334",interval:4500,selected:"seleted",deriction:"left"});
+
+    });
+</script>
 {% endblock %}

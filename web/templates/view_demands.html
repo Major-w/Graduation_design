@@ -26,9 +26,7 @@
                             {{f.id}}
                         </td>
                         <td>
-                            {% if current_user.role_id == 1 or current_user.id == f.author_id%}<a href="/bd/view_demand?id={{f.id}}">
-                            {%else%}<a href="/view_demand?id={{f.id}}">
-                            {%endif%}
+                           <a href="/view_demand?id={{f.id}}">
                                 {{f.title}}
                             </a>
                         </td>
@@ -58,6 +56,20 @@
                     {% endif %}
 
                 </table>
+            </div>
+            <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    {% if paging %}
+                    <li><a href="javascript:genPagingRef('/bd/view_rents?page=1');">&laquo;</a></li>
+                    {% for i in range(paging.page_from,paging.page_to+1) %}
+
+                    <li><a href="javascript:genPagingRef('/bd/view_rents?page={{i}}');">{{i}}</a></li>
+
+                    {% endfor %}
+                    <li><a href="javascript:genPagingRef('/bd/view_rents?page={{paging.total_pages}}');">&raquo;</a></li>
+                    {% endif %}
+
+                </ul>
             </div>
         </div>
 

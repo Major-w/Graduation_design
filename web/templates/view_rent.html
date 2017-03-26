@@ -9,7 +9,7 @@
         <div class="col-lg-5 col-xs-10">
             {{ render_field(form.title, size=50)}}
         </div>
-         <div class="col-lg-5 col-xs-10">
+        <div class="col-lg-5 col-xs-10">
             {{ render_field(form.address, size=50)}}
         </div>
         <div class="col-lg-5 col-xs-10">
@@ -54,19 +54,25 @@
 
     {{form.message}}
     <div class='box box-default'>
-            <div class='ui small images '>
-              <h3 class='box-title'><i class="fa fa-tag"></i> 已经上传的图片</h3>
-            </div>
-            <div class='box-body'>
-              <div class='row'>
-                <div class='col-sm-8 col-md-4'>
-		  <a href="javascript:genDeleteRef('{{form.images}}');">删除本图片</a>
+        <div class='box-header with-border'>
+            <h3 class='box-title'><i class="fa fa-tag"></i> 已经上传的图片</h3>
+        </div>
+        <div class='box-body'>
+            <div class='row'>
+
+                {% if form.images %}
+                <div class='ui small images'>
+                    {% for image in form.images %}
+                    <!-- <h4 class='text-center'>Primary</h4> -->
+                    <img src='{{"/bd/web/static/"+image}}' alt='{{image}}' height="200" width="200"/>
+                    {% endfor %}
                 </div><!-- /.col -->
+                {% endif %}
 
 
-               </div><!-- /.row -->
-            </div><!-- /.box-body -->
-          </div><!-- /.box -->
+            </div><!-- /.row -->
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
 
 
     <p><input type="submit" value="确定" name="confirm"></p>

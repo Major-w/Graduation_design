@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+{%  for bulletin in bulletins%}
+<div class="article" style="position: relative">
+    <h1>{{bulletin.title}}</h1>
+    <div class="">
+        &nbsp;
+        <span class="f12">{{bulletin.source}}</span>
+        <span class="c_888 f12">{{bulletin.dt}}</span>
+        {% if current_user.role_id == 1 or current_user.id == bulletin.author_id %}
+            <a href="/bd/view_bulletin?id={{bulletin.id}}"><i class="icon1"></i>编辑</a>
+        {% endif %}
+    </div>
+
+</div>
+<div class="bd">
+    <div class="left_image">
+        <ul>
+            {% if bulletin.bulletinimages %}
+            {% for image in bulletin.bulletinimages%}
+            <li><img src='{{"/bd/web/static/"+image.file}}'/></li>
+            {%endfor%}
+            {%else%}
+            <li><img src='{{"/bd/web/static/"+bulletin.bulletinimages.file}}'width:"600",height:"334"/></li>
+            {%endif%}
+        </ul>
+        <ol>
+            <li></li>
+            <li></li>
+            <li></li>
+
+        </ol>
+    </div>
+    <p class="f12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{bulletin.content}}
+        </p>
+</div>
+{% endfor %}
+
+{% endblock %}
+{% block script %}
+<script>
+    $(function(){
+        <!--调用Luara示例-->
+        $(".left_image").luara({width:"600",height:"334",interval:4500,selected:"seleted",deriction:"left"});
+
+    });
+</script>
+{% endblock %}

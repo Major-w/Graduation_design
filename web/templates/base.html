@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>- 爱租房</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="/bd/web/AdminLTE/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="/bd/web/static/semantic.css">
+    <link rel="stylesheet" href="/bd/web/static/luara.left.css"/>
     <!-- FontAwesome 4.3.0 -->
     <link href="/bd/web/static/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons 2.0.0 -->
@@ -33,168 +34,168 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="/bd/web/static/html5shiv.min.js"></script>
-        <script src="/bd/web/static/respond.min.js"></script>
+    <script src="/bd/web/static/html5shiv.min.js"></script>
+    <script src="/bd/web/static/respond.min.js"></script>
     <![endif]-->
 
-<link rel="stylesheet" href="/bd/web/plugins/Font-Awesome-3.2.1/css/font-awesome.min.css" />
-        <script src="/bd/web/static/base.js"></script>
-  </head>
+    <link rel="stylesheet" href="/bd/web/plugins/Font-Awesome-3.2.1/css/font-awesome.min.css" />
+    <script src="/bd/web/static/base.js"></script>
+</head>
 
-  <body class="skin-blue sidebar-mini">
-    <div class="wrapper">
-      <!-- header -->
-      <header class="main-header">
+<body class="skin-blue sidebar-mini">
+<div class="wrapper">
+    <!-- header -->
+    <header class="main-header">
         <!-- Logo -->
         <a href="{{ url_for('view_rents') }}" class="logo">
-          <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b></b></span>
-          <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>爱租房</b></span>
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b></b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>爱租房</b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
-          <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
-	    <span class="icon-bar"></span>
-	    <span class="icon-bar"></span>
-	    <span class="icon-bar"></span>
-          </a>
-          <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
 
-              <!-- User Account: style can be found in dropdown.less -->
-	      <!-- user account photo view -->
-               {% if current_user.is_anonymous() %}<li><a href="{{ url_for('login') }}">登陆</a></li> {% endif %}
-              <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  {% if current_user.is_authenticated() %}<img src="/bd/web/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                    {% else %}<img src="/bd/web/AdminLTE/dist/img/user2-160x160.old.jpg" class="user-image" alt="User Image"/>{% endif %}
-                  <span class="hidden-xs">{% if current_user.is_authenticated() %}{{ current_user.username }}{% else %}游客{% endif %}</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <!-- User image -->
-                  <li class="user-header">
-                    {% if current_user.is_authenticated() %}<img src="/bd/web/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
-                      {% else %}<img src="/bd/web/AdminLTE/dist/img/user2-160x160.old.jpg" class="img-circle" alt="User Image" />{% endif %}
-                    <p>
-                      {% if current_user.is_authenticated() %}{{ current_user.username }}{% else %}游客{% endif %}
-                      <small>2017年</small>
-                    </p>
-                  </li>
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <!-- user account photo view -->
+                    {% if current_user.is_anonymous() %}<li><a href="{{ url_for('login') }}">登陆</a></li> {% endif %}
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            {% if current_user.is_authenticated() %}<img src="/bd/web/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                            {% else %}<img src="/bd/web/AdminLTE/dist/img/user2-160x160.old.jpg" class="user-image" alt="User Image"/>{% endif %}
+                            <span class="hidden-xs">{% if current_user.is_authenticated() %}{{ current_user.username }}{% else %}游客{% endif %}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                {% if current_user.is_authenticated() %}<img src="/bd/web/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                                {% else %}<img src="/bd/web/AdminLTE/dist/img/user2-160x160.old.jpg" class="img-circle" alt="User Image" />{% endif %}
+                                <p>
+                                    {% if current_user.is_authenticated() %}{{ current_user.username }}{% else %}游客{% endif %}
+                                    <small>2017年</small>
+                                </p>
+                            </li>
 
-                  <li class="user-footer">
-                    <div class="pull-left">
-                      <a href="#" >个人信息</a>
-                    </div>
-                    <div class="pull-right">
-                      <a href="{{ url_for('logout') }}">注销</a>
-                    </div>
-                  </li>
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" >个人信息</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="{{ url_for('logout') }}">注销</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- }}} -->
+
+
                 </ul>
-              </li>
-	      <!-- }}} -->
-
-
-            </ul>
-          </div>
+            </div>
         </nav>
-      </header>
-      <!-- }}} -->
+    </header>
+    <!-- }}} -->
 
-      <!-- Left side column. contains the logo and sidebar -->
-      {# <!-- {{{ --> #}
-      <aside class="main-sidebar">
+    <!-- Left side column. contains the logo and sidebar -->
+    {# <!-- {{{ --> #}
+    <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
-	{# <!-- {{{ --> #}
+        {# <!-- {{{ --> #}
         <section class="sidebar">
-          <!-- Sidebar user panel -->
-	  {# <!-- {{{ --> #}
-          <div class="user-panel">
-            <div class="pull-left image">
-              {% if current_user.is_authenticated() %}<img src="/bd/web/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
-                {% else %}<img src="/bd/web/AdminLTE/dist/img/user2-160x160.old.jpg" class="img-circle" alt="User Image" />{% endif %}
-            </div>
-            <div class="pull-left info">
-              <p>{% if current_user.is_authenticated() %}{{ current_user.username }}{% else %}游客{% endif %}</p>
+            <!-- Sidebar user panel -->
+            {# <!-- {{{ --> #}
+            <div class="user-panel">
+                <div class="pull-left image">
+                    {% if current_user.is_authenticated() %}<img src="/bd/web/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                    {% else %}<img src="/bd/web/AdminLTE/dist/img/user2-160x160.old.jpg" class="img-circle" alt="User Image" />{% endif %}
+                </div>
+                <div class="pull-left info">
+                    <p>{% if current_user.is_authenticated() %}{{ current_user.username }}{% else %}游客{% endif %}</p>
 
-              <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+                    <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+                </div>
             </div>
-          </div>
-	  <!-- }}} -->
+            <!-- }}} -->
 
-	  <!-- search form in left side column -->
-	  {# <!-- {{{ --> #}
-          <!-- search form -->
-          <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="搜索..."/>
+            <!-- search form in left side column -->
+            {# <!-- {{{ --> #}
+            <!-- search form -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="搜索..."/>
               <span class="input-group-btn">
                 <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
-            </div>
-          </form>
-          <!-- /.search form -->f
-	  <!-- }}} -->
+                </div>
+            </form>
+            <!-- /.search form -->f
+            <!-- }}} -->
 
-          <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu">
-            <li class="header">导航</li>
-	    <li class="active"><a href="/bd/view_demands"><i class="fa fa-circle-o"></i> 所有求租信息
-		{% if form and form.demand_count %}
-               <small class="label pull-right bg-yellow">{{form.demand_count}}</small>
-	       {%  endif %}
-</a></li>
-	    <li class="active"><a href="/bd/view_rents"><i class="fa fa-circle-o"></i> 所有出租信息
-		{% if form and form.rent_count %}
-               <small class="label pull-right bg-yellow">{{form.rent_count}}</small>
-	       {%  endif %}
-</a></li>
-	    <li class="active"><a href="/bd/view_bulletins"><i class="fa fa-circle-o"></i> 新闻公告列表
-		{% if form and form.bulletin_count %}
-               <small class="label pull-right bg-yellow">{{form.bulletin_count}}</small>
-	       {%  endif %}
-</a></li>
-	    {% if current_user.role_id == 1 %}<li class="active"><a href="/bd/view_accounts"><i class="fa fa-circle-o"></i> 用户帐号列表
-		{% if form and form.user_count %}
-               <small class="label pull-right bg-yellow">{{form.user_count}}</small>
-	       {%  endif %}
-              {% endif %}
-</a></li>
-	    {% if current_user.is_authenticated() %}<li class="header">编辑</li>{% endif %}
-	    {% if current_user.role_id == 1 or current_user.role_id == 2 %}<li class="active"><a href="/bd/view_demand"><i class="fa fa-circle-o"></i> 新建求租信息</a></li>{% endif %}
-	    {% if current_user.role_id == 1 or current_user.role_id == 3 %}<li class="active"><a href="/bd/view_rent"><i class="fa fa-circle-o"></i> 新建出租信息</a></li>{% endif %}
-	    {% if current_user.role_id == 1 or current_user.role_id == 3%}<li class="active"><a href="/bd/view_bulletin"><i class="fa fa-circle-o"></i> 新建公告</a></li>{% endif %}
-	    {% if current_user.role_id == 2%}<li class="active"><a href="/bd/my_demand_publish"><i class="fa fa-circle-o"></i> 我的发布</a></li>{% endif %}
-	    {% if current_user.role_id == 3%}<li class="active"><a href="/bd/my_rent_publish"><i class="fa fa-circle-o"></i> 我的发布</a></li>{% endif %}
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu">
+                <li class="header">导航</li>
+                <li class="active"><a href="/bd/view_demands"><i class="fa fa-circle-o"></i> 所有求租信息
+                    {% if form and form.demand_count %}
+                    <small class="label pull-right bg-yellow">{{form.demand_count}}</small>
+                    {%  endif %}
+                </a></li>
+                <li class="active"><a href="/bd/view_rents"><i class="fa fa-circle-o"></i> 所有出租信息
+                    {% if form and form.rent_count %}
+                    <small class="label pull-right bg-yellow">{{form.rent_count}}</small>
+                    {%  endif %}
+                </a></li>
+                <li class="active"><a href="/bd/view_bulletins"><i class="fa fa-circle-o"></i> 新闻公告列表
+                    {% if form and form.bulletin_count %}
+                    <small class="label pull-right bg-yellow">{{form.bulletin_count}}</small>
+                    {%  endif %}
+                </a></li>
+                {% if current_user.role_id == 1 %}<li class="active"><a href="/bd/view_accounts"><i class="fa fa-circle-o"></i> 用户帐号列表
+                {% if form and form.user_count %}
+                <small class="label pull-right bg-yellow">{{form.user_count}}</small>
+                {%  endif %}
+                {% endif %}
+            </a></li>
+                {% if current_user.is_authenticated() %}<li class="header">编辑</li>{% endif %}
+                {% if current_user.role_id == 1 or current_user.role_id == 2 %}<li class="active"><a href="/bd/view_demand"><i class="fa fa-circle-o"></i> 新建求租信息</a></li>{% endif %}
+                {% if current_user.role_id == 1 or current_user.role_id == 3 %}<li class="active"><a href="/bd/view_rent"><i class="fa fa-circle-o"></i> 新建出租信息</a></li>{% endif %}
+                {% if current_user.role_id == 1 %}<li class="active"><a href="/bd/view_bulletin"><i class="fa fa-circle-o"></i> 新建公告</a></li>{% endif %}
+                {% if current_user.role_id == 2%}<li class="active"><a href="/bd/my_demand_publish"><i class="fa fa-circle-o"></i> 我的发布</a></li>{% endif %}
+                {% if current_user.role_id == 3%}<li class="active"><a href="/bd/my_rent_publish"><i class="fa fa-circle-o"></i> 我的发布</a></li>{% endif %}
 
-	    <li class="header">新功能</li>
-            <li><a href="/bd/new_function"><i class="fa fa-circle-o text-red"></i> <span>房屋租金分布</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>新功能2</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>新功能3</span></a></li>
-          </ul>
+                <li class="header">新功能</li>
+                <li><a href="/bd/new_function"><i class="fa fa-circle-o text-red"></i> <span>房屋租金分布</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>新功能2</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>新功能3</span></a></li>
+            </ul>
         </section>
         <!-- /.sidebar -->
-	<!-- }}} -->
-      </aside>
-      <!-- }}} -->
+        <!-- }}} -->
+    </aside>
+    <!-- }}} -->
 
-      <!-- Content Wrapper. Contains page content -->
-      {# <!-- {{{ --> #}
-      <div class="content-wrapper">
+    <!-- Content Wrapper. Contains page content -->
+    {# <!-- {{{ --> #}
+    <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-	{# <!-- {{{ --> #}
+        {# <!-- {{{ --> #}
         <section class="content-header">
-          <h1>
-            {{form.pagename}}
-          </h1>
-          <ol class="breadcrumb">
-            <li><a href="{{ url_for('view_rents') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
-            <li class="active">{{form.pagename}}</li>
-          </ol>
+            <h1>
+                {{form.pagename}}
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{ url_for('view_rents') }}"><i class="fa fa-dashboard"></i> 主页</a></li>
+                <li class="active">{{form.pagename}}</li>
+            </ol>
         </section>
-	<!-- }}} -->
+        <!-- }}} -->
 
 
 
@@ -204,97 +205,97 @@
         <!-- Main content -->
         <section class="content">
 
-{% macro render_field(field) %}
-  {{ field.label }} <br>
-  {{ field(**kwargs)|safe }}
-  {% if field.errors %}
-    <ul class=errors style="color:red;">
-    {% for error in field.errors %}
-      <li >{{ error }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
+            {% macro render_field(field) %}
+            {{ field.label }} <br>
+            {{ field(**kwargs)|safe }}
+            {% if field.errors %}
+            <ul class=errors style="color:red;">
+                {% for error in field.errors %}
+                <li >{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
 
-{% endmacro %}
-{% block content %}
-<div class="container">
-    {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ message }}
-    </div>
-    {% endfor %}
+            {% endmacro %}
+            {% block content %}
+            <div class="container">
+                {% for message in get_flashed_messages() %}
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                </div>
+                {% endfor %}
 
-    {% block page_content %}{% endblock %}
-</div>
-{% endblock %}
+                {% block page_content %}{% endblock %}
+            </div>
+            {% endblock %}
 
 
         </section><!-- /.content -->
-      </div><!-- /.content-wrapper -->
-      <!-- }}} -->
+    </div><!-- /.content-wrapper -->
+    <!-- }}} -->
 
-      <!-- footer -->
-      {# <!-- {{{ --> #}
-      <footer class="main-footer">
+    <!-- footer -->
+    {# <!-- {{{ --> #}
+    <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 1.0
+            <b>Version</b> 1.0
         </div>
         <strong>Copyright &copy; 2017 <a href="http://totalsolution.com"></a>.</strong> All rights reserved.
-      </footer>
-      <!-- }}} -->
+    </footer>
+    <!-- }}} -->
 
 
 
-      <!-- Add the sidebar's background. This div must be placed
-           immediately after the control sidebar -->
-      <div class='control-sidebar-bg'></div>
-      <!-- }}} -->
-    </div><!-- ./wrapper -->
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class='control-sidebar-bg'></div>
+    <!-- }}} -->
+</div><!-- ./wrapper -->
 
-    <!-- jQuery 2.1.4 -->
-    <script src="/bd/web/AdminLTE/bootstrap/js/jquery.chart.js"></script>
-    <script src="/bd/web/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    <!-- jQuery UI 1.11.2 -->
-    <script src="/bd/web/static/jquery-ui.min.js" type="text/javascript"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <link rel="stylesheet" href="/bd/web/static/semantic.css">
-    <!-- Bootstrap 3.3.2 JS -->
-    <script src="/bd/web/AdminLTE/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- Morris.js charts -->
-    <script src="/bd/web/static/raphael-min.js"></script>
-    <script src="/bd/web/AdminLTE/plugins/morris/morris.min.js" type="text/javascript"></script>
-    <!-- Sparkline -->
-    <script src="/bd/web/AdminLTE/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
-    <!-- jvectormap -->
-    <script src="/bd/web/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
-    <script src="/bd/web/AdminLTE/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="/bd/web/AdminLTE/plugins/knob/jquery.knob.js" type="text/javascript"></script>
-    <!-- daterangepicker -->
-    <script src="/bd/web/static/moment.min.js" type="text/javascript"></script>
-    <script src="/bd/web/AdminLTE/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-    <!-- datepicker -->
-    <script src="/bd/web/AdminLTE/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
-    <!-- Bootstrap WYSIHTML5 -->
-    <script src="/bd/web/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
-    <!-- Slimscroll -->
-    <script src="/bd/web/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <!-- FastClick -->
-    <script src="/bd/web/AdminLTE/plugins/fastclick/fastclick.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="/bd/web/AdminLTE/dist/js/app.min.js" type="text/javascript"></script>
+<!-- jQuery 2.1.4 -->
+<script src="/bd/web/AdminLTE/bootstrap/js/jquery.chart.js"></script>
+<script src="/bd/web/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="/bd/web/AdminLTE/bootstrap/js/jquery.luara.0.0.1.min.js"></script>
+<!-- jQuery UI 1.11.2 -->
+<script src="/bd/web/static/jquery-ui.min.js" type="text/javascript"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<!-- Bootstrap 3.3.2 JS -->
+<script src="/bd/web/AdminLTE/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- Morris.js charts -->
+<script src="/bd/web/static/raphael-min.js"></script>
+<script src="/bd/web/AdminLTE/plugins/morris/morris.min.js" type="text/javascript"></script>
+<!-- Sparkline -->
+<script src="/bd/web/AdminLTE/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
+<!-- jvectormap -->
+<script src="/bd/web/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
+<script src="/bd/web/AdminLTE/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+<!-- jQuery Knob Chart -->
+<script src="/bd/web/AdminLTE/plugins/knob/jquery.knob.js" type="text/javascript"></script>
+<!-- daterangepicker -->
+<script src="/bd/web/static/moment.min.js" type="text/javascript"></script>
+<script src="/bd/web/AdminLTE/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<!-- datepicker -->
+<script src="/bd/web/AdminLTE/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="/bd/web/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
+<!-- Slimscroll -->
+<script src="/bd/web/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<!-- FastClick -->
+<script src="/bd/web/AdminLTE/plugins/fastclick/fastclick.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/bd/web/AdminLTE/dist/js/app.min.js" type="text/javascript"></script>
 
 
-    <!-- AdminLTE for demo purposes -->
-    <script src="/bd/web/AdminLTE/dist/js/demo.js" type="text/javascript"></script>
-    <script src="/bd/web/AdminLTE/bootstrap/js/semantic.js"></script>
-    <script src="/bd/web/AdminLTE/bootstrap/js/exporting.js"></script>
-    <script src="/bd/web/AdminLTE/bootstrap/js/highcharts.js"></script>
-    <script src="/bd/web/AdminLTE/bootstrap/js/highcharts-more.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/bd/web/AdminLTE/dist/js/demo.js" type="text/javascript"></script>
+<script src="/bd/web/AdminLTE/bootstrap/js/semantic.js"></script>
+<script src="/bd/web/AdminLTE/bootstrap/js/exporting.js"></script>
+<script src="/bd/web/AdminLTE/bootstrap/js/highcharts.js"></script>
+<script src="/bd/web/AdminLTE/bootstrap/js/highcharts-more.js"></script>
 
-    <!-- block tag for extra scripts -->
-    {% block script %}{% endblock %}
+<!-- block tag for extra scripts -->
+{% block script %}{% endblock %}
 
-  </body>
+</body>
 </html>

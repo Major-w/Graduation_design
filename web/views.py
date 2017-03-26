@@ -208,17 +208,19 @@ def view_demands():
     page = request.args.get('page', 1, type=int)
     q = request.args.get('q')
     pagination = orm.Demand.query.order_by(orm.Demand.date.desc()).paginate(page, 10)
+    count = orm.Demand.query.count()
+    paging=get_pages(page,count,10)
     demands = pagination.items
     if request.method == 'POST':
         form = DemandForm(request.form)
         if request.form.has_key('delete'):
             orm.db.session.delete(orm.Demand.query.get(int(form.id.data)))
             orm.db.session.commit()
-            return redirect(url_for('view_demands', page=page, q=q))
+            return redirect(url_for('view_demands', page=page, q=q, paging=paging))
     form = PageInfo()
     logic.LoadBasePageInfo('所有求租信息', form)
 
-    return render_template('view_demands.html', demands=demands, pagination=pagination, page=page, form=form)
+    return render_template('view_demands.html', demands=demands, pagination=pagination, page=page, form=form, paging=paging)
 
 
 @app.route('/bd/rent', methods=['GET', 'POST'])
@@ -272,6 +274,18 @@ def view_rent():
             rent.decorate_type = form.decorate_type.data
             rent.residential_id = form.residential_id.data
             rent.subway_line = form.subway_line.data
+            if request.form.has_key('upload'):
+                file = request.files['image']
+                if file:
+                    file_server = str(uuid.uuid1()) + Util.file_extension(file.filename)
+                    pathfile_server = os.path.join(UPLOAD_PATH, file_server)
+                    file.save(pathfile_server)
+                    if os.stat(pathfile_server).st_size < 1 * 1024 * 1024:
+                        rentimage = orm.Rentimage(rent.id, file_server)
+                        orm.db.session.merge(rentimage)  # merge 方法代替save
+                        orm.db.session.commit()
+                    else:
+                        os.remove(pathfile_server)
         else:
             if form.decorate_type.data == '0':
                 form.decorate_type.data = True
@@ -310,7 +324,7 @@ def view_rent():
         rent = orm.Rent.query.get(int(form.id.data))
         form.rent = rent
         if form.rent and form.rent.rentimages != [] :
-            form.images = form.rent.rentimages[0].file
+            form.images = [image.file for image in form.rent.rentimages]
     return render_template('view_rent.html', form=form)
 
 
@@ -371,6 +385,8 @@ def view_rents():
     area_id = request.args.get('area_id')
     price =int(p) if p else None
     form = PageInfo()
+    total_count = orm.Rent.query.count()
+    paging = get_pages(page,total_count,5)
     if request.method == 'POST':
         form = RentForm(request.form)
         if request.form.has_key('delete'):
@@ -379,41 +395,45 @@ def view_rents():
                 orm.db.session.commit()
             except:
                 orm.db.session.rollback()
-            return redirect(url_for('view_rents', page=page, q=q))
+            return redirect(url_for('view_rents', page=page, q=q, paging=paging))
     if subway_id:
         rents = orm.Rent.query.filter_by(subway_line=int(subway_id)).all()
+        count = len(rents)
+        paging = get_pages(page, count, 5)
         logic.LoadBasePageInfo(orm.Subway.query.filter_by(id=int(subway_id)).all()[0].name + '附近出租信息', form)
         rent_image(rents)
-        return render_template('view_rents.html', rents=rents, page=page, form=form)
+        return render_template('view_rents.html', rents=rents, page=page, form=form,paging=paging)
     elif area_id:
         rents = orm.Rent.query.filter_by(area_id=int(area_id)).all()
+        count = len(rents)
+        paging = get_pages(page, count, 5)
         logic.LoadBasePageInfo(orm.Area.query.filter_by(id=int(area_id)).all()[0].name + '出租信息', form)
         rent_image(rents)
-        return render_template('view_rents.html', rents=rents, page=page, form=form)
+        return render_template('view_rents.html', rents=rents, page=page, form=form,paging=paging)
     else:
         if p is None:
-            pagination = orm.Rent.query.order_by(orm.Rent.date.desc()).paginate(page,10)
+            pagination = orm.Rent.query.order_by(orm.Rent.date.desc()).paginate(page,5)
         elif price == 600:
-            pagination = orm.Rent.query.filter(orm.Rent.price <= price).paginate(page, 10)
+            pagination = orm.Rent.query.filter(orm.Rent.price <= price).paginate(page, 5)
         elif price == 1000:
-            pagination = orm.Rent.query.filter(600 < orm.Rent.price , orm.Rent.price <= price).paginate(page, 10)
+            pagination = orm.Rent.query.filter(600 < orm.Rent.price , orm.Rent.price <= price).paginate(page, 5)
         elif price == 1500:
-            pagination = orm.Rent.query.filter(1000 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 10)
+            pagination = orm.Rent.query.filter(1000 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 5)
         elif price == 2000:
-            pagination = orm.Rent.query.filter(1500 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 10)
+            pagination = orm.Rent.query.filter(1500 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 5)
         elif price == 3000:
-            pagination = orm.Rent.query.filter(2000 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 10)
+            pagination = orm.Rent.query.filter(2000 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 5)
         elif price == 5000:
-            pagination = orm.Rent.query.filter(3000 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 10)
-        pagination_area = orm.Area.query.order_by(orm.Area.id).paginate(page,20)
-        pagination_subway = orm.Subway.query.order_by(orm.Subway.id).paginate(page,20)
+            pagination = orm.Rent.query.filter(3000 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 5)
+        pagination_area = orm.Area.query.order_by(orm.Area.id).paginate(1,20)
+        pagination_subway = orm.Subway.query.order_by(orm.Subway.id).paginate(1,20)
         # paginat
         rents = pagination.items
         areas = pagination_area.items
         subways = pagination_subway.items
         logic.LoadBasePageInfo('所有出租信息', form)
         rent_image(rents)
-        return render_template('view_rents.html', rents=rents, page=page, form=form, areas=areas, subways=subways)
+        return render_template('view_rents.html', rents=rents, page=page, form=form, areas=areas, subways=subways,paging=paging)
 
 
 @app.route('/bd/delete_image' , methods=['GET', 'POST'])
@@ -433,6 +453,22 @@ def delete_image():
     return redirect(backurl)
 
 
+@app.route('/view_bulletin',methods=['GET', 'POST'])
+def view_bulletin_int():
+    bulletin_id = request.args.get('id')
+    bulletins = orm.Bulletin.query.filter_by(id=int(bulletin_id)).all()
+    for bulletin in bulletins:
+        if isinstance(bulletin.dt, datetime):
+            bulletin.dt = bulletin.dt.strftime('%Y-%m-%d %H:%M:%S')
+        if bulletin.bulletinimages != []:
+            bulletin.bulletinimages.file = bulletin.bulletinimages[0].file
+        else:
+            bulletin.bulletinimages.file = 'notfound.png'
+    form = PageInfo()
+    logic.LoadBasePageInfo('新闻公告', form)
+    return render_template('bulletin.html', form=form, bulletins=bulletins)
+
+
 @app.route('/bd/view_bulletin' , methods=['GET', 'POST'])
 def view_bulletin():
     bulletin_id = request.args.get('id')
@@ -444,13 +480,17 @@ def view_bulletin():
     if request.method == 'POST' and form.validate():
         if form.id.data:
             bulletin = orm.Bulletin.query.get(int(form.id.data))
-            bulletin.dt = form.dt.data
             bulletin.title = form.title.data
             bulletin.content = form.content.data
             bulletin.source = form.source.data
-            orm.db.session.commit()
+            bulletin.dt = now
+            return  redirect(url_for('view_bulletins'))
+            try:
+                orm.db.session.commit()
+            except:
+                orm.db.session.rollback()
         else:
-            bulletin = orm.Bulletin(form.dt.data, form.title.data, form.content.data, form.source.data, current_user.id)
+            bulletin = orm.Bulletin(now, form.title.data, form.content.data, form.source.data, current_user.id)
             orm.db.session.add(bulletin)
             orm.db.session.commit()
             form.id.data = bulletin.id
@@ -476,7 +516,6 @@ def view_bulletin():
         form = logic.GetBulletinFormById(bulletin_id)
         logic.LoadBasePageInfo('修改公告',form)
     else:
-        form.dt.data = datetime.now()
         logic.LoadBasePageInfo('新建公告', form)
 
     if form.id.data:
@@ -493,8 +532,12 @@ def view_bulletins():
     page = request.args.get('page', 1, type=int)
     q = request.args.get('q')
     pagination = orm.Bulletin.query.order_by(orm.Bulletin.dt.desc()).paginate(page, 10)
+    count = orm.Bulletin.query.count()
+    paging = get_pages(page,count,10)
     bulletins = pagination.items
     for bulletin in bulletins:
+        if isinstance(bulletin.dt,datetime):
+            bulletin.dt = bulletin.dt.strftime('%Y-%m-%d %H:%M:%S')
         if bulletin.bulletinimages != []:
             bulletin.bulletinimages.file = bulletin.bulletinimages[0].file
         else:
@@ -505,65 +548,21 @@ def view_bulletins():
         if request.form.has_key('delete'):
             orm.db.session.delete(orm.Bulletin.query.get(int(form.id.data)))
             orm.db.session.commit()
-            return redirect(url_for('view_bulletins', page=page, q=q))
+            return redirect(url_for('view_bulletins', page=page, q=q, paging=paging))
 
     form = PageInfo()
     logic.LoadBasePageInfo('所有公告',form)
 
-    return render_template('view_bulletins.html',bulletins = bulletins,form = form, pagination=pagination, page=page)
-
-
-@app.route('/bd/view_account' , methods=['GET', 'POST'])
-def view_account():
-    account_id = request.args.get('id')
-    q = request.args.get('q')
-    if q is not None:
-        return redirect(url_for('view_accounts', page=1, q=q))
-
-    form = AccountForm(request.form)
-
-
-    if request.method == 'POST' and form.validate():
-        if form.id.data:
-            account = orm.Account.query.get(int(form.id.data))
-            account.username = form.telephone.data
-            account.name = form.telephone.data
-            account.telephone = form.telephone.data
-            account.role = 0
-            account.flag_telephone = 1 if form.flag_telephone.data else 0
-            account.checkcode = form.checkcode.data
-            account.source = form.source.data
-            account.dtcreate = form.dtcreate.data
-            orm.db.session.commit()
-        else:
-            account = orm.Account(form.telephone.data, '1234', form.telephone.data, form.telephone.data, 0, 1 if form.flag_telephone.data else 0, '1234', form.source.data, form.dtcreate.data)
-            orm.db.session.add(account)
-            try:
-                orm.db.session.commit()
-            except:
-                orm.db.session.rollback()
-            form.id.data = account.id
-
-        return redirect(url_for('view_account'))
-    elif request.method =='GET' and account_id:
-        form = logic.GetAccountFormById(account_id)
-        logic.LoadBasePageInfo('修改用户',form)
-    else:
-        logic.LoadBasePageInfo('新建用户',form)
-
-    if form.id.data:
-        account = orm.Account.query.get(int(form.id.data))
-        form.account = account
-
-    return render_template('view_account.html',form = form)
-
+    return render_template('view_bulletins.html',bulletins = bulletins,form = form, pagination=pagination, page=page, paging=paging)
 
 
 @app.route('/bd/view_accounts' , methods=['GET', 'POST'])
 def view_accounts():
     page = request.args.get('page', 1, type=int)
     q = request.args.get('q')
-    pagination = orm.User.query.order_by(orm.User.id).paginate(page, 20)
+    pagination = orm.User.query.order_by(orm.User.id).paginate(page, 10)
+    count = orm.User.query.count()
+    paging=get_pages(page,count,10)
     users = pagination.items
 
     if request.method == 'POST':
@@ -571,12 +570,12 @@ def view_accounts():
         if request.form.has_key('delete'):
             orm.db.session.delete(orm.User.query.get(int(form.id.data)))
             orm.db.session.commit()
-            return redirect(url_for('view_accounts', page=page, q=q))
+            return redirect(url_for('view_accounts', page=page, q=q, paging=paging))
 
     form = PageInfo()
     logic.LoadBasePageInfo('所有用户',form)
 
-    return render_template('view_accounts.html', form=form, pagination=pagination, users=users)
+    return render_template('view_accounts.html', form=form, pagination=pagination, users=users, paging=paging)
 
 
 @app.route('/bd/new_function', methods=['GET', 'POST'])
@@ -603,3 +602,12 @@ def rent_image(rents):
             rent.rentimages.file = rent.rentimages[0].file
         else:
             rent.rentimages.file = 'notfound.png'
+
+def get_pages(page,count,unit):
+    if count % unit != 0:
+        total_pages = count / unit + 1
+    else:
+        total_pages = count / unit
+    page_from = max(1, page - 5)
+    page_to = min(total_pages, page + 5)
+    return {'total_pages': total_pages, 'page': page, 'page_from': page_from, 'page_to': page_to}

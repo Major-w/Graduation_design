@@ -82,7 +82,7 @@ class SchoolForm(Form):
 
 class BulletinForm(Form):
     id = HiddenField('id')
-    dt = DateTimeField('发布时间', format = '%Y-%m-%d %H:%M:%S')
+    # dt = DateTimeField('发布时间', format = '%Y-%m-%d %H:%M:%S')
     title = StringField('标题')
     content = TextAreaField('详情')
     valid = BooleanField('是否有效')
