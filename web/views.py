@@ -5,7 +5,7 @@ from flask import render_template, send_from_directory, session, redirect, url_f
 from flask_login import login_user, logout_user, current_user, login_required
 from flask import Markup, request, make_response
 from app import app, db
-from forms import PageInfo, BulletinForm, AccountForm, LoginForm, RegistrationForm,\
+from forms import PageInfo, BulletinForm, LoginForm, RegistrationForm,\
     PasswordResetRequestForm, PasswordResetForm, RentForm, DemandForm
 from DB import orm
 from Utils import Util

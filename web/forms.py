@@ -60,26 +60,6 @@ class PasswordResetRequestForm(Form):
     submit = SubmitField(u'重置密码')
 
 
-class SchoolForm(Form):
-    id = HiddenField('id')
-    name = StringField('学校名称', validators=[Length(min=1, max= 50)]) # 学校名称
-    area_id = SelectField(u'所在区县', coerce=int) #区县
-    teachdesc = TextAreaField(u'校长及教师情况') #
-    address = StringField('地址') #
-    schooltype_id = SelectField(u'学校类型', coerce=int) #
-    website = StringField('网址') #
-    distinguish = TextAreaField(u'教学特色') #
-    leisure = TextAreaField(u'课外特色活动') #
-    threashold = TextAreaField(u'招生条件及招生地块') #
-    partner = StringField('对口学校') #
-    artsource = StringField('艺术特长招生情况') # 
-    feedesc = StringField('学费标准') #
-    longitude = DecimalField('经度', places=4)
-    latitude =  DecimalField('纬度', places=4)
-    feature_ids =  SelectMultipleField(u'教学特色', coerce=int)
-    image = FileField('上传图片', validators= [FileAllowed(['jpg', 'png'], 'Images only!')])
-
-
 class BulletinForm(Form):
     id = HiddenField('id')
     # dt = DateTimeField('发布时间', format = '%Y-%m-%d %H:%M:%S')
@@ -88,22 +68,6 @@ class BulletinForm(Form):
     valid = BooleanField('是否有效')
     source = StringField('来源')
     image = FileField('上传图片', validators= [FileAllowed(['jpg', 'png'], 'Images only!')])
-
-
-class AccountForm(Form):
-    id = HiddenField('id')
-    dtcreate = DateTimeField('注册时间', format = '%Y-%m-%d %H:%M:%S')
-    username = StringField('登录名')
-    password = StringField('密码')
-    name = StringField('昵称')
-    telephone = StringField('注册电话')
-    flag_telephone = BooleanField('是否已认证')
-    checkcode = StringField('认证码')
-    source = StringField('来源')
-
-    def validate_username(self, field):
-        if orm.Account.query.filter_by(username=field.data).first():
-            raise ValidationError(u'用户名已存在')
 
 
 class RentForm(Form):
@@ -140,9 +104,3 @@ class DemandForm(Form):
     def validate_price_low(self, field):
         if self.price_high.data < self.price_low.data:
             raise ValidationError(u'最低值不能大于最高值')
-
-
-
-
-
-
