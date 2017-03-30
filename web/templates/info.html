@@ -15,7 +15,7 @@
     <link href="/bd/web/static/icon.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="/bd/web/AdminLTE/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-    <!-- AdminLTE Skins. Choose a skin from the css/skins 
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link href="/bd/web/AdminLTE/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
@@ -50,31 +50,31 @@
 
 <body class="skin-blue sidebar-mini">
 <style>
-    #b04 { width: 640px;}
-    #b04 .dots { position: absolute; left: 0; right: 0; bottom: 20px;}
-    #b04 .dots li
-    {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        margin: 0 4px;
-        text-indent: -999em;
-        border: 2px solid #fff;
-        border-radius: 6px;
-        cursor: pointer;
-        opacity: .4;
-        -webkit-transition: background .5s, opacity .5s;
-        -moz-transition: background .5s, opacity .5s;
-        transition: background .5s, opacity .5s;
-    }
-    #b04 .dots li.active
-    {
-        background: #fff;
-        opacity: 1;
-    }
-    #b04 .arrow { position: absolute; top: 200px;}
-    #b04 #al { left: 15px;}
-    #b04 #ar { right: 15px;}
+#b04 { width: 640px;}
+#b04 .dots { position: absolute; left: 0; right: 0; bottom: 20px;}
+#b04 .dots li
+{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin: 0 4px;
+	text-indent: -999em;
+	border: 2px solid #fff;
+	border-radius: 6px;
+	cursor: pointer;
+	opacity: .4;
+	-webkit-transition: background .5s, opacity .5s;
+	-moz-transition: background .5s, opacity .5s;
+	transition: background .5s, opacity .5s;
+}
+#b04 .dots li.active
+{
+	background: #fff;
+	opacity: 1;
+}
+#b04 .arrow { position: absolute; top: 200px;}
+#b04 #al { left: 15px;}
+#b04 #ar { right: 15px;}
 </style>
 <div class="wrapper">
     <!-- header -->
@@ -97,49 +97,7 @@
             </a>
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    {% if current_user.is_authenticated() %}
-                    <li class="dropdown notifications-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">10</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
-                            <li>
-                                <!-- inner menu: contains the actual data -->
-                                <ul class="menu">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                                            page and may cause design problems
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-users text-red"></i> 5 new members joined
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user text-light-blue"></i> You changed your username
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="footer"><a href="#">View all</a></li>
-                        </ul>
-                    </li>
-                    {% endif %}
+
                     <!-- User Account: style can be found in dropdown.less -->
                     <!-- user account photo view -->
                     {% if current_user.is_anonymous() %}<li><a href="{{ url_for('login') }}">登陆</a></li> {% endif %}
@@ -162,11 +120,7 @@
 
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    {%if current_user.is_authenticated()%}
-                                    <a href="{{ url_for('info') }}" >个人信息</a>
-                                    {% else %}
                                     <a href="#" >个人信息</a>
-                                    {% endif %}
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{ url_for('logout') }}">注销</a>
@@ -202,57 +156,13 @@
                     <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
                 </div>
             </div>
-            <!-- }}} -->
-
-            <!-- search form in left side column -->
-            {# <!-- {{{ --> #}
-            <!-- search form -->
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="请输入区域"/>
-              <span class="input-group-btn">
-                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-              </span>
-                </div>
-            </form>
-            <!-- /.search form -->f
-            <!-- }}} -->
 
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
-                <li class="header">导航</li>
-                <li class="active"><a href="/bd/view_demands"><i class="fa fa-circle-o"></i> 所有求租信息
-                    {% if form and form.demand_count %}
-                    <small class="label pull-right bg-yellow">{{form.demand_count}}</small>
-                    {%  endif %}
-                </a></li>
-                <li class="active"><a href="/bd/view_rents"><i class="fa fa-circle-o"></i> 所有出租信息
-                    {% if form and form.rent_count %}
-                    <small class="label pull-right bg-yellow">{{form.rent_count}}</small>
-                    {%  endif %}
-                </a></li>
-                <li class="active"><a href="/bd/view_bulletins"><i class="fa fa-circle-o"></i> 新闻公告列表
-                    {% if form and form.bulletin_count %}
-                    <small class="label pull-right bg-yellow">{{form.bulletin_count}}</small>
-                    {%  endif %}
-                </a></li>
-                {% if current_user.role_id == 1 %}<li class="active"><a href="/bd/view_accounts"><i class="fa fa-circle-o"></i> 用户帐号列表
-                {% if form and form.user_count %}
-                <small class="label pull-right bg-yellow">{{form.user_count}}</small>
-                {%  endif %}
-                {% endif %}
-            </a></li>
-                {% if current_user.is_authenticated() %}<li class="header">编辑</li>{% endif %}
-                {% if current_user.role_id == 1 or current_user.role_id == 2 %}<li class="active"><a href="/bd/view_demand"><i class="fa fa-circle-o"></i> 新建求租信息</a></li>{% endif %}
-                {% if current_user.role_id == 1 or current_user.role_id == 3 %}<li class="active"><a href="/bd/view_rent"><i class="fa fa-circle-o"></i> 新建出租信息</a></li>{% endif %}
-                {% if current_user.role_id == 1 %}<li class="active"><a href="/bd/view_bulletin"><i class="fa fa-circle-o"></i> 新建公告</a></li>{% endif %}
-                {% if current_user.role_id == 2%}<li class="active"><a href="/bd/my_demand_publish"><i class="fa fa-circle-o"></i> 我的发布</a></li>{% endif %}
-                {% if current_user.role_id == 3%}<li class="active"><a href="/bd/my_rent_publish"><i class="fa fa-circle-o"></i> 我的发布</a></li>{% endif %}
-                {% if current_user.is_authenticated() %}<li class="active"><a href="/my_favourite"><i class="fa fa-circle-o"></i> 我的收藏</a></li>{% endif %}
-
-                <li class="header">新功能</li>
-                <li><a href="/bd/new_function"><i class="fa fa-circle-o text-red"></i> <span>房屋租金分布</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>新功能2</span></a></li>
+                <li class="header">个人信息</li>
+                <li><a href="/bd/my_demand_publish"><i class="fa fa-circle-o text-red"></i> <span>我的发布</span></a></li>
+                <li><a href="/my_favourite"><i class="fa fa-circle-o text-yellow"></i> <span>我的收藏</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>更改昵称</span></a></li>
                 <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>新功能3</span></a></li>
             </ul>
         </section>
@@ -290,12 +200,6 @@
             {{ field(**kwargs)|safe }}
             {% if field.errors %}
             <ul class=errors style="color:red;">
-                 <!--<div class="alert alert-danger alert-dismissible">-->
-                <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
-                <!--<h4><i class="icon fa fa-ban"></i> Alert!</h4>-->
-                <!--Danger alert preview. This alert is dismissable. A wonderful serenity has taken possession of my entire-->
-                <!--soul, like these sweet mornings of spring which I enjoy with my whole heart.-->
-              <!--</div>-->
                 {% for error in field.errors %}
                 <li >{{ error }}</li>
                 {% endfor %}

@@ -7,28 +7,40 @@
 <div class="house-title">
     <h1 class="c_333 f20">{{r.title}}</h1>
     <p class="c_888 f12">{{r.date}}发布</p>
-    {% if current_user.role_id == 1 or current_user.id == r.author_id %}
     <div class="title-right-info">
-        <a href="/bd/view_rent?id={{r.id}}"><i class="icon1"></i>编辑</a>
+        {% if like==False%}
+        <a class="btn btn-app"id="like" value="{{r.id}}">
+            <i class="fa fa-heart-o"></i> 收藏
+        </a>
+        {%else%}
+         <a class="btn btn-app" id="unlike" value="{{r.id}}">
+            <i class="fa fa-heart"></i> 取消收藏
+        </a>
+        {% endif %}
+        {% if current_user.role_id == 1 or current_user.id == r.author_id %}
+        <a class="btn btn-app" href="/bd/view_rent?id={{r.id}}"><i class="fa fa-edit"></i> 编辑</a>
     </div>
     {% endif %}
 </div>
 <table>
     <tr>
         <td rowspan="7">
+            {% if r.rentimages and r.rentimages|length >1%}
             <div class="banner" id="b04">
                 <ul>
-                    {% if r.rentimages and r.rentimages|length >1%}
                     {% for image in r.rentimages%}
                     <li><img src="{{"/bd/web/static/"+image.file}}" width="640" height="400" ></li>
                     {% endfor%}
                     <a href="javascript:void(0);" class="unslider-arrow04 prev"><img class="arrow" id="al" src="/bd/web/static/arrowl.png" alt="prev" width="20" height="35"></a>
                     <a href="javascript:void(0);" class="unslider-arrow04 next"><img class="arrow" id="ar" src="/bd/web/static/arrowr.png" alt="next" width="20" height="37"></a>
-                    {% else%}<img src="{{"/bd/web/static/"+r.rentimages.file}}" width="640" height="400" >
-                    {% endif %}
-                </ul>
 
+                </ul>
             </div>
+            {% else%}
+            <div>
+                <ul><img src="{{"/bd/web/static/"+r.rentimages.file}}" width="640" height="400" ></ul>
+            </div>
+            {% endif %}
         </td>
         <td>&nbsp;&nbsp;&nbsp;</td>
         <td>
@@ -88,6 +100,57 @@
             var fn = this.className.split(' ')[1];
             data04[fn]();
         });
+    });
+</script>
+<script>
+    $(function(){
+        $("#like").click(function(){
+            $.ajax({
+                type : "post",
+                url : "/view_rent",
+                cache:false,
+                data : {'like_rent_id':$("#like").attr("value")},
+                dataType : "String"
+            });
+        });
+    });
+</script>
+<script>
+    $(function(){
+        $("#unlike").click(function(){
+            $.ajax({
+                type : "post",
+                url : "/view_rent",
+                cache:false,
+                data : {'unlike_rent_id':$("#unlike").attr("value")},
+                dataType : "String"
+            });
+        });
+    });
+</script>
+<script>
+    $(function(){
+        $("#like").click(function(){
+            alert("收藏成功")
+        });
+    });
+</script>
+
+<script>
+    $(function(){
+        $("#unlike").click(function(){
+            alert("取消收藏成功")
+        });
+    });
+</script>
+<script>
+    $('#like').click(function() {
+        parent.location.reload()
+    });
+</script>
+<script>
+    $('#unlike').click(function() {
+        parent.location.reload()
     });
 </script>
 {% endblock %}

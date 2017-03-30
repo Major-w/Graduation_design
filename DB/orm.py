@@ -29,27 +29,6 @@ class Role(db.Model):
     permissions = db.Column(db.Integer)
     users = db.relationship('User', backref='role', lazy='dynamic')
 
-    @staticmethod
-    def insert_roles():
-        roles = {
-            'Visitor': (Permission.FOLLOW |
-                     Permission.COMMENT |
-                     Permission.WRITE_ARTICLES, True),
-            'Renter': (Permission.FOLLOW |
-                          Permission.COMMENT |
-                          Permission.WRITE_ARTICLES |
-                          Permission.MODERATE_COMMENTS, False),
-            'Administrator': (0xff, False)
-        }
-        for r in roles:
-            role = Role.query.filter_by(name=r).first()
-            if role is None:
-                role = Role(name=r)
-            role.permissions = roles[r][0]
-            role.default = roles[r][1]
-            db.session.add(role)
-        db.session.commit()
-
     def __repr__(self):
         return '<Role %r>' % self.name
 
@@ -401,3 +380,14 @@ class Subway(db.Model):
 
     def __repr__(self):
         return '<Subway %s>' % self.name
+
+
+class Like(db.Model):
+    __tablename__ = 'like'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    rent_id = db.Column(db.Integer)
+
+    def __init__(self, user_id, rent_id):
+        self.user_id = user_id
+        self.rent_id = rent_id

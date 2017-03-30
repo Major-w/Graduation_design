@@ -14,9 +14,10 @@ from .email import send_email
 from datetime import datetime
 from wtforms import ValidationError
 from Parsing import page_parsing
+import json
 
 now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
+a = 1
 @app.route('/bd/web/<path:path>')
 def rootDir_web(path):
     index_key = path.rfind('py')
@@ -342,17 +343,21 @@ def view_rent():
 def my_demand_publish():
     page = request.args.get('page', 1, type=int)
     q = request.args.get('q')
-    demands = orm.Demand.query.filter_by(author_id=current_user.id).all()
+    demands = orm.Demand.query.filter_by(author_id=current_user.id).paginate(page,10).items
+    count = orm.Demand.query.filter_by(author_id=current_user.id).count()
+    paging = get_pages(page, count, 10)
     form = PageInfo()
     logic.LoadBasePageInfo('我的发布', form)
-    return render_template('view_demands.html', demands=demands, form=form)
+    return render_template('view_demands.html', demands=demands, form=form, paging=paging)
 
 
 @app.route('/bd/my_rent_publish',methods=['GET', 'POST'])
 def my_rent_publish():
     page = request.args.get('page', 1, type=int)
     q = request.args.get('q')
-    rents = orm.Rent.query.filter_by(author_id=current_user.id).all()
+    rents = orm.Rent.query.filter_by(author_id=current_user.id).paginate(page,5).items
+    count = orm.Rent.query.filter_by(author_id=current_user.id).count()
+    paging = get_pages(page, count, 5)
     for rent in rents:
         if rent.rentimages != []:
             rent.rentimages.file = rent.rentimages[0].file
@@ -360,7 +365,7 @@ def my_rent_publish():
             rent.rentimages.file = 'notfound.png'
     form = PageInfo()
     logic.LoadBasePageInfo('我的发布', form)
-    return render_template('view_rents.html',rents=rents,form=form)
+    return render_template('view_rents.html',rents=rents,form=form,paging=paging)
 
 
 @app.route('/view_demand',methods=['GET', 'POST'])
@@ -373,7 +378,30 @@ def view_demand_int():
 
 
 @app.route('/view_rent',methods=['GET', 'POST'])
+@login_required
 def view_rent_int():
+    if current_user.id:
+        user_id = current_user.id
+    like_rent_id = request.form.get('like_rent_id')
+    unlike_rent_id = request.form.get('unlike_rent_id')
+    if like_rent_id:
+        rent_id = int(like_rent_id)
+        results = orm.Like.query.filter_by(user_id=user_id, rent_id=rent_id).all()
+        if len(results) == 0:
+            like = orm.Like(user_id, rent_id)
+            orm.db.session.add(like)
+            orm.db.session.commit()
+            form = PageInfo()
+            logic.LoadBasePageInfo('出租信息', form)
+            return render_template('rent.html', form=form,like=True)
+    if unlike_rent_id:
+        rent_id = int(unlike_rent_id)
+        result = orm.Like.query.filter_by(user_id=user_id, rent_id=rent_id).one()
+        orm.db.session.delete(result)
+        orm.db.session.commit()
+        form = PageInfo()
+        logic.LoadBasePageInfo('出租信息', form)
+        return render_template('rent.html', form=form, like=False)
     rent_id = request.args.get('id')
     rents = orm.Rent.query.filter_by(id=int(rent_id)).all()
     for rent in rents:
@@ -383,6 +411,13 @@ def view_rent_int():
             rent.rentimages.file = 'notfound.png'
     form = PageInfo()
     logic.LoadBasePageInfo('出租信息', form)
+    if rent_id:
+        result = orm.Like.query.filter_by(user_id=user_id, rent_id=int(rent_id)).all()
+        if len(result) > 0:
+            like = True
+        else:
+            like = False
+        return render_template('rent.html', form=form, rents=rents, like=like)
     return render_template('rent.html', form=form, rents=rents)
 
 
@@ -423,25 +458,34 @@ def view_rents():
     else:
         if p is None:
             pagination = orm.Rent.query.order_by(orm.Rent.date.desc()).paginate(page,5)
+            logic.LoadBasePageInfo('所有出租信息', form)
         elif price == 600:
             pagination = orm.Rent.query.filter(orm.Rent.price <= price).paginate(page, 5)
+            logic.LoadBasePageInfo('600元以下所有出租信息', form)
         elif price == 1000:
             pagination = orm.Rent.query.filter(600 < orm.Rent.price , orm.Rent.price <= price).paginate(page, 5)
+            logic.LoadBasePageInfo('600-1000元所有出租信息', form)
         elif price == 1500:
             pagination = orm.Rent.query.filter(1000 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 5)
+            logic.LoadBasePageInfo('1000-1500元所有出租信息', form)
         elif price == 2000:
             pagination = orm.Rent.query.filter(1500 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 5)
+            logic.LoadBasePageInfo('1500-2000元所有出租信息', form)
         elif price == 3000:
             pagination = orm.Rent.query.filter(2000 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 5)
+            logic.LoadBasePageInfo('2000-3000元所有出租信息', form)
         elif price == 5000:
             pagination = orm.Rent.query.filter(3000 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 5)
+            logic.LoadBasePageInfo('3000-5000元所有出租信息', form)
+        elif price == 8000:
+            pagination = orm.Rent.query.filter(5000 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 5)
+            logic.LoadBasePageInfo('5000-8000元所有出租信息', form)
         pagination_area = orm.Area.query.order_by(orm.Area.id).paginate(1,20)
         pagination_subway = orm.Subway.query.order_by(orm.Subway.id).paginate(1,20)
         # paginat
         rents = pagination.items
         areas = pagination_area.items
         subways = pagination_subway.items
-        logic.LoadBasePageInfo('所有出租信息', form)
         rent_image(rents)
         return render_template('view_rents.html', rents=rents, page=page, form=form, areas=areas, subways=subways,paging=paging)
 
@@ -591,19 +635,51 @@ def view_accounts():
 @app.route('/bd/new_function', methods=['GET', 'POST'])
 def new_funciton():
     page = request.args.get('page', 1, type=int)
-    area_id = request.args.get('area_id')
     areas = orm.Area.query.order_by(orm.Area.id).paginate(page, 20).items
     form = PageInfo()
     logic.LoadBasePageInfo('房屋租金分布', form)
-    if area_id != None:
+    if request.method == 'POST':
+        area_id = request.form.get('area_id')
         area_id = int(area_id)
+        global a
+        a = json.dumps(area_id)
         area_name = orm.Area.query.filter_by(id=area_id).first().name
         series = [data for data in page_parsing.get_area_price(area_name)]
-        return render_template('new_function.html', form=form, areas=areas, area_id=area_id,
-                               area_name=area_name,series=series)
-    # modes = orm.Mode.query.order_by(orm.Mode.id).paginate(page, 20).items
+        return render_template('new_function.html', form=form, areas=areas)
     else:
-        return render_template('new_function.html',form=form, areas=areas)
+        area_name = orm.Area.query.filter_by(id=a).first().name
+        series = [data for data in page_parsing.get_area_price(area_name)]
+        return render_template('new_function.html',form=form, areas=areas, area_id=a,area_name=area_name,series=series)
+
+
+@app.route('/info', methods=['GET', 'POST'])
+def info():
+    form = PageInfo()
+    logic.LoadBasePageInfo('房屋租金分布', form)
+    return render_template('info.html', form=form)
+
+
+@app.route('/my_favourite', methods=['GET', 'POST'])
+def my_favourite():
+    page = request.args.get('page', 1, type=int)
+    q = request.args.get('q')
+    user_id = current_user.id
+    rents = []
+    favourite = []
+    count = orm.Like.query.filter_by(user_id=user_id).count()
+    for rent in orm.Like.query.filter_by(user_id=user_id).paginate(page,5).items:
+        favourite.append(rent.rent_id)
+    paging=get_pages(page,count,5)
+    for rent in favourite:
+        rents.append(orm.Rent.query.filter_by(id=rent).all()[0])
+    form = PageInfo()
+    logic.LoadBasePageInfo('我的收藏', form)
+    for rent in rents:
+        if rent.rentimages != []:
+            rent.rentimages.file = rent.rentimages[0].file
+        else:
+            rent.rentimages.file = 'notfound.png'
+    return render_template('view_rents.html', rents=rents, form=form,paging=paging)
 
 
 def rent_image(rents):

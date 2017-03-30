@@ -61,7 +61,7 @@ def get_all_links_from(url):
 #         print e
 
 def get_area_price(area, rent_type=None):
-    price_index=['低于600元','600-1000元','1000-1500元','1500-2000元','2000-3000元','3000-5000元','5000-8000元']
+    price_index=['低于600元','600-1000元','1000-1500元','1500-2000元','2000-3000元','3000-5000元','5000-8000元', '8000元以上']
     post_times = [0,0,0,0,0,0,0,0]
     if rent_type == None:
         items = item_info.find({"area":area})

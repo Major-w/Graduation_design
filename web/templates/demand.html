@@ -8,13 +8,13 @@
     <p class="c_888 f12">{{demand.date}}发布</p>
     {% if current_user.role_id == 1 or current_user.id == demand.author_id %}
     <div class="title-right-info">
-        <a href="/bd/view_demand?id={{demand.id}}"><i class="icon1"></i>编辑</a>
+        <a class="btn btn-app" href="/bd/view_demand?id={{demand.id}}"><i class="fa fa-edit"></i> 编辑</a>
     </div>
     {% endif %}
 </div>
 <br>
 <div class="main_tab list_01">
-    <ul>
+    <ul style="list-style-type:none">
         <li><i class="c_888">区域：</i>{{demand.area.name}}&nbsp;</li>
         <li><i class="c_888">居室：</i>{{demand.mode.name}}</li>
         <li><i class="c_888">租金：</i><em class="redfont">{{demand.price_low}}-{{demand.price_high}}元/月</em> </li>
