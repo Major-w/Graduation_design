@@ -6,7 +6,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from flask import Markup, request, make_response
 from app import app, db
 from forms import PageInfo, BulletinForm, LoginForm, RegistrationForm,\
-    PasswordResetRequestForm, PasswordResetForm, RentForm, DemandForm
+    PasswordResetRequestForm, PasswordResetForm, RentForm, DemandForm,ChangePasswordForm, ChangeUsernameForm
 from DB import orm
 from Utils import Util
 from Logic import restful, logic
@@ -128,6 +128,37 @@ def logout():
     logout_user()
     flash(u'您已经退出登录.')
     return redirect(url_for('login'))
+
+
+@app.route('/change-password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    logic.LoadBasePageInfo('更改密码', form)
+    if form.validate_on_submit():
+        if current_user.verify_password(form.old_password.data):
+            current_user.password = form.password.data
+            orm.User.query.filter_by(id=current_user.id).update({'password_hash':current_user.password_hash})
+            orm.db.session.commit()
+            flash('密码已经更改')
+            return redirect(url_for('login'))
+        else:
+            flash('密码错误')
+    return render_template("auth/change_password.html", form=form)
+
+
+@app.route('/change-username', methods=['GET', 'POST'])
+@login_required
+def change_username():
+    form = ChangeUsernameForm()
+    logic.LoadBasePageInfo('更改昵称', form)
+    if form.validate_on_submit():
+        current_user.username=form.username.data
+        orm.User.query.filter_by(id=current_user.id).update({'username':form.username.data})
+        orm.db.session.commit()
+        flash('用户名已经更改')
+        return redirect(url_for('login'))
+    return render_template("auth/change_username.html", form=form)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -348,7 +379,7 @@ def my_demand_publish():
     paging = get_pages(page, count, 10)
     form = PageInfo()
     logic.LoadBasePageInfo('我的发布', form)
-    return render_template('view_demands.html', demands=demands, form=form, paging=paging)
+    return render_template('view_demands.html', demands=demands, form=form, paging=paging,url='/bd/my_demand_publish')
 
 
 @app.route('/bd/my_rent_publish',methods=['GET', 'POST'])
@@ -365,7 +396,7 @@ def my_rent_publish():
             rent.rentimages.file = 'notfound.png'
     form = PageInfo()
     logic.LoadBasePageInfo('我的发布', form)
-    return render_template('view_rents.html',rents=rents,form=form,paging=paging)
+    return render_template('view_rents.html',rents=rents,form=form,paging=paging,url='/bd/my_rent_publish')
 
 
 @app.route('/view_demand',methods=['GET', 'POST'])
@@ -402,23 +433,28 @@ def view_rent_int():
         form = PageInfo()
         logic.LoadBasePageInfo('出租信息', form)
         return render_template('rent.html', form=form, like=False)
-    rent_id = request.args.get('id')
-    rents = orm.Rent.query.filter_by(id=int(rent_id)).all()
-    for rent in rents:
-        if rent.rentimages != []:
-            rent.rentimages.file = rent.rentimages[0].file
-        else:
-            rent.rentimages.file = 'notfound.png'
-    form = PageInfo()
-    logic.LoadBasePageInfo('出租信息', form)
-    if rent_id:
-        result = orm.Like.query.filter_by(user_id=user_id, rent_id=int(rent_id)).all()
-        if len(result) > 0:
-            like = True
-        else:
-            like = False
-        return render_template('rent.html', form=form, rents=rents, like=like)
-    return render_template('rent.html', form=form, rents=rents)
+    if request.method == 'GET':
+        rent_id = request.args.get('id')
+        rents = orm.Rent.query.filter_by(id=int(rent_id)).all()
+        times = orm.Rent.query.filter_by(id=rent_id).one().times
+        times += 1
+        orm.Rent.query.filter_by(id=rent_id).update({'times':times})
+        orm.db.session.commit()
+        for rent in rents:
+            if rent.rentimages != []:
+                rent.rentimages.file = rent.rentimages[0].file
+            else:
+                rent.rentimages.file = 'notfound.png'
+        form = PageInfo()
+        logic.LoadBasePageInfo('出租信息', form)
+        if rent_id:
+            result = orm.Like.query.filter_by(user_id=user_id, rent_id=int(rent_id)).all()
+            if len(result) > 0:
+                like = True
+            else:
+                like = False
+            return render_template('rent.html', form=form, rents=rents, like=like)
+        return render_template('rent.html', form=form, rents=rents)
 
 
 @app.route('/bd/view_rents', methods=['GET', 'POST'])
@@ -457,7 +493,7 @@ def view_rents():
         return render_template('view_rents.html', rents=rents, page=page, form=form,paging=paging)
     else:
         if p is None:
-            pagination = orm.Rent.query.order_by(orm.Rent.date.desc()).paginate(page,5)
+            pagination = orm.Rent.query.order_by(orm.Rent.times.desc()).paginate(page,5)
             logic.LoadBasePageInfo('所有出租信息', form)
         elif price == 600:
             pagination = orm.Rent.query.filter(orm.Rent.price <= price).paginate(page, 5)
@@ -655,8 +691,8 @@ def new_funciton():
 @app.route('/info', methods=['GET', 'POST'])
 def info():
     form = PageInfo()
-    logic.LoadBasePageInfo('房屋租金分布', form)
-    return render_template('info.html', form=form)
+    logic.LoadBasePageInfo('个人信息', form)
+    return redirect(url_for('change_username'))
 
 
 @app.route('/my_favourite', methods=['GET', 'POST'])
@@ -679,7 +715,7 @@ def my_favourite():
             rent.rentimages.file = rent.rentimages[0].file
         else:
             rent.rentimages.file = 'notfound.png'
-    return render_template('view_rents.html', rents=rents, form=form,paging=paging)
+    return render_template('view_rents.html', rents=rents, form=form,paging=paging,url='/my_favourite')
 
 
 def rent_image(rents):

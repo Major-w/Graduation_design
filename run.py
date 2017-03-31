@@ -96,55 +96,15 @@ def pre_post_test(data=None, **kw):
     pass
 
 
-# class Account(Resource):
-#     def post(self):
-#         body = json.loads(request.data)
-#         account = orm.Account.query.filter_by(telephone= body.get(restful.ITEM_TELEPHONE)).first()
-#         if account:
-#             #send sms verification here
-#             if account.flag_telephone != 1:
-#                 account.dtcreate = datetime.datetime.now()
-#                 account.checkcode = str(random.randint(100001,999999))
-#                 orm.db.session.commit()
-#                 message = '您的验证码为%s, 请勿告诉他人，15分钟有效 【学莫愁】' % account.checkcode
-#                 Util.SendSMSByZA(account.telephone, message)
-#
-#             dtcreate = account.dtcreate.strftime("%Y-%m-%dT%H:%M:%S") if account.dtcreate else None
-#
-#             return {restful.ITEM_ID:account.id,
-#                     restful.ITEM_FLAG_TELEPHONE:account.flag_telephone,
-#                     restful.ITEM_TELEPHONE:account.telephone,
-#                     restful.ITEM_USERNAME:account.username,
-#                     restful.ITEM_NAME:account.name,
-#                     restful.ITEM_DTCREATE: dtcreate,
-#                     restful.ITEM_SOURCE:account.source}
-#         else:
-#             return restful.PostAccount(body)
-#         return {'hello': 'world'}
-
-
-# api.add_resource(Account, '/bd/api/v1.0/account')
-
 # Create the Flask-Restless API manager.
 orm.db.create_all()
 manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=orm.db)
 
 # Create API endpoints, which will be available at /api/<tablename> by
 # default. Allowed HTTP methods can be specified as well.
-manager.create_api(orm.Advert, methods=['GET'], url_prefix='/bd/api/v1.0')
 manager.create_api(orm.Area, methods=['GET'], url_prefix='/bd/api/v1.0')
 manager.create_api(orm.Bulletin, methods=['GET'], url_prefix='/bd/api/v1.0', postprocessors={'GET_SINGLE': [post_get_one],'GET_MANY':[post_get_many]})
-# manager.create_api(orm.Feature, methods=['GET'], url_prefix='/bd/api/v1.0')
-# manager.create_api(orm.Feetype, methods=['GET'], url_prefix='/bd/api/v1.0')
-# manager.create_api(orm.Institution, methods=['GET'], url_prefix='/bd/api/v1.0', postprocessors={'GET_SINGLE': [post_get_one],'GET_MANY':[post_get_many]})
-# manager.create_api(orm.InstitutionFeature, methods=['GET'], url_prefix='/bd/api/v1.0')
-# manager.create_api(orm.School, results_per_page = 7, methods=['GET'], url_prefix='/bd/api/v1.0', postprocessors={'GET_SINGLE': [post_get_one],'GET_MANY':[post_get_many]})
-# manager.create_api(orm.SchoolFeature, methods=['GET'], url_prefix='/bd/api/v1.0')
 manager.create_api(orm.Rent, methods=['GET'], url_prefix='/bd/api/v1.0', postprocessors={'GET_SINGLE': [post_get_one],'GET_MANY':[post_get_many]})
-# manager.create_api(orm.Schooltype, methods=['GET'], url_prefix='/bd/api/v1.0')
-manager.create_api(orm.Account, methods=['GET', 'PUT', 'PATCH'], url_prefix='/bd/api/v1.0', preprocessors={'PATCH_SINGLE':[pre_put_single_account]}, exclude_columns=['checkcode','password'])
-# manager.create_api(orm.Account, methods=['POST'], url_prefix='/bd/api/v1.0/back', preprocessors={'POST':[pre_post_account]},postprocessors={'POST':[post_post_account]}, exclude_columns=['checkcode','password'])
-# manager.create_api(orm.Test, methods=['POST', 'PATCH'], preprocessors={'POST':[pre_post_test]}, url_prefix='/bd/api/v1.0')
 
 
 class Messages(Resource):

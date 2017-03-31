@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import StringField, BooleanField,HiddenField, TextAreaField, SelectField, DecimalField, SelectMultipleField,\
+from wtforms import StringField, BooleanField,HiddenField, TextAreaField, SelectField, DecimalField, SelectMultipleField, \
     DateTimeField, BooleanField, PasswordField, SubmitField, IntegerField
 from wtforms.validators import DataRequired, Length, Regexp, Required, Email, EqualTo
 from wtforms import ValidationError
@@ -12,12 +12,12 @@ images = UploadSet('images', IMAGES)
 
 class PageInfo():
     def __init__(self, pagename=""):
-       self.pagename = pagename
+        self.pagename = pagename
 
 
 class RegistrationForm(Form):
     email = StringField(u'电子邮箱', validators=[Required(), Length(1, 64),
-                                           Email()])
+                                             Email()])
     username = StringField(u'用户名', validators=[
         Required(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
                                           'Usernames must have only letters, '
@@ -54,6 +54,22 @@ class PasswordResetForm(Form):
         if orm.User.query.filter_by(email=field.data).first() is None:
             raise ValidationError(u'邮箱地址未知')
 
+
+class ChangePasswordForm(Form):
+    old_password = PasswordField('旧密码', validators=[Required()])
+    password = PasswordField('新密码', validators=[
+        Required(), EqualTo('password2', message='Passwords must match')])
+    password2 = PasswordField('确认密码', validators=[Required()])
+    submit = SubmitField('更改密码')
+
+
+class ChangeUsernameForm(Form):
+    username = StringField('新的用户名', validators=[Required(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,'用户名必须包含字母或数字')])
+    submit = SubmitField('保存修改')
+
+    def validate_username(self, field):
+        if orm.User.query.filter_by(username=field.data).first():
+            raise ValidationError(u'该用户已被注册')
 
 class PasswordResetRequestForm(Form):
     email = StringField(u'电子邮箱', validators=[Required(), Length(1, 64), Email()])

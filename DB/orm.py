@@ -141,58 +141,6 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-class Account(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50))
-    password = db.Column(db.String(255))
-    name = db.Column(db.String(20))
-    telephone = db.Column(db.String(50), unique=True)
-    role = db.Column(db.Integer)
-    flag_telephone = db.Column(db.Integer)
-    checkcode = db.Column(db.String(50))
-    source = db.Column(db.String(20))
-    dtcreate = db.Column(db.DateTime)
-
-    def __init__(self, username=None, password=None, name=None, telephone=None, role=None, flag_telephone=None, checkcode=None, source=None, dtcreate=None):
-        self.username = username
-        self.password = password
-        self.name = name
-        self.telephone = telephone
-        self.role = role
-        self.flag_telephone = flag_telephone
-        self.checkcode = checkcode
-        self.source = source
-        self.dtcreate = dtcreate
-
-    def __repr__(self):
-        return '<Account %s>' % self.username
-
-
-class Test(db.Model):
-    user = db.Column(db.String(50), primary_key=True)
-    tt = db.Column(db.DateTime())
-
-    def __init__(self, user):
-        self.user = user
-
-    def __repr__(self):
-        return '<Test %s>' % self.user
-
-
-class Advert(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200))
-    website = db.Column(db.String(200))
-    image_file = db.Column(db.String(200))
-
-    def __init__(self, title, website, image_file):
-        self.title = title
-        self.website = website
-        self.image_file = image_file
-
-    def __repr__(self):
-        return '<Advert %s>' % self.title
-
 
 class Area(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -285,6 +233,7 @@ class Rent(db.Model):
     subway_line = db.Column(db.ForeignKey(u'subway.id'))  # 地铁几号线附近
     decorate_type = db.Column(db.Boolean)  # 装修类型
     author_id = db.Column(db.ForeignKey(u'users.id')) # 发布人
+    times  = db.Column(db.Integer) # 访问次数
     # 房屋类型
     residential = db.relationship(u'Residential')
     area = db.relationship(u'Area')
@@ -293,7 +242,7 @@ class Rent(db.Model):
     author = db.relationship(u'User')
 
     def __init__(self, area_id, title, price, description, rent_type, mode_id, contacts, phone_number, date,
-                 residential_id, size, address, decorate_type, subway_line, author_id):
+                 residential_id, size, address, decorate_type, subway_line, author_id, times):
         self.area_id = area_id
         self.title = title
         self.price = price
@@ -309,6 +258,7 @@ class Rent(db.Model):
         self.decorate_type = decorate_type
         self.subway_line = subway_line
         self.author_id = author_id
+        self.times = times
 
     def __repr__(self):
         return '<Rent %s>' % self.name

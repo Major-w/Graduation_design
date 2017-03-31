@@ -1,4 +1,8 @@
+{% if url == '/my_favourite' or url=='/bd/my_rent_publish'%}
+{% extends "info.html" %}
+{% else %}
 {% extends "base.html" %}
+{% endif%}
 {% block content %}
 
 <div class="row" style="overflow:hidden; text-overflow:ellipsis;">
@@ -32,7 +36,7 @@
                                 600元以下
                             </a>
                             <a href="/bd/view_rents?price=1000">
-                                600-1000元]
+                                600-1000元
                             </a>
                             <a href="/bd/view_rents?price=1500">
                                 1000-1500元
@@ -112,13 +116,13 @@
             <div class="box-footer clearfix">
                 <ul class="pagination pagination-sm no-margin pull-right">
                     {% if paging %}
-                    <li><a href="javascript:genPagingRef('/bd/view_rents?page=1');">&laquo;</a></li>
+                    <li><a href="javascript:genPagingRef('{{url}}?page=1');">&laquo;</a></li>
                     {% for i in range(paging.page_from,paging.page_to+1) %}
 
-                    <li><a href="javascript:genPagingRef('/bd/view_rents?page={{i}}');">{{i}}</a></li>
+                    <li><a href="javascript:genPagingRef('{{url}}?page={{i}}');">{{i}}</a></li>
 
                     {% endfor %}
-                    <li><a href="javascript:genPagingRef('/bd/view_rents?page={{paging.total_pages}}');">&raquo;</a></li>
+                    <li><a href="javascript:genPagingRef('{{url}}?page={{paging.total_pages}}');">&raquo;</a></li>
                     {% endif %}
 
                 </ul>

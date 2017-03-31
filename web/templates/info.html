@@ -50,31 +50,31 @@
 
 <body class="skin-blue sidebar-mini">
 <style>
-#b04 { width: 640px;}
-#b04 .dots { position: absolute; left: 0; right: 0; bottom: 20px;}
-#b04 .dots li
-{
-	display: inline-block;
-	width: 10px;
-	height: 10px;
-	margin: 0 4px;
-	text-indent: -999em;
-	border: 2px solid #fff;
-	border-radius: 6px;
-	cursor: pointer;
-	opacity: .4;
-	-webkit-transition: background .5s, opacity .5s;
-	-moz-transition: background .5s, opacity .5s;
-	transition: background .5s, opacity .5s;
-}
-#b04 .dots li.active
-{
-	background: #fff;
-	opacity: 1;
-}
-#b04 .arrow { position: absolute; top: 200px;}
-#b04 #al { left: 15px;}
-#b04 #ar { right: 15px;}
+    #b04 { width: 640px;}
+    #b04 .dots { position: absolute; left: 0; right: 0; bottom: 20px;}
+    #b04 .dots li
+    {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin: 0 4px;
+        text-indent: -999em;
+        border: 2px solid #fff;
+        border-radius: 6px;
+        cursor: pointer;
+        opacity: .4;
+        -webkit-transition: background .5s, opacity .5s;
+        -moz-transition: background .5s, opacity .5s;
+        transition: background .5s, opacity .5s;
+    }
+    #b04 .dots li.active
+    {
+        background: #fff;
+        opacity: 1;
+    }
+    #b04 .arrow { position: absolute; top: 200px;}
+    #b04 #al { left: 15px;}
+    #b04 #ar { right: 15px;}
 </style>
 <div class="wrapper">
     <!-- header -->
@@ -160,10 +160,12 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header">个人信息</li>
-                <li><a href="/bd/my_demand_publish"><i class="fa fa-circle-o text-red"></i> <span>我的发布</span></a></li>
+                <li><a href="/change-username"><i class="fa fa-circle-o text-aqua"></i> <span>更换昵称</span></a></li>
+                <li><a href="/change-password"><i class="fa fa-circle-o text-aqua"></i> <span>更改密码</span></a></li>
+                {% if current_user.role_id == 2%}<li class="active"><a href="/bd/my_demand_publish"><i class="fa fa-circle-o"></i> 我的发布</a></li>{% endif %}
+                {% if current_user.role_id == 3%}<li class="active"><a href="/bd/my_rent_publish"><i class="fa fa-circle-o"></i> 我的发布</a></li>{% endif %}
                 <li><a href="/my_favourite"><i class="fa fa-circle-o text-yellow"></i> <span>我的收藏</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>更改昵称</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>新功能3</span></a></li>
+
             </ul>
         </section>
         <!-- /.sidebar -->

@@ -6,7 +6,7 @@
 {% for r in rents%}
 <div class="house-title">
     <h1 class="c_333 f20">{{r.title}}</h1>
-    <p class="c_888 f12">{{r.date}}发布</p>
+    <p class="c_888 f12">{{r.date}}发布&nbsp;&nbsp;&nbsp;{{r.times}}人浏览</p>
     <div class="title-right-info">
         {% if like==False%}
         <a class="btn btn-app"id="like" value="{{r.id}}">
@@ -145,12 +145,12 @@
 </script>
 <script>
     $('#like').click(function() {
-        parent.location.reload()
+        window.location.reload()
     });
 </script>
 <script>
     $('#unlike').click(function() {
-        parent.location.reload()
+        window.location.reload()
     });
 </script>
 {% endblock %}
