@@ -32,9 +32,13 @@ def get_item_info(url):
     soup = BeautifulSoup(wb_data.text, 'lxml')
     rent_type = soup.select('ul.f14 > li > span')[1].text[:2] if soup.find('ul','f14') else None
     price = soup.select('span.c_ff552e > b.f36')[0].text
+    price = int(price)
     area = soup.select('ul.f14 > li > span > a')[1].text if soup.find('ul','f14') else None
+    if len(area) >2:
+        print area
+        area = None
     item_info.insert_one({'price':price, 'area':area, 'url':url, 'rent_type':rent_type})
-    # print {'price':price, 'area':area, 'url':url}
+    print {'price':price, 'area':area, 'url':url}
 
 
 def get_all_links_from(url):
@@ -45,7 +49,7 @@ def get_all_links_from(url):
             except Exception,e:
                 print url, i, j
                 print e
-
+# get_all_links_from(start_url)
 
 # db_urls = [item['url'] for item in url_list.find()]
 #
@@ -84,13 +88,32 @@ def get_area_price(area, rent_type=None):
             post_times[5] += 1
         elif 8000<= i['price']:
             post_times[6] += 1
-    print post_times
     length=0
     if length <= len(price_index):
         for price,times in zip(price_index,post_times):
             data = {
                 'name':price,
                 'data':times,
+            }
+            yield data
+            length += 1
+
+
+def get_area_count():
+    area_list = []
+    for i in item_info.find():
+        if i['area']:
+            area_list.append(i['area'])
+    area_index = list(set(area_list))
+    post_times=[]
+    for index in area_index:
+        post_times.append(area_list.count(index))
+    length = 0
+    if length <= len(area_index):
+        for area, times in zip(area_index, post_times):
+            data = {
+                'name': area,
+                'data': [times],
             }
             yield data
             length += 1

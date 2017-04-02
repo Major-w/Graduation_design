@@ -10,24 +10,27 @@
         <span class="c_888 f12">{{bulletin.source}}</span>
         &nbsp;&nbsp;&nbsp;
         {% if current_user.role_id == 1 or current_user.id == bulletin.author_id %}
-       <a class="btn btn-app" href="/bd/view_bulletin?id={{bulletin.id}}"><i class="fa fa-edit"></i> 编辑</a>
+        <a class="btn btn-app" href="/bd/view_bulletin?id={{bulletin.id}}"><i class="fa fa-edit"></i> 编辑</a>
         {% endif %}
     </div>
 </div>
 <div class="bd">
-    <div class="banner" id="b04">
-        <ul>
-            {% if bulletin.bulletinimages and bulletin.bulletinimages|length >1 %}
-            {% for image in bulletin.bulletinimages%}
-            <li><img src="{{"/bd/web/static/"+image.file}}" width="640" height="400" ></li>
-            {% endfor%}
-            <a href="javascript:void(0);" class="unslider-arrow04 prev"><img class="arrow" id="al" src="/bd/web/static/arrowl.png" alt="prev" width="20" height="35"></a>
-            <a href="javascript:void(0);" class="unslider-arrow04 next"><img class="arrow" id="ar" src="/bd/web/static/arrowr.png" alt="next" width="20" height="37"></a>
-            {% else%}<img src="{{"/bd/web/static/"+bulletin.bulletinimages.file}}" width="640" height="400" >
-            {% endif %}
-        </ul>
+{% if bulletin.bulletinimages and bulletin.bulletinimages|length >1 %}
+<div class="banner" id="b04">
+    <ul>
+        {% for image in bulletin.bulletinimages%}
+        <li><img src="{{"/bd/web/static/"+image.file}}" width="640" height="400" ></li>
+        {% endfor%}
+        <a href="javascript:void(0);" class="unslider-arrow04 prev"><img class="arrow" id="al" src="/bd/web/static/arrowl.png" alt="prev" width="20" height="35"></a>
+        <a href="javascript:void(0);" class="unslider-arrow04 next"><img class="arrow" id="ar" src="/bd/web/static/arrowr.png" alt="next" width="20" height="37"></a>
 
-    </div>
+    </ul>
+</div>
+{% else%}
+<div>
+    <ul><img src="{{"/bd/web/static/"+bulletin.bulletinimages.file}}" width="640" height="400" ></ul>
+</div>
+{% endif %}
     <br>
     <p class="f16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{bulletin.content}}
     </p>

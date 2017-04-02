@@ -8,6 +8,8 @@
                 <div class="ui container segment">
                     <div class="menu">
                         <select class="ui simple dropdown item" id="test">
+                            <option value="100" class="item">选择</option>
+                            <option value="50" class="item">所有</option>
                             {% for area in areas %}
                             <option value="{{area.id}}" class="item">{{area.name}}</option>
                             {% endfor%}
@@ -61,6 +63,7 @@
 </script>
 <script>
     $('#yes').click(function () {
+        {% if series %}
         $('#chart1').highcharts({
             chart: {
                 type: 'column'
@@ -69,7 +72,7 @@
                 text: '{{area_name}}房屋租金分布'
             },
             xAxis: {
-                categories: ['低于600元', '600-1000元', '1000-1500元', '1500-2000元', '2000-3000元', '3000-5000元', '5000-8000元']
+                categories: ['租金']
             },
             yAxis: {
                 title: {
@@ -77,8 +80,8 @@
                 }
             },
             series: [
-                {% if series %}
-        {% for serie in series[:-1] %}
+
+            {% for serie in series[:-1] %}
         {
             name: '{{serie['name']}}',
                 data: [{{serie['data']}}]
@@ -88,9 +91,39 @@
             name:'{{series[-1]['name']}}',
                 data: [{{series[-1]['data']}}]
         }
-        {% endif %}
+
         ]
     });
+        {% endif %}
+        {% if all %}
+        $('#chart1').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: '上海地区房屋出租分布'
+            },
+            xAxis: {
+                categories: ['地区']
+            },
+            yAxis: {
+                title: {
+                    text: '数量'
+                }
+            },
+            series: [
+            {% for serie in all[:-1] %}
+        {
+            name: '{{serie['name']}}',
+                data: [{{serie['data']}}]
+        },
+        {%endfor%}
+        {
+            name:'{{all[-1]['name']}}',
+                data: [{{all[-1]['data']}}]
+        }
+        ]
+    });{% endif %}
     });
 </script>
 

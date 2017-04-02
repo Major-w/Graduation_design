@@ -120,7 +120,7 @@
 
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" >个人信息</a>
+                                    <a href="#" >个人中心</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{ url_for('logout') }}">注销</a>
@@ -159,12 +159,24 @@
 
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
-                <li class="header">个人信息</li>
-                <li><a href="/change-username"><i class="fa fa-circle-o text-aqua"></i> <span>更换昵称</span></a></li>
-                <li><a href="/change-password"><i class="fa fa-circle-o text-aqua"></i> <span>更改密码</span></a></li>
-                {% if current_user.role_id == 2%}<li class="active"><a href="/bd/my_demand_publish"><i class="fa fa-circle-o"></i> 我的发布</a></li>{% endif %}
-                {% if current_user.role_id == 3%}<li class="active"><a href="/bd/my_rent_publish"><i class="fa fa-circle-o"></i> 我的发布</a></li>{% endif %}
-                <li><a href="/my_favourite"><i class="fa fa-circle-o text-yellow"></i> <span>我的收藏</span></a></li>
+                <li class="header">个人中心</li>
+                <li class="treeview active">
+                    <a href="#">
+                        <i class="fa fa-info"></i> <span>个人信息</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-down pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu menu-open" style="display: block;">
+                        <li><a href="/change-username"><i class="fa fa-circle-o text-aqua"></i> <span>更换昵称</span></a></li>
+                        <li><a href="/change-password"><i class="fa fa-circle-o text-aqua"></i> <span>更改密码</span></a></li>
+                    </ul>
+                </li>
+
+                {% if current_user.role_id == 2%}<li class="active"><a href="/bd/my_demand_publish"><i class="fa fa-edit"></i> 我的发布</a></li>{% endif %}
+                {% if current_user.role_id == 3%}<li class="active"><a href="/bd/my_rent_publish"><i class="fa fa-edit"></i> 我的发布</a></li>{% endif %}
+                <li><a href="/my_favourite"><i class="fa fa-heart "></i> <span>我的收藏</span></a></li>
+
 
             </ul>
         </section>

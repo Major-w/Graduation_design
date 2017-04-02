@@ -8,19 +8,22 @@
     <h1 class="c_333 f20">{{r.title}}</h1>
     <p class="c_888 f12">{{r.date}}发布&nbsp;&nbsp;&nbsp;{{r.times}}人浏览</p>
     <div class="title-right-info">
+        {% if current_user.role_id == 1 or current_user.id == r.author_id %}
+        <a class="btn btn-app" href="/bd/view_rent?id={{r.id}}"><i class="fa fa-edit"></i> 编辑</a>
+        <a class="btn btn-app" id="delete" value="{{r.id}}"><i class="fa fa-trash-o"></i> 删除</a>
+        {%else%}
         {% if like==False%}
         <a class="btn btn-app"id="like" value="{{r.id}}">
             <i class="fa fa-heart-o"></i> 收藏
         </a>
         {%else%}
          <a class="btn btn-app" id="unlike" value="{{r.id}}">
-            <i class="fa fa-heart"></i> 取消收藏
+            <i class="fa fa-heart"></i> 取消收藏 fa-trash
         </a>
         {% endif %}
-        {% if current_user.role_id == 1 or current_user.id == r.author_id %}
-        <a class="btn btn-app" href="/bd/view_rent?id={{r.id}}"><i class="fa fa-edit"></i> 编辑</a>
+        {% endif %}
     </div>
-    {% endif %}
+
 </div>
 <table>
     <tr>
