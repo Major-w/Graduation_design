@@ -336,7 +336,9 @@ class Like(db.Model):
     __tablename__ = 'like'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer)
-    rent_id = db.Column(db.Integer)
+    rent_id = db.Column(db.ForeignKey(u'rent.id'))
+
+    rent = db.relationship(u'Rent', backref=db.backref('like', cascade="all, delete-orphan"))
 
     def __init__(self, user_id, rent_id):
         self.user_id = user_id

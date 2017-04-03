@@ -268,28 +268,6 @@ def view_demands():
             orm.db.session.rollback()
         return render_template('view_demands.html', demands=demands, page=page, form=form)
 
-@app.route('/bd/rent', methods=['GET', 'POST'])
-def view_subway():
-    page = request.args.get('page', 1, type=int)
-    subway_id = request.args.get('subway_id')
-    area_id = request.args.get('area_id')
-    q = request.args.get('q')
-    form = PageInfo()
-    if subway_id:
-        rents = orm.Rent.query.filter_by(subway_line = int(subway_id)).all()
-        logic.LoadBasePageInfo(orm.Subway.query.filter_by(id=int(subway_id)).all()[0].name + '附近出租信息', form)
-    elif area_id:
-        rents = orm.Rent.query.filter_by(area_id=int(area_id)).all()
-        logic.LoadBasePageInfo(orm.Area.query.filter_by(id=int(area_id)).all()[0].name + '出租信息', form)
-    for rent in rents:
-        if rent.rentimages != []:
-            rent.rentimages.file = rent.rentimages[0].file
-        else:
-            rent.rentimages.file = 'notfound.png'
-    if request.method == 'POST':
-        form = RentForm(request.form)
-    return render_template('view_rents.html', rents=rents, page=page, form=form)
-
 
 @app.route('/bd/view_rent', methods=['GET', 'POST'])
 @login_required
@@ -382,11 +360,20 @@ def view_rent():
 def my_demand_publish():
     page = request.args.get('page', 1, type=int)
     q = request.args.get('q')
+    delete_demand_id = request.args.get('delete_demand_id')
     demands = orm.Demand.query.filter_by(author_id=current_user.id).paginate(page,10).items
     count = orm.Demand.query.filter_by(author_id=current_user.id).count()
     paging = get_pages(page, count, 10)
     form = PageInfo()
     logic.LoadBasePageInfo('我的发布', form)
+    if delete_demand_id:
+        demand_id = int(delete_demand_id)
+        orm.db.session.delete(orm.Demand.query.get(demand_id))
+        try:
+            orm.db.session.commit()
+        except:
+            orm.db.session.rollback()
+        return redirect(url_for('view_demands', page=page, q=q, paging=paging))
     return render_template('view_demands.html', demands=demands, form=form, paging=paging,url='/bd/my_demand_publish')
 
 
@@ -394,6 +381,7 @@ def my_demand_publish():
 def my_rent_publish():
     page = request.args.get('page', 1, type=int)
     q = request.args.get('q')
+    delete_rent_id = request.args.get('delete_rent_id')
     rents = orm.Rent.query.filter_by(author_id=current_user.id).paginate(page,5).items
     count = orm.Rent.query.filter_by(author_id=current_user.id).count()
     paging = get_pages(page, count, 5)
@@ -404,6 +392,14 @@ def my_rent_publish():
             rent.rentimages.file = 'notfound.png'
     form = PageInfo()
     logic.LoadBasePageInfo('我的发布', form)
+    if delete_rent_id:
+        rent_id = int(delete_rent_id)
+        orm.db.session.delete(orm.Rent.query.get(rent_id))
+        try:
+            orm.db.session.commit()
+        except:
+            orm.db.session.rollback()
+        return redirect(url_for('view_rents', page=page, q=q, paging=paging))
     return render_template('view_rents.html',rents=rents,form=form,paging=paging,url='/bd/my_rent_publish')
 
 
@@ -472,7 +468,6 @@ def view_rents():
     p = request.args.get('price')
     form = PageInfo()
     if q is None:
-        orm.db.session.rollback()
         subway_id = request.args.get('subway_id')
         area_id = request.args.get('area_id')
         price =int(p) if p else None
@@ -719,7 +714,7 @@ def new_funciton():
 @app.route('/info', methods=['GET', 'POST'])
 def info():
     form = PageInfo()
-    logic.LoadBasePageInfo('个人信息', form)
+    logic.LoadBasePageInfo('个人中心', form)
     return redirect(url_for('change_username'))
 
 

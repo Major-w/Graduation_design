@@ -17,8 +17,8 @@
             <i class="fa fa-heart-o"></i> 收藏
         </a>
         {%else%}
-         <a class="btn btn-app" id="unlike" value="{{r.id}}">
-            <i class="fa fa-heart"></i> 取消收藏 fa-trash
+        <a class="btn btn-app" id="unlike" value="{{r.id}}">
+            <i class="fa fa-heart"></i> 取消收藏 
         </a>
         {% endif %}
         {% endif %}
@@ -120,6 +120,19 @@
 </script>
 <script>
     $(function(){
+        $("#delete").click(function(){
+            $.ajax({
+                type : "get",
+                url : "/bd/my_rent_publish",
+                cache:false,
+                data : {'delete_rent_id':$("#delete").attr("value")},
+                dataType : "String"
+            });
+        });
+    });
+</script>
+<script>
+    $(function(){
         $("#unlike").click(function(){
             $.ajax({
                 type : "post",
@@ -147,6 +160,13 @@
     });
 </script>
 <script>
+    $(function(){
+        $("#delete").click(function(){
+            alert("删除成功")
+        });
+    });
+</script>
+<script>
     $('#like').click(function() {
         window.location.reload()
     });
@@ -154,6 +174,11 @@
 <script>
     $('#unlike').click(function() {
         window.location.reload()
+    });
+</script>
+<script>
+    $('#delete').click(function() {
+        window.location.href = 'http://127.0.0.1:5001/bd/my_rent_publish';
     });
 </script>
 {% endblock %}

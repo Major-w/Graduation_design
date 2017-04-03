@@ -9,6 +9,7 @@
     {% if current_user.role_id == 1 or current_user.id == demand.author_id %}
     <div class="title-right-info">
         <a class="btn btn-app" href="/bd/view_demand?id={{demand.id}}"><i class="fa fa-edit"></i> 编辑</a>
+        <a class="btn btn-app" id="delete" value="{{r.id}}"><i class="fa fa-trash-o"></i> 删除</a>
     </div>
     {% endif %}
 </div>
@@ -33,4 +34,31 @@
 
 {% endfor %}
 {% endif %}
+{% endblock %}
+{% block script %}
+<script>
+    $(function(){
+        $("#delete").click(function(){
+            $.ajax({
+                type : "get",
+                url : "/bd/my_demand_publish",
+                cache:false,
+                data : {'delete_demand_id':$("#delete").attr("value")},
+                dataType : "String"
+            });
+        });
+    });
+</script>
+<script>
+    $(function(){
+        $("#delete").click(function(){
+            alert("删除成功")
+        });
+    });
+</script>
+<script>
+    $('#delete').click(function() {
+        window.location.href = 'http://127.0.0.1:5001/bd/my_rent_publish';
+    });
+</script>
 {% endblock %}

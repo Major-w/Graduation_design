@@ -13,6 +13,13 @@ start_url = 'http://sh.58.com/chuzu'
 
 
 def get_links_from(url, pages, who_rent=0):
+    """
+    爬取房源信息链接
+    :param url:
+    :param pages:
+    :param who_rent:
+    :return:
+    """
     list_view = url + '/{}/pn{}/'.format(str(who_rent), str(pages))
     wb_data = requests.get(list_view)
     sleep(1)
@@ -22,12 +29,16 @@ def get_links_from(url, pages, who_rent=0):
         for link in links:
             item_link = link.get('href')
             url_list.insert_one({'url': item_link})
-            print {'url': item_link}
     else:   # 最后一页
         pass
 
 
 def get_item_info(url):
+    """
+    爬取房源信息详细内容
+    :param url:
+    :return:
+    """
     wb_data = requests.get(url)
     soup = BeautifulSoup(wb_data.text, 'lxml')
     rent_type = soup.select('ul.f14 > li > span')[1].text[:2] if soup.find('ul','f14') else None
@@ -35,11 +46,8 @@ def get_item_info(url):
     price = int(price)
     area = soup.select('ul.f14 > li > span > a')[1].text if soup.find('ul','f14') else None
     if len(area) >2:
-        print area
         area = None
     item_info.insert_one({'price':price, 'area':area, 'url':url, 'rent_type':rent_type})
-    print {'price':price, 'area':area, 'url':url}
-
 
 def get_all_links_from(url):
     for j in [0, 1]:    # 区分个人房源和经纪人房源
@@ -52,7 +60,6 @@ def get_all_links_from(url):
 # get_all_links_from(start_url)
 
 # db_urls = [item['url'] for item in url_list.find()]
-#
 # index_urls = [item['url'] for item in item_info.find()]
 # x = set(db_urls)
 # y = set(index_urls)
