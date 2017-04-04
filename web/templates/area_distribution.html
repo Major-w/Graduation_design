@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="pusher">
+    <div class="ui divider"></div>
+    <div class="ui equal width grid" style="margin:5px 0 5px 0;width:70%">
+        <div class="row">
+            <div class="column">
+                <div class="ui container segment">
+                    <div class="menu">
+                        <select class="ui simple dropdown item" id="test">
+                            <option value="100" class="item">选择</option>
+                            <option value="50" class="item">所有</option>
+                            {% for area in areas %}
+                            <option value="{{area.id}}" class="item">{{area.name}}</option>
+                            {% endfor%}
+                        </select>
+                    </div>
+                    <div class="ui container" id="chart1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    $(function(){
+        $("#test").change(function(){
+            $.ajax({
+                type : "post",
+                url : "/bd/area_distribution",
+                cache:false,
+                data : {'area_id':$("#test").val()},
+                success: function (data) {
+                    console.log(data.series);
+                    $('#chart1').highcharts({
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: data.area_name
+                        },
+                        xAxis: {
+                            categories: [data.x_title]
+                        },
+                        yAxis: {
+                            title: {
+                                text: data.y_title
+                            }
+                        },
+                        series: data.series
+                    });
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(textStatus);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $('#test').click(function () {
+        $('.ui.sidebar').sidebar('toggle');
+    });
+</script>
+
+{% endblock %}

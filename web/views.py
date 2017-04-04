@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 import os
 import time, uuid, datetime
-from flask import render_template, send_from_directory, session, redirect, url_for, flash, current_app
+from flask import render_template, send_from_directory, session, redirect, url_for, flash, current_app,jsonify
 from flask_login import login_user, logout_user, current_user, login_required
 from flask import Markup, request, make_response
 from app import app, db
@@ -688,27 +688,29 @@ def view_accounts():
     return render_template('view_accounts.html', form=form, pagination=pagination, users=users, paging=paging)
 
 
-@app.route('/bd/new_function', methods=['GET', 'POST'])
-def new_funciton():
+@app.route('/bd/area_distribution', methods=['GET', 'POST'])
+def area_distribution():
     page = request.args.get('page', 1, type=int)
     areas = orm.Area.query.order_by(orm.Area.id).paginate(page, 20).items
     form = PageInfo()
     logic.LoadBasePageInfo('房屋租金分布', form)
     if request.method == 'POST':
-        area_id = request.form.get('area_id')
-        global a
-        a = json.dumps(int(area_id))
-    else:
-        if int(a)== 50:
-            all = [data for data in page_parsing.get_area_count()]
-            return render_template('new_function.html',form=form, areas=areas,all=all)
-        elif int(a)==100:
-            return render_template('new_function.html', form=form, areas=areas)
-        else:
-            a = int(a)
-            area_name = orm.Area.query.filter_by(id=a).first().name
+        area_id = int(request.form.get('area_id'))
+        if area_id < 50:
+            area_name = orm.Area.query.filter_by(id=area_id).first().name
             series = [data for data in page_parsing.get_area_price(area_name)]
-            return render_template('new_function.html',form=form, areas=areas, area_id=a,area_name=area_name,series=series)
+            x_title = '租金'
+            area_name  =area_name + '地区房屋租金分布'
+            y_title = '数量'
+            return jsonify({'area_name':area_name,'series':series,'x_title':x_title,'y_title': y_title})
+        else:
+            area_name = '上海地区房屋出租分布'
+            series = [data for data in page_parsing.get_area_count()]
+            x_title = '地区'
+            y_title = '数量'
+            return jsonify({'area_name': area_name, 'series': series, 'x_title': x_title,'y_title': y_title})
+    else:
+        return render_template('area_distribution.html',form=form, areas=areas)
 
 
 @app.route('/info', methods=['GET', 'POST'])

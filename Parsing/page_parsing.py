@@ -100,7 +100,7 @@ def get_area_price(area, rent_type=None):
         for price,times in zip(price_index,post_times):
             data = {
                 'name':price,
-                'data':times,
+                'data':[times],
             }
             yield data
             length += 1
