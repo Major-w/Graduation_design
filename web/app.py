@@ -6,7 +6,7 @@ from flask import Flask, request
 from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-
+from config import config
 
 
 reload(sys)
@@ -18,11 +18,24 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)),'..'))
 bootstrap = Bootstrap()
 mail = Mail()
 db = SQLAlchemy()
+moment = Moment()
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'login'
 app = Flask(__name__)
 
+# def create_app(config_name):
+#     app = Flask(__name__)
+#     app.config.from_object(config[config_name])
+#     config[config_name].init_app(app)
+#
+#     bootstrap.init_app(app)
+#     mail.init_app(app)
+#     moment.init_app(app)
+#     db.init_app(app)
+#     login_manager.init_app(app)
+#
+#     return app
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+pg8000://postgres:rootroot@localhost/Graduation'
 app.config['WTF_CSRF_ENABLED'] = True

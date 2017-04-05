@@ -45,17 +45,17 @@ def rootDir():
 @app.route('/reset/<token>', methods=['GET', 'POST'])
 def password_reset(token):
     if not current_user.is_anonymous:
-        return redirect(url_for('view_rent'))
+        return redirect(url_for('view_rents'))
     form = PasswordResetForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = orm.User.query.filter_by(email=form.email.data).first()
         if user is None:
-            return redirect(url_for('view_rent'))
+            return redirect(url_for('view_rents'))
         if user.reset_password(token, form.password.data):
-            flash(u'您的密码已经更新.')
+            flash('您的密码已经更新.')
             return redirect(url_for('login'))
         else:
-            return redirect(url_for('view_rent'))
+            return redirect(url_for('view_rents'))
     return render_template('auth/reset_password.html', form=form)
 
 
@@ -417,8 +417,8 @@ def view_demand_int():
 def view_rent_int():
     if current_user.id:
         user_id = current_user.id
-    like_rent_id = request.form.get('like_rent_id')
-    unlike_rent_id = request.form.get('unlike_rent_id')
+    like_rent_id = request.args.get('like_rent_id')
+    unlike_rent_id = request.args.get('unlike_rent_id')
     if like_rent_id:
         rent_id = int(like_rent_id)
         results = orm.Like.query.filter_by(user_id=user_id, rent_id=rent_id).all()
@@ -655,7 +655,6 @@ def view_bulletins():
                 orm.db.session.commit()
                 return redirect(url_for('view_bulletins', page=page, q=q, paging=paging))
         logic.LoadBasePageInfo('所有公告',form)
-
         return render_template('view_bulletins.html',bulletins = bulletins,form = form, pagination=pagination, page=page, paging=paging)
     else:
         logic.LoadBasePageInfo('搜索结果', form)
@@ -664,6 +663,11 @@ def view_bulletins():
             bulletins = orm.Bulletin.query.filter(orm.Bulletin.title.like(q)).all()
         except:
             orm.db.session.rollback()
+        for bulletin in bulletins:
+            if bulletin.bulletinimages != []:
+                bulletin.bulletinimages.file = bulletin.bulletinimages[0].file
+            else:
+                bulletin.bulletinimages.file = 'notfound.png'
         return render_template('view_bulletins.html', bulletins = bulletins, page=page, form=form)
 
 @app.route('/bd/view_accounts' , methods=['GET', 'POST'])
@@ -676,7 +680,6 @@ def view_accounts():
     users = pagination.items
 
     if request.method == 'POST':
-        form = AccountForm(request.form)
         if request.form.has_key('delete'):
             orm.db.session.delete(orm.User.query.get(int(form.id.data)))
             orm.db.session.commit()

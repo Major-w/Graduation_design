@@ -109,7 +109,7 @@
     $(function(){
         $("#like").click(function(){
             $.ajax({
-                type : "post",
+                type : "get",
                 url : "/view_rent",
                 cache:false,
                 data : {'like_rent_id':$("#like").attr("value")},
@@ -135,7 +135,7 @@
     $(function(){
         $("#unlike").click(function(){
             $.ajax({
-                type : "post",
+                type : "get",
                 url : "/view_rent",
                 cache:false,
                 data : {'unlike_rent_id':$("#unlike").attr("value")},
@@ -178,7 +178,7 @@
 </script>
 <script>
     $('#delete').click(function() {
-        window.location.href = 'http://127.0.0.1:5001/bd/my_rent_publish';
+        window.location.href = 'http://127.0.0.1:5000/bd/my_rent_publish';
     });
 </script>
 {% endblock %}
