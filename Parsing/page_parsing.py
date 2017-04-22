@@ -29,6 +29,7 @@ def get_links_from(url, pages, who_rent=0):
         for link in links:
             item_link = link.get('href')
             url_list.insert_one({'url': item_link})
+            print item_link
     else:   # 最后一页
         pass
 
@@ -48,6 +49,7 @@ def get_item_info(url):
     if len(area) >2:
         area = None
     item_info.insert_one({'price':price, 'area':area, 'url':url, 'rent_type':rent_type})
+    print price
 
 def get_all_links_from(url):
     for j in [0, 1]:    # 区分个人房源和经纪人房源

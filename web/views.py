@@ -5,6 +5,7 @@ from flask import render_template, send_from_directory, session, redirect, url_f
 from flask_login import login_user, logout_user, current_user, login_required
 from flask import Markup, request, make_response
 from app import app, db
+from flask_sqlalchemy import get_debug_queries
 from forms import PageInfo, BulletinForm, LoginForm, RegistrationForm,\
     PasswordResetRequestForm, PasswordResetForm, RentForm, DemandForm,ChangePasswordForm, ChangeUsernameForm
 from DB import orm
@@ -36,6 +37,15 @@ def before_request():
         if not current_user.confirmed and request.endpoint and request.endpoint[:4] == 'view' and request.endpoint != 'static':
             return redirect(url_for('unconfirmed'))
 
+@app.after_request
+def after_request(response):
+    for query in get_debug_queries():
+        if query.duration >= current_app.config['FLASKY_SLOW_DB_QUERY_TIME']:
+            current_app.logger.warning(
+                'Slow query: %s\nParameters: %s\nDuration: %fs\nContext: %s\n'
+                % (query.statement, query.parameters, query.duration,
+                   query.context))
+    return response
 
 @app.route('/')
 def rootDir():

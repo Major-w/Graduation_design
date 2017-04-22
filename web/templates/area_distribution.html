@@ -33,7 +33,6 @@
                 cache:false,
                 data : {'area_id':$("#test").val()},
                 success: function (data) {
-                    console.log(data.series);
                     $('#chart1').highcharts({
                         chart: {
                             type: 'column'

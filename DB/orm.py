@@ -148,7 +148,7 @@ class Area(db.Model):
         return '<Area %s>' % self.name
 
 
-class Bulletin(db.Model):
+class Bulletin(db.Model):       # 新闻公告类
     id = db.Column(db.Integer, primary_key=True)
     dt = db.Column(db.DateTime)
     title = db.Column(db.String(68))
@@ -171,7 +171,7 @@ class Bulletin(db.Model):
         return '<Bulletin %s>' % self.title
 
 
-class Bulletinimage(db.Model):
+class Bulletinimage(db.Model):      # 新闻公告图片类
     id = db.Column(db.Integer, primary_key=True)
     bulletin_id = db.Column(db.ForeignKey(u'bulletin.id'))
     file = db.Column(db.String(500))
