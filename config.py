@@ -23,7 +23,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql+pg8000://postgres:rootroot@localhost/Graduation'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+pg8000://postgres:123123@localhost/graduation'
 
 
 class TestingConfig(Config):

@@ -27,7 +27,7 @@ def rootDir_web(path):
     return send_from_directory(os.path.join(app.root_path, '.'), path)
 
 
-UPLOAD_PATH = 'E:\Python\Graduation_design\web\static'
+UPLOAD_PATH = '/Users/jikai/Desktop/Graduation_design/web/static'
 
 
 @app.before_request
@@ -91,12 +91,12 @@ def password_reset_request():
 @login_required
 def confirm(token):
     if current_user.confirmed:
-        return redirect(url_for('view_rent'))
+        return redirect(url_for('view_rents'))
     if current_user.confirm(token):
         flash(u'您已经激活了您的账户')
     else:
         flash(u'链接已失效')
-    return redirect(url_for('view_rent'))
+    return redirect(url_for('view_rents'))
 
 
 @app.route('/confirm')
@@ -236,10 +236,7 @@ def view_demand():
                                 form.phone_number.data, form.mode_id.data, form.decorate_type.data,
                                 form.subway_line.data, form.description.data, now, form.title.data, current_user.id)
             orm.db.session.add(demand)
-            try:
-                orm.db.session.commit()
-            except :
-                orm.db.session.rollback()
+            orm.db.session.commit()
             form.id.data = demand.id
             return redirect(url_for('view_demands'))
     elif request.method == 'GET' and demand_id:
@@ -531,9 +528,11 @@ def view_rents():
             elif price == 8000:
                 pagination = orm.Rent.query.filter(5000 < orm.Rent.price, orm.Rent.price <= price).paginate(page, 5)
                 logic.LoadBasePageInfo('5000-8000元所有出租信息', form)
+            elif price > 8000:
+                pagination = orm.Rent.query.filter(8000< orm.Rent.price).paginate(page, 5)
+                logic.LoadBasePageInfo('8000元以上所有出租信息', form)
             pagination_area = orm.Area.query.order_by(orm.Area.id).paginate(1,20)
             pagination_subway = orm.Subway.query.order_by(orm.Subway.id).paginate(1,20)
-            # paginat
             rents = pagination.items
             areas = pagination_area.items
             subways = pagination_subway.items
@@ -717,7 +716,7 @@ def area_distribution():
             y_title = '数量'
             return jsonify({'area_name':area_name,'series':series,'x_title':x_title,'y_title': y_title})
         else:
-            area_name = '上海地区房屋出租分布'
+            area_name = u'上海地区房屋出租分布'
             series = [data for data in page_parsing.get_area_count()]
             x_title = '地区'
             y_title = '数量'

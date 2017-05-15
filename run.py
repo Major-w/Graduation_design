@@ -7,7 +7,7 @@ import os
 COV = None
 if os.environ.get('FLASK_COVERAGE'):
     import coverage
-    COV = coverage.coverage(branch=True)
+    COV = coverage.coverage(branch=True, include="web/*")
     COV.start()
 from flask import Flask, request
 from flask_restful import Resource, Api

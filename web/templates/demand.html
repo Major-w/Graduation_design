@@ -9,7 +9,7 @@
     {% if current_user.role_id == 1 or current_user.id == demand.author_id %}
     <div class="title-right-info">
         <a class="btn btn-app" href="/bd/view_demand?id={{demand.id}}"><i class="fa fa-edit"></i> 编辑</a>
-        <a class="btn btn-app" id="delete" value="{{r.id}}"><i class="fa fa-trash-o"></i> 删除</a>
+        <a class="btn btn-app" id="delete" value="{{demand.id}}"><i class="fa fa-trash-o"></i> 删除</a>
     </div>
     {% endif %}
 </div>

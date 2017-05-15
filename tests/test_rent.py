@@ -6,7 +6,7 @@ from flask_login import current_user
 from web.app import app, db
 from DB import orm
 app.config['WTF_CSRF_ENABLED'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+pg8000://postgres:rootroot@localhost/Graduation'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+pg8000://postgres:123123@localhost/graduation'
 
 
 class GraduationRentTest(unittest.TestCase):

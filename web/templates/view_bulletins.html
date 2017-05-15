@@ -14,6 +14,7 @@
 						<th>标题</th>
 						<th>发布时间</th>
 						<th>来源</th>
+						<th></th>
 					</tr>
 					{% if bulletins %}
 					{% for f in bulletins %}
@@ -32,13 +33,11 @@
 						<td>
 							{{f.source}}
 						</td>
-						<td>
 
-						</td>
 						<td>
 							<form action="" method="post" name="edit_bulletin" onsubmit="return confirm('确认要提交吗?');">
 								<input type="hidden" name="id" value="{{f.id}}">
-								<input type="submit" value="删除" name="delete">
+								{% if current_user.role_id == 1%}<input type="submit" value="删除" name="delete">{% endif%}
 							</form>
 						</td>
 					</tr>
